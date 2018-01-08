@@ -1,0 +1,20 @@
+{% extends "_base.html" %}
+
+{% block "body" %}
+<div>
+    <h1>{{revision.car.maker.name}} {{revision.car.name}} {{revision.year}}</h1>
+    <div>
+        <ul>
+            {% for defect in defects %}
+            <li>
+                <div>
+                    <h3>{{ defect.part_name }}</h3>
+                    <p>{{ defect.solution }}</p>
+                    <p><a href="{{ defect.source }}">출처</a></p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

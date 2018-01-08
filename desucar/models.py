@@ -1,0 +1,41 @@
+from django.db import models
+
+
+class Maker(models.Model):
+    name = models.CharField(max_length=30)
+    slug = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{name} ({slug})'.format(name=self.name, slug=self.slug)
+
+
+class Car(models.Model):
+    maker = models.ForeignKey(Maker, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)  # 싼타페, 소나타
+    slug = models.CharField(max_length=30)
+    variation = models.CharField(max_length=10, null=True, blank=True)  # YF, NF, MD, SD
+
+    def __str__(self):
+        return '{name}'.format(name=self.name)
+
+
+class Revision(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE)
+    year = models.PositiveSmallIntegerField()
+
+# class Manufactured(models.Model):
+#     start_year =
+#     start_month =
+#     end_year =
+#     end_month =
+
+
+class Defect(models.Model):
+    target = models.ForeignKey(Revision, on_delete=models.CASCADE)
+    n_targets = models.IntegerField()  # 대상 차량 수
+    part_name = models.CharField(max_length=20)
+    solution = models.TextField()
+    source = models.URLField()
+
+    def __str__(self):
+        return '{name} - {part}'.format(name=self.target.car.name, part=self.part_name)

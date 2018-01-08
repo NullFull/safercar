@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block "body" %}
+<div>
+    <div class="search">
+        <h3>차종 검색</h3>
+        <input />
+        <button>검색</button>
+        <h5>VIN, 소나타, 2012</h5>
+    </div>
+    <div>
+        <h3>제조사로 검색</h3>
+        <ul>
+            {% for maker in makers %}
+            <li>{{ maker.name }}</li>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for car in cars %}
+            <li><a href="{{ car.maker.slug }}/{{ car.slug }}">{{ car.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
