@@ -21,7 +21,11 @@ class Car(models.Model):
 
 class Revision(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE)
-    year = models.PositiveSmallIntegerField()
+    production_start = models.DateField()
+    production_end = models.DateField(null=True, blank=True)
+
+    def __str__(self):
+        return '{name}'.format(name=self.car.name)
 
 # class Manufactured(models.Model):
 #     start_year =

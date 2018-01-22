@@ -1,0 +1,5 @@
+csv/
+py3/
+db.sqlite3
+.vscode/
+.idea/

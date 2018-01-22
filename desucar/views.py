@@ -1,5 +1,4 @@
 from django.shortcuts import render
-
 from desucar.models import Car, Maker, Revision, Defect
 
 
@@ -11,7 +10,7 @@ def index(request):
 
 
 def detail(request, maker, car, year):
-    revision = Revision.objects.get(car__slug=car, year=year)
+    revision = Revision.objects.get(car__name=car, production_start__year=year)
     defects = Defect.objects.filter(target=revision).all()
 
     return render(request, 'detail.html', dict(
