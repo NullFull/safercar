@@ -2,20 +2,32 @@
 
 {% block "body" %}
 <div>
-    {% include "components/searchbar.html" %}
-
-    <h1>{{revision.car.maker.name}} {{revision.car.name}} {{revision.year}}</h1>
     <div>
-        <ul>
-            {% for defect in defects %}
-            <li>
-                <div>
-                    <h3>{{ defect.part_name }}</h3>
-                    <p>{{ defect.solution }}</p>
-                    <p><a href="{{ defect.source }}">출처</a></p>
-                </div>
-            </li>
+        {% include "components/searchbar.html" %}
+    </div>
+    <div class="info">
+        <div>
+            <h1>{{ car.maker.name }} {{ car.name }}</h1>
+            <p>{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
+        </div>
+    </div>
+    <div class="stats">
+        <dl>
+            {% for kind, value in stats.items %}
+            <dt>{{ kind }}</dt>
+            <dd>{{ value }}</dd>
             {% endfor %}
+        </dl>
+    </div>
+
+    <div class="defects">
+        <ul>
+        {% for defect in defects %}
+            <li>
+                <h3>[{{ defect.get_kind_display }}] {{ defect.part_name }}</h3>
+                <p>{{ defect.solution }}</p>
+            </li>
+        {% endfor %}
         </ul>
     </div>
 </div>

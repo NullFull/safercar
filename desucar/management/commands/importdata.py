@@ -1,63 +1,89 @@
-import csv
-import os
-from datetime import datetime
-
+from datetime import date
 from django.conf import settings
 from django.core.management import BaseCommand
-from django.utils.http import urlquote
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from desucar.models import Car, Maker, Defect
 
-from desucar.models import Maker, Car, Revision, Defect
+
+def format_date(s):
+    s = s.replace('(게시일)', '')
+    if s.endswith('.'):
+        s = s[:-1]
+    ys, ms, ds = s.split('.')
+    y, m, d = int(ys), int(ms), int(ds)
+    return date(year=y, month=m, day=d)
+
+
+def parse_int(s):
+    s = s.replace(',', '')
+    return int(s)
 
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        csv_dir = os.path.join(settings.BASE_DIR, 'csv')
-        csv_path = os.path.join(csv_dir, 'molit-recalls.csv')
+        cred = ServiceAccountCredentials.from_json_keyfile_dict(
+            settings.GSPREAD_AUTH,
+            scopes=['https://spreadsheets.google.com/feeds']
+        )
 
         Maker.objects.all().delete()
         Car.objects.all().delete()
-        Revision.objects.all().delete()
         Defect.objects.all().delete()
 
-        with open(csv_path) as f:
-            reader = csv.reader(f)
-            next(reader)
-            for row in reader:
-                print(row)
-                maker_name = row[0]
-                car_names = row[1]
-                if not row[5] or not row[6]:
-                    continue
+        gs = gspread.authorize(cred)
+        cars_doc = gs.open_by_key('1EMOGtpBJ9sW2RTZMjZ7UGQ7ODQgDjruyp-YsW5g1AgU')
+        cars_sheet = cars_doc.worksheet('대상차종 구체화')
 
-                ps_year, ps_month, ps_day = [int(c) for c in row[5].split('.')]  # TODO : 어디 한번 수정해보시지.
-                production_start = datetime(year=ps_year, month=ps_month, day=ps_day)
-                pe_year, pe_month, pe_day = [int(c) for c in row[6].split('.')]
-                production_end = datetime(year=pe_year, month=pe_month, day=pe_day)
+        for row in cars_sheet.get_all_values()[1:]:
+            maker_name = row[3]
+            car_simple_name = row[4]
+            car_code = row[5] + row[6] + row[7]
+            car_name = row[8]
+            make_start = format_date(row[9])
+            make_end = None if row[10] == 'on' else format_date(row[10])
 
-                maker, _ = Maker.objects.get_or_create(name=maker_name)
-                maker.slug = urlquote(maker_name)
-                maker.save()
+            print(car_name)
 
-                for car_name in car_names.split(','):
-                    car, _ = Car.objects.get_or_create(maker=maker, name=car_name)
-                    car.slug = urlquote(car_names)
-                    car.save()
+            maker, _ = Maker.objects.get_or_create(name=maker_name)
+            car, _ = Car.objects.get_or_create(
+                maker=maker,
+                name=car_name,
+                simple_name=car_simple_name,
+                code=car_code,
+                make_start=make_start,
+                make_end=make_end,
+            )
 
-                    revision, _ = Revision.objects.get_or_create(
-                        car=car,
-                        production_start=production_start,
-                        production_end=production_end
-                    )
+        defects_doc = gs.open_by_key('1NC7CVJUPZzSw7_hEANafQiCvvP331p8oNWLtCi3z53Y')
 
-                    part_name = row[10]
-                    n_targets = row[9]
-                    if not part_name:
-                        continue
-                    print(part_name)
-                    defect, _ = Defect.objects.get_or_create(
-                        target=revision,
-                        part_name=part_name,
-                        n_targets=int(n_targets.replace(',', ''))
-                    )
-                    defect.solution = row[11]
-                    defect.save()
+        sheet_names = [
+            '1_리콜(국토교통부)',
+            '1_리콜(환경부)',
+            '2_무상수리(국토교통부)',
+            '2_무상수리(CISS)',
+        ]
+
+        for sheet_name in sheet_names:
+            sheet = defects_doc.worksheet(sheet_name)
+            for row in sheet.get_all_values()[1:]:
+                car_code = row[2] + row[3] + row[4]
+                car = Car.objects.get(code=car_code)
+                if row[10] in [
+                    '증상 발생 차량 전체',
+                    '해당차량 전체',
+                    '증상 발생하는 차량 전체',
+                    '조치시점까지 생산된 해당 차량 전체',
+                    '스티커 미부착 차량 전체',
+                ]:
+                    row[10] = '0'
+
+                print(row[11])
+                Defect.objects.create(
+                    car=car,
+                    kind=Defect.종류.무상수리,
+                    n_targets=parse_int(row[10]),
+                    part_name=row[11],
+                    solution=row[12],
+                    fix_start=format_date(row[8]),
+                )

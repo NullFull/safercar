@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from desucar.models import Car, Maker, Revision, Defect
+from desucar.models import Car, Maker, Defect
 
 
 def index(request):
@@ -9,22 +9,29 @@ def index(request):
     ))
 
 
-def detail(request, maker, car, year):
-    revision = Revision.objects.get(car__name=car, production_start__year=year)
-    defects = Defect.objects.filter(target=revision).all()
+def detail(request, maker_name, car_name, car_year, car_code):
+    car = Car.objects.get(code=car_code)
+
+    defects = car.defects.all()
+
+    stats = {
+        '리콜': sum(1 for x in defects if x.kind == 'RC'),
+        '무상수리': sum(1 for x in defects if x.kind == 'FF'),
+    }
 
     return render(request, 'detail.html', dict(
-        revision=revision,
+        car=car,
         defects=defects,
+        stats=stats,
     ))
 
 
 def search(request):
     q = request.GET.get('q')
 
-    cars = Car.objects.filter(name__contain=q).all()
-    
+    cars = Car.objects.filter(name__contains=q).all()
 
     return render(request, 'search.html', dict(
         q=q,
+        cars=cars,
     ))

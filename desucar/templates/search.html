@@ -2,5 +2,15 @@
 
 
 {% block "body" %}
+<div>
     {% include "components/searchbar.html" %}
+</div>
+<div>
+    <ul>
+    {% for car in cars %}
+        <li><a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">{{ car.name }} {{ car.year }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
