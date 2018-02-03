@@ -2,24 +2,24 @@
 
 {% block "body" %}
 <div>
-    <div class="search">
-        <h3>차종 검색</h3>
-        <input />
-        <button>검색</button>
-        <h5>VIN, 소나타, 2012</h5>
+    <div>
+        <p>
+            자동차 결함 정보는 크게 리콜과 무상수리로 나뉩니다.
+        </p>
+        <p>
+            안전상 극심한 결함의 경우 정부차원에서 리콜을 진행하지만 대다수의 경우 무상수리 대상으로 선정합니니다.
+        </p>
+        <p>
+            대충 넘어갑니다.
+        </p>
     </div>
     <div>
-        <h3>제조사로 검색</h3>
+        <h3>FAQ</h3>
         <ul>
-            {% for maker in makers %}
-            <li>{{ maker.name }}</li>
-            {% endfor %}
-        </ul>
-        <ul>
-            {% for car in cars %}
-            <li><a href="{{ car.maker.slug }}/{{ car.slug }}">{{ car.name }}</a></li>
-            {% endfor %}
+            <li><a href="">리콜과 무상수리의 차이점</a></li>
+            <li><a href="">관련된 기사의 제목</a></li>
         </ul>
     </div>
+    {% include "components/searchbar.html" %}
 </div>
 {% endblock %}

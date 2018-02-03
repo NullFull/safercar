@@ -2,6 +2,8 @@
 
 {% block "body" %}
 <div>
+    {% include "components/searchbar.html" %}
+
     <h1>{{revision.car.maker.name}} {{revision.car.name}} {{revision.year}}</h1>
     <div>
         <ul>

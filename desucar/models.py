@@ -3,17 +3,14 @@ from django.db import models
 
 class Maker(models.Model):
     name = models.CharField(max_length=30)
-    slug = models.CharField(max_length=30)
 
     def __str__(self):
-        return '{name} ({slug})'.format(name=self.name, slug=self.slug)
+        return '{name}'.format(name=self.name)
 
 
 class Car(models.Model):
     maker = models.ForeignKey(Maker, on_delete=models.CASCADE)
     name = models.CharField(max_length=30)  # 싼타페, 소나타
-    slug = models.CharField(max_length=30)
-    variation = models.CharField(max_length=10, null=True, blank=True)  # YF, NF, MD, SD
 
     def __str__(self):
         return '{name}'.format(name=self.name)

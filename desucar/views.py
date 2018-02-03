@@ -17,3 +17,14 @@ def detail(request, maker, car, year):
         revision=revision,
         defects=defects,
     ))
+
+
+def search(request):
+    q = request.GET.get('q')
+
+    cars = Car.objects.filter(name__contain=q).all()
+    
+
+    return render(request, 'search.html', dict(
+        q=q,
+    ))
