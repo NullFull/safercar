@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from desucar.models import Car, Maker, Defect
+import re
 
 
 def index(request):
@@ -35,3 +36,14 @@ def search(request):
         q=q,
         cars=cars,
     ))
+
+
+def seperate_year(keyword):
+    d4 = re.compile('\d{4}')
+    l = keyword.split(' ')
+    yyyy = d4.search(keyword)
+    if yyyy:
+        l.remove(yyyy.group())
+        return [int(yyyy.group()), ' '.join(l)]
+    else:
+        return [None, ' '.join(l)]
