@@ -1,54 +1,56 @@
 {% extends "_base.html" %}
 
-{% block "body" %}
-<div>
-    <div>
-        {% include "components/searchbar.html" %}
-    </div>
-    <div class="container">
-        <div class="info">
-            <div>
-                <img src="">
-            </div>
-            <div>
-                <h2 class="maker">{{ car.maker.name }}</h2>
-                <h1 class="name">{{ car.name }}</h1>
-                <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
-            </div>
-        </div>
-        <div class="stats">
-            <ul>
-                {% for kind, value in stats.items %}
-                <li>
-                    <div>{{ kind }}</div>
-                    <div class="value">{{ value }}</div>
-                </li>
-                {% endfor %}
-                <li>
-                    <div>무언가</div>
-                    <div class="value">12</div>
-                </li>
-                <li>
-                    <div>추가될</div>
-                    <div class="value">6</div>
-                </li>
-                <li>
-                    <div>숫자</div>
-                    <div class="value">8</div>
-                </li>
-            </ul>
-        </div>
+{% load static %}
 
-        <div class="defects">
-            <ul>
-            {% for defect in defects %}
-                <li>
-                    <h3>[{{ defect.get_kind_display }}] {{ defect.part_name }}</h3>
-                    <p>{{ defect.solution }}</p>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
+{% block "body" %}
+
+<div>
+    {% include "components/searchbar.html" %}
+</div>
+<div class="info">
+    <div>
+        <img class="info-image" src="{% static 'imgs/' %}{{ car.code }}.png">
+    </div>
+    <div>
+        <h2 class="maker">{{ car.maker.name }}</h2>
+        <h1 class="name">{{ car.name }}</h1>
+        <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
     </div>
 </div>
+<div class="stats">
+    <ul>
+        {% for kind, value in stats.items %}
+        <li>
+            <span class="badge
+            {% if kind == '리콜' %}badge-danger{% endif %}
+            {% if kind == '무상수리' %}badge-warning{% endif %}">{{ kind }}</span>
+            <div class="value">{{ value }}</div>
+        </li>
+        {% endfor %}
+        <li>
+            <div>무언가</div>
+            <div class="value">12</div>
+        </li>
+        <li>
+            <div>추가될</div>
+            <div class="value">6</div>
+        </li>
+        <li>
+            <div>숫자</div>
+            <div class="value">8</div>
+        </li>
+    </ul>
+</div>
+
+<div class="defects">
+    <ul>
+    {% for defect in defects %}
+        <li>
+            <h3>[{{ defect.get_kind_display }}] {{ defect.part_name }}</h3>
+            <p>{{ defect.solution }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
 {% endblock %}
