@@ -1,16 +1,16 @@
-<div class="search">
-    <div class="container">
-        <div>
-            <form action="/search" method="get">
-                <input class="q" name="q" placeholder="2012 싼타페" value="{{ q }}"/>
-                <input class="btn-submit" type="submit" value="검색">
-            </form>
-        </div>
-        <!--<div class="example">-->
-            <!--<ul>-->
-                <!--<li>싼타페 2014</li>-->
-                <!--<li>쏘나타 2012</li>-->
-            <!--</ul>-->
-        <!--</div>-->
+<div class="searchbar">
+    <div>
+        <form action="/search" method="get">
+            <input class="q" name="q" placeholder="2012 싼타페" value="{{ q }}"/>
+            <!--<input type="submit" value="검색">-->
+            <button class="btn-submit" >검색</button>
+        </form>
+    </div>
+    <div class="examples">
+        <ul>
+            <li><a href="/search?q=싼타페">싼타페 2014</a></li>
+            <li><a href="/search?q=쏘나타">쏘나타 2012</a></li>
+            <li><a href="/search?q=모닝">모닝 2011</a></li>
+        </ul>
     </div>
 </div>

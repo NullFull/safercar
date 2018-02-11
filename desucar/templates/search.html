@@ -1,18 +1,23 @@
 {% extends "_base.html" %}
 
+{% load static %}
 
 {% block "body" %}
-<div>
-    {% include "components/searchbar.html" %}
-</div>
-<div>
+<div class="search">
     <div class="container">
-        <ul>
-        {% for car in cars %}
-            <li><a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">{{ car.name }} {{ car.year }}</a></li>
-        {% endfor %}
-        </ul>
+        <div>
+            {% include "components/searchbar.html" %}
+        </div>
+        <div class="results">
+            <ul>
+            {% for car in cars %}
+                <li><a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
+                    <img class="thumbnail" src="{% static 'cars/' %}{{ car.code}}-100x.png"/>
+                    {{ car.name }} {{ car.year }}
+                </a></li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
-
 {% endblock %}

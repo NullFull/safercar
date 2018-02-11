@@ -1,14 +1,16 @@
 {% extends "_base.html" %}
 
+{% load static %}
+
 {% block "body" %}
 <div>
-    <div>
+    <div class="container">
         {% include "components/searchbar.html" %}
     </div>
-    <div class="container">
-        <div class="info">
-            <div>
-                <img src="">
+    <div class="info">
+        <div class="container">
+            <div class="image">
+                <img src="{% static 'cars/' %}{{ car.code}}-600x.png">
             </div>
             <div>
                 <h2 class="maker">{{ car.maker.name }}</h2>
@@ -16,7 +18,9 @@
                 <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
             </div>
         </div>
-        <div class="stats">
+    </div>
+    <div class="stats">
+        <div class="container">
             <ul>
                 {% for kind, value in stats.items %}
                 <li>
@@ -38,6 +42,9 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div class="container">
+
 
         <div class="defects">
             <ul>

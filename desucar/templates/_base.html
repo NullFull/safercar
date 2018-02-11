@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <style>
-        html, body, div, ul, li, p {
+        html, body, div, ul, li, p, input {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -16,18 +16,95 @@
         body {
             font-family: sans-serif;
         }
+        input {
+            outline: none;
+        }
         li {
             list-style: none;
         }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
         .container {
-            max-width: 640px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 0 16px;
         }
-        .info img {
+        .header {
+            background: #2868CF;
+            color: white;
+            height: 60px;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+        }
+        .header h1 {
+            font-size: 20px;
+            line-height: 60px;
+        }
+        .footer {
+            padding: 40px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            height: 200px;
-            background: #EEEEEE;
+            text-align: center;
+        }
+        .searchbar {
+            padding: 8px 0;
+            position: relative;
+        }
+        .searchbar input {
+            width: 100%;
+            height: 48px;
+            padding: 0 16px;
+            font-size: 15px;
+            border: 1px solid #CACACA;
+            border-radius: 5px;
+        }
+        .searchbar button {
+            position: absolute;
+            font-size: 15px;
+            top: 12px;
+            right: 4px;
+            height: 40px;
+            width: 80px;
+            border-radius: 5px;
+            background: #2868CF;
+            color: white;
+        }
+        .searchbar .examples ul li {
+            display: inline-block;
+            padding: 8px 8px;
+        }
+        .searchbar .examples ul li a {
+            text-decoration: underline;
+        }
+        .index .lead {
+            padding: 40px 0;
+        }
+        .index .lead p {
+            margin-bottom: 14px;
+        }
+        .index .search {
+            text-align: center;
+        }
+        .search .results ul li {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            margin-bottom: 16px;
+            vertical-align: top;
+        }
+        .search .results ul li a {
+            padding: 8px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 80px;
+        }
+        .search .results ul li .thumbnail {
+            vertical-align: top;
+        }
+        .info {
+            text-align: center;
         }
         .info .maker {
             font-size: 1.2rem;
@@ -35,11 +112,10 @@
         .info .name {
             font-size: 1.6rem;
         }
-        .info .date {
-            text-align: right;
-        }
         .stats {
             margin: 24px 0;
+            padding: 40px 0;
+            background: #eeeeee;
         }
         .stats ul {
             display: flex;
@@ -52,18 +128,28 @@
         .stats .value {
             font-size: 1.6rem;
         }
+        .defects {
+            font-size: 14px;
+        }
+        .defects ul li {
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
 <div>
     <div class="header">
         <div class="container">
-            <h1><a href="/">차량 결함 정보</a></h1>
+            <h1><a href="/">내차 결함 찾기</a></h1>
         </div>
     </div>
 
     {% block "body" %}
     {% endblock %}
+
+    <div class="footer">
+        <p>ⓒ뉴스타파 x Null채움. All Rights Reserved.</p>
+    </div>
 </div>
 </body>
 </html>
