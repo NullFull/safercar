@@ -62,7 +62,7 @@ GSPREAD_AUTH = {
 }
 ```
 ```
-$ python manage.py importdata
+$ python manage.py import_data
 ```
 ### 썸네일 생성
 data/cars에 있는 사진들을 기반으로 static 안에 썸네일들을 생성함
