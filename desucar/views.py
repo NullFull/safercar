@@ -41,9 +41,7 @@ def search(request):
             )
             query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
         else:
-            print(token)
             token = normalize_name(token)
-            print(token)
             query = query.filter(name__contains=token)
 
     return render(request, 'search.html', dict(
