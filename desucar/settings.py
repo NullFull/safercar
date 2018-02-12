@@ -87,3 +87,5 @@ if DEBUG:
 else:
     STATIC_URL = '//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+NORMALIZE_MAP_PATH = os.path.join(BASE_DIR, 'data', 'normalize_map.json')
