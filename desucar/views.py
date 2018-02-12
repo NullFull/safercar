@@ -1,6 +1,7 @@
+from datetime import date
 from django.shortcuts import render
-from desucar.models import Car, Maker, Defect
-import re
+from desucar.models import Car, Maker
+from desucar.utils.normalize import normalize_name, is_year
 
 
 def index(request):
@@ -28,22 +29,24 @@ def detail(request, maker_name, car_name, car_year, car_code):
 
 
 def search(request):
-    q = request.GET.get('q')
+    q = request.GET.get('q').strip()
+    tokens = q.split()
 
-    cars = Car.objects.filter(name__contains=q).all()
+    query = Car.objects
+    for token in tokens:
+        if is_year(token):
+            year = int(token)
+            query = query.filter(
+                make_start__lte=date(year + 1, 1, 1)
+            )
+            query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
+        else:
+            print(token)
+            token = normalize_name(token)
+            print(token)
+            query = query.filter(name__contains=token)
 
     return render(request, 'search.html', dict(
         q=q,
-        cars=cars,
+        cars=query.all(),
     ))
-
-
-def seperate_year(keyword):
-    d4 = re.compile('\d{4}')
-    l = keyword.split(' ')
-    yyyy = d4.search(keyword)
-    if yyyy:
-        l.remove(yyyy.group())
-        return [int(yyyy.group()), ' '.join(l)]
-    else:
-        return [None, ' '.join(l)]
