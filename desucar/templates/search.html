@@ -11,10 +11,12 @@
         <div class="results">
             <ul>
             {% for car in cars %}
-                <li><a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
-                    <img class="thumbnail" src="{% static 'cars/' %}{{ car.code}}-100x.png"/>
-                    {{ car.name }} {{ car.year }}
-                </a></li>
+                <li>
+                    <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
+                        <div class="thumbnail"><img src="{% static 'cars/' %}{{ car.code}}-100x.png"/></div>
+                        <span>{{ car.maker.name }}<br/>{{ car.name }} {{ car.year }}</span>
+                    </a>
+                </li>
             {% endfor %}
             </ul>
         </div>

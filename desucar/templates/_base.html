@@ -41,8 +41,12 @@
             font-size: 20px;
             line-height: 60px;
         }
+        .body-wrapper {
+            padding-bottom: 120px;
+        }
         .footer {
-            padding: 40px 0;
+            background: white;
+            padding: 20px 0;
             position: fixed;
             bottom: 0;
             left: 0;
@@ -85,6 +89,12 @@
         .index .lead p {
             margin-bottom: 14px;
         }
+        .index .lead .links {
+            text-align: right;
+        }
+        .index .lead .links a {
+            text-decoration: underline;
+        }
         .index .search {
             text-align: center;
         }
@@ -95,16 +105,26 @@
         }
         .search .results ul li a {
             padding: 8px;
-            display: block;
+            /*display: block;*/
+            line-height: 1.5;
             width: 100%;
             height: 100%;
             min-height: 80px;
+            display: flex;
         }
         .search .results ul li .thumbnail {
             vertical-align: top;
+            margin-right: 10px;
+            width: 100px;
+        }
+        .search .results ul li .thumbnail img {
+            width: 100%;
         }
         .info {
             text-align: center;
+        }
+        .info img {
+            max-width: 100%;
         }
         .info .maker {
             font-size: 1.2rem;
@@ -144,8 +164,10 @@
         </div>
     </div>
 
+    <div class="body-wrapper">
     {% block "body" %}
     {% endblock %}
+    </div>
 
     <div class="footer">
         <p>ⓒ뉴스타파 x Null채움. All Rights Reserved.</p>
