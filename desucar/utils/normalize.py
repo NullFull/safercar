@@ -50,7 +50,7 @@ def similar_names(name):
 
 
 def is_year(s):
-    return s.isdigit and len(s) == 4
+    return s.isdigit() and len(s) == 4
 
 
 def separate_year(keyword):
