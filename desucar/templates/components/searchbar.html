@@ -1,10 +1,13 @@
 <div class="search">
     <div>
-        <form class="searchbar" action="/search" method="get">
+        <form class="searchbar" action="/search" method="get" autocomplete="off">
             <input class="q" name="q" placeholder="2012 싼타페" value="{{ q }}"/>
             <!--<input type="submit" value="검색">-->
             <button class="btn-submit" >검색</button>
         </form>
+    </div>
+    <ul class="autocomplete dropdown">
+    </ul>
     </div>
     <div class="examples">
         <ul>

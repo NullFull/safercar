@@ -88,6 +88,17 @@
             background: #2868CF;
             color: white;
         }
+        .search .dropdown {
+            margin-top: 0.3em;
+            text-align: left;
+            outline: none;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .dropdown .dropdown-item {
+            color: rgba(0, 0, 0, 0.65);
+            padding: 8px 16px;
+        }
         .search .examples ul li {
             display: inline-block;
             padding: 8px 8px;
@@ -186,4 +197,55 @@
     </div>
 </div>
 </body>
+<script>
+    const baseUrl = 'http://127.0.0.1:8000'
+    const searchbar = document.querySelector('.q')
+    const dropdown = document.querySelector('.dropdown')
+    const autocomplete = document.querySelector('.autocomplete')
+
+    let cars = [];
+    
+    const render = () => {
+        autocomplete.innerHTML = '';
+        cars.forEach(car => {
+            autocomplete.innerHTML += `
+            <li class="dropdown-item">${car.fields.simple_name}</li>
+            `            
+        })
+    }
+
+    const debounce = (func, wait, immediate) => {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            const later = () => {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+    
+    const getSuggestion = debounce(() => {
+        return new Promise((res, rej) => {
+            const req = new XMLHttpRequest();
+            req.open('GET', `${baseUrl}/suggest?q=${searchbar.value}`);
+            if (searchbar.value)
+            req.send();
+            req.onreadystatechange = function () {
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        cars = JSON.parse(req.response)
+                        render()
+                    }
+                }
+            };
+        })
+    }, 300)
+
+    searchbar.addEventListener('input', getSuggestion)
+</script>
 </html>
