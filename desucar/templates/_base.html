@@ -99,6 +99,13 @@
             color: rgba(0, 0, 0, 0.65);
             padding: 8px 16px;
         }
+        .dropdown-item:hover {
+            background-color: #e6f7ff;
+        }
+        .dropdown-item a {
+            display: block;
+            width: 100%;
+        }
         .search .examples ul li {
             display: inline-block;
             padding: 8px 8px;
@@ -209,7 +216,7 @@
         autocomplete.innerHTML = '';
         cars.forEach(car => {
             autocomplete.innerHTML += `
-            <li class="dropdown-item">${car.fields.simple_name}</li>
+            <li class="dropdown-item"><a href="/${car.fields.maker}/${car.fields.simple_name}-${car.fields.make_start.substr(0, 4)}-${car.fields.code}">${car.fields.name}</a></li>
             `            
         })
     }
