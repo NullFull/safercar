@@ -178,6 +178,33 @@
         .stats .value {
             font-size: 1.6rem;
         }
+        .navbar {
+            box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+            margin-bottom: 1.5em;
+        }
+        .navbar .container {
+            padding: 0;
+        }
+        .navbar-tab {
+            display: inline-block;
+            padding: 0.5em 1em;
+            cursor: pointer;
+        }
+        .navbar-tab:hover {
+            color: #40a9ff;
+        }
+        .navbar-tab.active {
+            color: #1890ff;
+            font-weight: 600;
+            border-bottom: 2px solid #1890ff;
+        }
+        .navbar-tab.disabled{
+            color: rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+        }
+        .navbar-tab.no-comments{
+            /* TODO: 뭔가 댓글 달고싶은 모양으로... */
+        }
         .defects {
             font-size: 14px;
         }
