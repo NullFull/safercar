@@ -237,6 +237,10 @@
     };
     
     const getSuggestion = debounce(() => {
+        if (!searchbar.value) {
+            cars = [];
+            render();
+        }
         return new Promise((res, rej) => {
             const req = new XMLHttpRequest();
             req.open('GET', `${baseUrl}/suggest?q=${searchbar.value}`);
