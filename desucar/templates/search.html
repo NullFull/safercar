@@ -14,7 +14,7 @@
                 <li>
                     <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
                         <div class="thumbnail"><img src="{% static 'cars/' %}{{ car.code}}-100x.png"/></div>
-                        <span>{{ car.maker.name }}<br/>{{ car.name }} {{ car.year }}</span>
+                        <span>{{ car.maker.name }}<br/>{{ car.name }}</span>
                     </a>
                 </li>
             {% endfor %}
