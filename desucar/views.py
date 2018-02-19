@@ -36,9 +36,7 @@ def search(request):
     for token in tokens:
         if is_year(token):
             year = int(token)
-            query = query.filter(
-                make_start__lte=date(year + 1, 1, 1)
-            )
+            query = query.filter(make_start__lte=date(year + 1, 1, 1))
             query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
         else:
             token = normalize_name(token)
