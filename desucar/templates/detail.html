@@ -51,7 +51,7 @@
             {% for defect in defects %}
                 <li>
                     <h3>[{{ defect.get_kind_display }}] {{ defect.part_name }}</h3>
-                    <p>{{ defect.solution }}</p>
+                    <p>{{ defect.solution | linebreaks }}</p>
                 </li>
             {% endfor %}
             </ul>
