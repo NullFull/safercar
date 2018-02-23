@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <style>
-        html, body, div, ul, li, p, input {
+        html, body, div, ul, li, p, input, button {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
@@ -53,34 +53,64 @@
             width: 100%;
             text-align: center;
         }
-        .searchbar {
+        .search {
             padding: 8px 0;
             position: relative;
         }
-        .searchbar input {
-            width: 100%;
-            height: 48px;
+        .search input {
+            border: 1px solid transparent;
+            border-radius: 3px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            font-size: 1rem;
+            width: calc(100% - 5em);
+            height: 2.25em;
             padding: 0 16px;
-            font-size: 15px;
-            border: 1px solid #CACACA;
-            border-radius: 5px;
+            border-color: #dbdbdb;
+            color: #363636;
+            margin-right: -5px;
         }
-        .searchbar button {
-            position: absolute;
-            font-size: 15px;
-            top: 12px;
-            right: 4px;
-            height: 40px;
-            width: 80px;
-            border-radius: 5px;
+        .search input:focus {
+            outline: none;
+            border-color: #3273dc;
+            -webkit-box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+            box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+        }
+        .search button {
+            position: relative;
+            font-size: 1rem;
+            height: 2.25em;
+            width: 5em;
+            border: 0;
+            border-radius: 3px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
             background: #2868CF;
             color: white;
         }
-        .searchbar .examples ul li {
+        .search .dropdown {
+            margin-top: 0.3em;
+            text-align: left;
+            outline: none;
+            border-radius: 3px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .dropdown .dropdown-item {
+            color: rgba(0, 0, 0, 0.65);
+            padding: 8px 16px;
+        }
+        .dropdown-item:hover {
+            background-color: #e6f7ff;
+        }
+        .dropdown-item a {
+            display: block;
+            width: 100%;
+        }
+        .search .examples ul li {
             display: inline-block;
             padding: 8px 8px;
         }
-        .searchbar .examples ul li a {
+        .search .examples ul li a {
             text-decoration: underline;
         }
         .index .lead {
@@ -160,7 +190,7 @@
 <div>
     <div class="header">
         <div class="container">
-            <h1><a href="/">내차 결함 찾기</a></h1>
+            <h1><a href="/">내차결함</a></h1>
         </div>
     </div>
 
@@ -174,4 +204,59 @@
     </div>
 </div>
 </body>
+<script>
+    const baseUrl = 'http://127.0.0.1:8000'
+    const searchbar = document.querySelector('.q')
+    const dropdown = document.querySelector('.dropdown')
+    const autocomplete = document.querySelector('.autocomplete')
+
+    let cars = [];
+    
+    const render = () => {
+        autocomplete.innerHTML = '';
+        cars.forEach(car => {
+            autocomplete.innerHTML += `
+            <li class="dropdown-item"><a href="/${car.fields.maker}/${car.fields.simple_name}-${car.fields.make_start.substr(0, 4)}-${car.fields.code}">${car.fields.name}</a></li>
+            `            
+        })
+    }
+
+    const debounce = (func, wait, immediate) => {
+        let timeout;
+        return function() {
+            const context = this, args = arguments;
+            const later = () => {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            const callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+    
+    const getSuggestion = debounce(() => {
+        if (!searchbar.value) {
+            cars = [];
+            render();
+        }
+        return new Promise((res, rej) => {
+            const req = new XMLHttpRequest();
+            req.open('GET', `${baseUrl}/suggest?q=${searchbar.value}`);
+            if (searchbar.value)
+            req.send();
+            req.onreadystatechange = function () {
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        cars = JSON.parse(req.response)
+                        render()
+                    }
+                }
+            };
+        })
+    }, 300)
+
+    searchbar.addEventListener('input', getSuggestion)
+</script>
 </html>

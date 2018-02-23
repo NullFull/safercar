@@ -10,7 +10,8 @@
     <div class="info">
         <div class="container">
             <div class="image">
-                <img src="{% static 'cars/' %}{{ car.code}}-600x.png">
+                {% comment %} <img src="{% static 'cars/' %}{{ car.code}}-600x.png"> {% endcomment %}
+                <img src="{% static 'mocks/a601' %}-600x.png">
             </div>
             <div>
                 <h2 class="maker">{{ car.maker.name }}</h2>

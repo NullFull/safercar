@@ -1,6 +1,8 @@
 from datetime import date
 from django.shortcuts import render
 from desucar.models import Car, Maker
+from django.http import HttpResponse
+from django.core import serializers
 from desucar.utils.normalize import normalize_name, is_year
 
 
@@ -46,3 +48,22 @@ def search(request):
         q=q,
         cars=query.all(),
     ))
+    
+
+def suggest(request):
+    q = request.GET.get('q').strip()
+    tokens = q.split()
+
+    query = Car.objects
+    for token in tokens:
+        if is_year(token):
+            year = int(token)
+            query = query.filter(
+                make_start__lte=date(year + 1, 1, 1)
+            )
+            query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
+        else:
+            token = normalize_name(token)
+            query = query.filter(name__contains=token)
+    data = serializers.serialize('json', query.all())
+    return HttpResponse(data, content_type='application/json')

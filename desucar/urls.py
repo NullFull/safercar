@@ -8,6 +8,6 @@ urlpatterns = [
     path('', views.index),
     path('search', views.search),
     path('<maker_name>/<car_name>-<int:car_year>-<car_code>', views.detail),
-
+    path('suggest', views.suggest)
     # path('<maker>/<car>/<int:year>', views.detail),
 ]
