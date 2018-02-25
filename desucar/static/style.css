@@ -1,0 +1,181 @@
+html, body, div, ul, li, p, input, button {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+body {
+    font-family: sans-serif;
+}
+input {
+    outline: none;
+}
+li {
+    list-style: none;
+}
+a {
+    color: inherit;
+    text-decoration: none;
+}
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+.header {
+    background: #2868CF;
+    color: white;
+    height: 60px;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+}
+.header h1 {
+    font-size: 20px;
+    line-height: 60px;
+}
+.body-wrapper {
+    padding-bottom: 120px;
+}
+.footer {
+    background: white;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+.search {
+    padding: 8px 0;
+    position: relative;
+}
+.search input {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: 1rem;
+    width: calc(100% - 5em);
+    height: 2.25em;
+    padding: 0 16px;
+    border-color: #dbdbdb;
+    color: #363636;
+    margin-right: -5px;
+}
+.search input:focus {
+    outline: none;
+    border-color: #3273dc;
+    -webkit-box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+}
+.search button {
+    position: relative;
+    font-size: 1rem;
+    height: 2.25em;
+    width: 5em;
+    border: 0;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: #2868CF;
+    color: white;
+}
+.search .dropdown {
+    margin-top: 0.3em;
+    text-align: left;
+    outline: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.dropdown .dropdown-item {
+    color: rgba(0, 0, 0, 0.65);
+    padding: 8px 16px;
+}
+.dropdown-item:hover {
+    background-color: #e6f7ff;
+}
+.dropdown-item a {
+    display: block;
+    width: 100%;
+}
+.search .examples ul li {
+    display: inline-block;
+    padding: 8px 8px;
+}
+.search .examples ul li a {
+    text-decoration: underline;
+}
+.index .lead {
+    padding: 40px 0;
+}
+.index .lead p {
+    margin-bottom: 14px;
+}
+.index .lead .links {
+    text-align: right;
+}
+.index .lead .links a {
+    text-decoration: underline;
+}
+.index .search {
+    text-align: center;
+}
+.search .results ul li {
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    margin-bottom: 16px;
+    vertical-align: top;
+}
+.search .results ul li a {
+    padding: 8px;
+    /*display: block;*/
+    line-height: 1.5;
+    width: 100%;
+    height: 100%;
+    min-height: 80px;
+    display: flex;
+}
+.search .results ul li .thumbnail {
+    vertical-align: top;
+    margin-right: 10px;
+    width: 100px;
+}
+.search .results ul li .thumbnail img {
+    width: 100%;
+}
+.info {
+    text-align: center;
+}
+.info img {
+    max-width: 100%;
+}
+.info .maker {
+    font-size: 1.2rem;
+}
+.info .name {
+    font-size: 1.6rem;
+}
+.stats {
+    margin: 24px 0;
+    padding: 40px 0;
+    background: #eeeeee;
+}
+.stats ul {
+    display: flex;
+    justify-content: space-evenly;
+}
+.stats ul li {
+    width: 80px;
+    text-align: center;
+}
+.stats .value {
+    font-size: 1.6rem;
+}
+.defects {
+    font-size: 14px;
+}
+.defects ul li {
+    margin-bottom: 16px;
+}
