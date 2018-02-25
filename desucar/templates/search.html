@@ -13,8 +13,7 @@
             {% for car in cars %}
                 <li>
                     <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
-                        {% comment %} <div class="thumbnail"><img src="{% static 'cars/' %}{{ car.code }}-100x.png"/></div> {% endcomment %}
-                        <div class="thumbnail"><img src="{% static 'mocks/a601' %}-100x.png"/></div>
+                        <div class="thumbnail"><img src="{% static 'cars/' %}{{ car.code }}-100x.png"/></div>
                         <span>{{ car.maker.name }}<br/>{{ car.name }} {{ car.year }}</span>
                     </a>
                 </li>
