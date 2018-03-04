@@ -7,3 +7,6 @@ db.sqlite3
 env
 .DS_Store
 cars/
+node_modules/
+yarn.lock
+yarn-error.log
