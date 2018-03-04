@@ -173,6 +173,51 @@ a {
 .stats .value {
     font-size: 1.6rem;
 }
+
+.navbar {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+    margin: 1.5em 0;
+}
+.navbar .container {
+    padding: 0;
+}
+.navbar-tabs {
+    display: flex;
+}
+.navbar-tab {
+    width: 20%;
+    font-size: 1em;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+}
+.navbar-tab .value {
+    pointer-events: none;
+}
+.navbar-tab:hover {
+    color: #40a9ff;
+}
+.navbar-tab.active {
+    color: #1890ff;
+    font-weight: 600;
+    border-bottom: 2px solid #1890ff;
+}
+.navbar-tab.no-value{
+    color: rgba(0, 0, 0, 0.50);
+    pointer-events: none;
+}
+.navbar-tab.no-comments {
+    /* TODO: 뭔가 댓글 달고싶은 모양으로... */
+}
+.navbar-tab .value {
+    font-size: 1.6rem;
+    z-index: 100;
+}
+
+.navbar-tab .value {
+    z-index: -5;
+}
+
 .defects {
     font-size: 14px;
 }

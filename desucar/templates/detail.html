@@ -19,37 +19,28 @@
             </div>
         </div>
     </div>
-    <div class="stats">
+    <nav class="navbar">
         <div class="container">
-            <ul>
+            <ul class="navbar-tabs">
                 {% for kind, value in stats.items %}
-                <li>
-                    <div>{{ kind }}</div>
-                    <div class="value">{{ value }}</div>
+                {% if value.value == 0 %}
+                <li class="navbar-tab no-value" id="{{ value.code }}">{{ kind }}
+                    <div class="value">{{ value.value }}</div>
                 </li>
+                {% else %}
+                <li class="navbar-tab" id="{{ value.code }}">{{ kind }}
+                    <div class="value">{{ value.value }}</div>
+                </li>
+                {% endif %}
                 {% endfor %}
-                <li>
-                    <div>무언가</div>
-                    <div class="value">12</div>
-                </li>
-                <li>
-                    <div>추가될</div>
-                    <div class="value">6</div>
-                </li>
-                <li>
-                    <div>숫자</div>
-                    <div class="value">8</div>
-                </li>
             </ul>
         </div>
-    </div>
+    </nav>
     <div class="container">
-
-
         <div class="defects">
             <ul>
             {% for defect in defects %}
-                <li>
+                <li class="defect {{ defect.kind }}">
                     <h3>[{{ defect.get_kind_display }}] {{ defect.part_name }}</h3>
                     <p>{{ defect.solution }}</p>
                 </li>
