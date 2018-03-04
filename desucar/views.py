@@ -19,8 +19,14 @@ def detail(request, maker_name, car_name, car_year, car_code):
     defects = car.defects.all()
 
     stats = {
-        '리콜': sum(1 for x in defects if x.kind == 'RC'),
-        '무상수리': sum(1 for x in defects if x.kind == 'FF'),
+        '리콜': {
+            'value': sum(1 for x in defects if x.kind == 'RC'),
+            'code': 'RC'
+        },
+        '무상수리': {
+            'value': sum(1 for x in defects if x.kind == 'FF'),
+            'code': 'FF'
+        }
     }
 
     return render(request, 'detail.html', dict(
