@@ -24,12 +24,12 @@ class Car(models.Model):
         return '{name}'.format(name=self.name)
 
 
-class Defect(models.Model):
+class OfficialDefect(models.Model):
     class 종류:
         리콜 = 'RC'
         무상수리 = 'FF'
 
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='defects')
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='official_defects')
     kind = models.CharField(max_length=2, choices=(
         (종류.리콜, '리콜'),
         (종류.무상수리, '무상수리'),
@@ -43,3 +43,26 @@ class Defect(models.Model):
 
     def __str__(self):
         return '{name} - {part}'.format(name=self.car.name, part=self.part_name)
+
+
+class Community(models.Model):
+    name = models.CharField(max_length=40)
+    url = models.URLField()
+    join_required = models.BooleanField()
+
+
+class CommunityDefect(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='community_defects')
+    community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=20)
+    solution = models.TextField()
+
+
+class SuddenAccelReport(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='sudden_accels')
+    buy_at = models.DateField(null=True, blank=True)
+    make_at = models.DateField(null=True, blank=True)
+    accident_at = models.DateField(null=True, blank=True)
+
+    detail = models.TextField()
+    source = models.CharField(max_length=200)

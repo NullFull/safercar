@@ -16,15 +16,18 @@ def index(request):
 def detail(request, maker_name, car_name, car_year, car_code):
     car = Car.objects.get(code=car_code)
 
-    defects = car.defects.all()
-
-    stats = {
-        '리콜': sum(1 for x in defects if x.kind == 'RC'),
-        '무상수리': sum(1 for x in defects if x.kind == 'FF'),
+    official_defects = car.official_defects.all()
+    defects = {
+        '리콜': [x for x in official_defects if x.kind == 'RC'],
+        '무상수리': [x for x in official_defects if x.kind == 'FF'],
+        '비공식 무상수리': list(car.community_defects.all()),
+        '급발진 의심': [x for x in car.sudden_accels.all()]
     }
+    stats = {key: len(value) for key, value in defects.items()}
 
     return render(request, 'detail.html', dict(
         car=car,
+        official_defects=official_defects,
         defects=defects,
         stats=stats,
     ))
@@ -58,9 +61,7 @@ def suggest(request):
     for token in tokens:
         if is_year(token):
             year = int(token)
-            query = query.filter(
-                make_start__lte=date(year + 1, 1, 1)
-            )
+            query = query.filter(make_start__lte=date(year + 1, 1, 1))
             query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
         else:
             token = normalize_name(token)
