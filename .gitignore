@@ -7,3 +7,7 @@ db.sqlite3
 **.pyc
 env
 .DS_Store
+cars/
+node_modules/
+yarn.lock
+yarn-error.log

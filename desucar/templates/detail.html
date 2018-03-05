@@ -19,28 +19,31 @@
             </div>
         </div>
     </div>
-    <div class="stats">
+    <nav class="navbar">
         <div class="container">
-            <ul>
-                {% for kind, value in stats.items %}
-                <li>
+            <ul class="navbar-tabs">
+                {% for kind, value in defects.items %}
+                <li class="navbar-tab {% if value.count == 0 %}no-value{% endif %}" id="{{ value.code }}">
                     <div>{{ kind }}</div>
-                    <div class="value">{{ value }}</div>
+                    <div class="value">{{ value.count }}</div>
                 </li>
                 {% endfor %}
             </ul>
         </div>
-    </div>
+    </nav>
     <div class="container">
         <div class="defects">
-            {% for kind, items in defects.items %}
+            {% for kind, value in defects.items %}
             <ul>
-                {% for item in items %}
-                <li>
+                {% for item in value.items %}
+                <li class="defect {{ value.code }}">
                     {% if kind == "리콜" or kind == "무상수리" %}
                         <h3>[{{ item.get_kind_display }}] {{ item.part_name }}</h3>
                         <p>{{ item.solution | linebreaksbr }}</p>
                     {% elif kind == "비공식 결함처리" %}
+                        <h3>[{{ kind }}] {{ item.part_name }}</h3>
+                        <p>{{ item.solution | linebreaksbr }}</p>
+                    {% elif kind == "급발진 의심" %}
                         <h3>[{{ kind }}] {{ item.part_name }}</h3>
                         <p>{{ item.solution | linebreaksbr }}</p>
                     {% endif %}
