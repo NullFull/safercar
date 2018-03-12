@@ -41,11 +41,17 @@
                         <h3>[{{ item.get_kind_display }}] {{ item.part_name }}</h3>
                         <p>{{ item.solution | linebreaksbr }}</p>
                     {% elif kind == "비공식 결함처리" %}
-                        <h3>[{{ kind }}] {{ item.part_name }}</h3>
-                        <p>{{ item.solution | linebreaksbr }}</p>
+                        <h3>[{{ kind }}] {{ item }}</h3>
+                        <p>
+                            <ul>
+                                {% for post in item.posts.all %}
+                                <li>{{ post.content }}</li>
+                                {% endfor %}
+                            </ul>
+                        </p>
                     {% elif kind == "급발진 의심" %}
                         <h3>[{{ kind }}] {{ item.part_name }}</h3>
-                        <p>{{ item.solution | linebreaksbr }}</p>
+                        <p>{{ item.detail | linebreaksbr }}</p>
                     {% endif %}
                 </li>
                 {% endfor %}
