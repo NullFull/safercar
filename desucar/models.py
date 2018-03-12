@@ -34,12 +34,12 @@ class OfficialDefect(models.Model):
         (종류.리콜, '리콜'),
         (종류.무상수리, '무상수리'),
     ))
-    n_targets = models.IntegerField()
+    n_targets = models.IntegerField(null=True, blank=True)
     part_name = models.CharField(max_length=20)
     solution = models.TextField()
     source = models.URLField(null=True, blank=True)
-    fix_start = models.DateField(null=True, blank=True)
-    fix_end = models.DateField(null=True, blank=True)
+    fix_start = models.CharField(max_length=40, null=True, blank=True)
+    fix_end = models.CharField(max_length=40, null=True, blank=True)
 
     def __str__(self):
         return '{name} - {part}'.format(name=self.car.name, part=self.part_name)
@@ -48,14 +48,20 @@ class OfficialDefect(models.Model):
 class Community(models.Model):
     name = models.CharField(max_length=40)
     url = models.URLField()
-    join_required = models.BooleanField()
 
 
 class CommunityDefect(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='community_defects')
     community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=20)
-    solution = models.TextField()
+
+
+class CommunityDefectPost(models.Model):
+    defect = models.ForeignKey(CommunityDefect, on_delete=models.CASCADE, related_name='posts')
+    url = models.URLField()
+    content = models.TextField(null=True, blank=True)
+    posted_at = models.DateField(null=True, blank=True)
+    join_required = models.BooleanField()
 
 
 class SuddenAccelReport(models.Model):

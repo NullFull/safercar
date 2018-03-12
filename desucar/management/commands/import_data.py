@@ -1,9 +1,12 @@
+from collections import defaultdict
+
 from datetime import date
 from django.conf import settings
 from django.core.management import BaseCommand
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from desucar.models import Car, Maker, OfficialDefect, CommunityDefect, Community, SuddenAccelReport
+from desucar.models import Car, Maker, OfficialDefect, CommunityDefect, Community, SuddenAccelReport, \
+    CommunityDefectPost
 
 
 def format_date(s):
@@ -95,35 +98,62 @@ class Command(BaseCommand):
 
                 part_name = row[11]
                 print(part_name)
+                n_targets = parse_int(row[10]) if row[10] else None
 
                 OfficialDefect.objects.create(
                     car=car,
                     kind=defect_type,
-                    n_targets=parse_int(row[10]),
+                    n_targets=n_targets,
                     part_name=part_name,
                     solution=row[12],
-                    fix_start=format_date(row[8]),
+                    fix_start=row[8],
                 )
 
-        sheet = defects_doc.worksheet('3_비공식_결함처리(동호회/제보/인터넷등)')
+        # community_doc = gs.open_by_key('11Ik9e_baJlToODyLI5swY3wKoPS9QIRZlzumm04LI4U')
+        # communities = {}
+        # for row in community_doc.get_worksheet(0).get_all_values()[1:]:
+        #     print(row)
+        #     community = Community.objects.create(
+        #         name=row[2],
+        #         # url=row[5],
+        #     )
+
+        sheet = defects_doc.worksheet('3_비공식_결함정보(동호회/제보/인터넷등)')
+        defects = {}
         for row in sheet.get_all_values()[1:]:
             car_code = row[2] + row[3] + row[4]
             if not car_code:  # TODO : remove
                 continue
 
-            car = Car.objects.get(code=car_code)
-
             community, _ = Community.objects.get_or_create(
-                name=row[10],
-                join_required=row[12] == '(가입해야 읽을 수 있음)',
-                url=row[11]
+                name=row[6],
+                url='https://test.test',
             )
 
-            CommunityDefect.objects.create(
+            car = Car.objects.get(code=car_code)
+            key = row[8]
+
+            defect = CommunityDefect.objects.create(
                 community=community,
                 car=car,
-                status=row[7],
-                solution=row[14]
+                status=row[5],
+            )
+
+            defects[key] = defect
+
+        sheet = defects_doc.worksheet('3_비공식_결함정보(+상세내용)')
+        for row in sheet.get_all_values()[1:]:
+            key = row[0]
+            posted_at = format_date(row[3]) if row[3] else None
+
+            print(row[7])
+            
+            CommunityDefectPost.objects.create(
+                defect=defects[key],
+                url=row[5],
+                content=row[7],
+                posted_at=posted_at,
+                join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
 
         sources = set()
