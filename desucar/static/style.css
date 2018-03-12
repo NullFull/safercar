@@ -191,7 +191,7 @@ a {
     display: inline-block;
     cursor: pointer;
 }
-.navbar-tab .value {
+.navbar-tab * {
     pointer-events: none;
 }
 .navbar-tab:hover {
