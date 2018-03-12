@@ -2,7 +2,7 @@ from os.path import splitext
 
 from django.conf import settings
 from django.core.management import BaseCommand
-from os import path, listdir
+from os import path, listdir, makedirs
 from wand.image import Image
 
 
@@ -10,6 +10,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         SRC_DIR = path.join(settings.BASE_DIR, 'data', 'cars')
         TARGET_DIR = path.join(settings.BASE_DIR, 'desucar', 'static', 'cars')
+        makedirs(TARGET_DIR, exist_ok=True)
 
         for filename in listdir(SRC_DIR):
             if filename == '.DS_Store':
