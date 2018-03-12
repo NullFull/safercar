@@ -89,3 +89,4 @@ else:
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 NORMALIZE_MAP_PATH = os.path.join(BASE_DIR, 'data', 'normalize_map.json')
+
