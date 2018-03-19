@@ -39,6 +39,9 @@ a {
     font-size: 20px;
     line-height: 60px;
 }
+.logo-width {
+    width: 60%;
+}
 .body-wrapper {
     padding-bottom: 120px;
 }
@@ -50,9 +53,6 @@ a {
     left: 0;
     width: 100%;
     text-align: center;
-}
-.footer p a {
-    width: 60%;
 }
 .searchbar {
     padding: 8px 0;
