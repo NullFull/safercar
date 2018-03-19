@@ -28,7 +28,7 @@ class OfficialDefect(models.Model):
     class 종류:
         리콜 = 'RC'
         무상수리 = 'FF'
-
+        
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='official_defects')
     kind = models.CharField(max_length=2, choices=(
         (종류.리콜, '리콜'),
@@ -54,6 +54,7 @@ class CommunityDefect(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='community_defects')
     community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=20)
+    part_name = models.CharField(max_length=30, null=True, blank=True)
 
 
 class CommunityDefectPost(models.Model):

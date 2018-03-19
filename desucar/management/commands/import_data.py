@@ -25,6 +25,12 @@ def parse_int(s):
     return int(s)
 
 
+not_exists = [
+    'a400', 'w300', 'w500', 'ea00', 'vd00', 'be00', 'ev00',
+    'fe00', 'yi01', 'ym01', 'zp00', 'vr00', 'yr00', 'bs00',
+]
+
+
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         cred = ServiceAccountCredentials.from_json_keyfile_dict(
@@ -81,9 +87,8 @@ class Command(BaseCommand):
             sheet = defects_doc.worksheet(sheet_name)
             for row in sheet.get_all_values()[1:]:
                 car_code = row[2] + row[3] + row[4]
-                if not car_code:
-                    # TODO : remove
-                    # CISS 시트에 빈 아이들 많음
+                print(car_code)
+                if car_code in not_exists:  # TODO : fix code.
                     continue
 
                 car = Car.objects.get(code=car_code)
@@ -122,9 +127,8 @@ class Command(BaseCommand):
         defects = {}
         for row in sheet.get_all_values()[1:]:
             car_code = row[2] + row[3] + row[4]
-            if not car_code:  # TODO : remove
+            if car_code in not_exists:  # TODO : fix code.
                 continue
-
             community, _ = Community.objects.get_or_create(
                 name=row[6],
                 url='https://test.test',
@@ -132,35 +136,47 @@ class Command(BaseCommand):
 
             car = Car.objects.get(code=car_code)
             key = row[8]
+            part_name = row[7]
 
             defect = CommunityDefect.objects.create(
                 community=community,
                 car=car,
+                part_name=part_name,
                 status=row[5],
             )
 
+            print(key)
+            print(type(key))
             defects[key] = defect
+
+        print(len(defects.keys()))
 
         sheet = defects_doc.worksheet('3_비공식_결함정보(+상세내용)')
         for row in sheet.get_all_values()[1:]:
             key = row[0]
             posted_at = format_date(row[3]) if row[3] else None
 
-            print(row[7])
-            
+            if key in ['1', '59']:
+                continue
+
+            print(row[6])
+            print(key)
+            print(type(key))
+
             CommunityDefectPost.objects.create(
                 defect=defects[key],
                 url=row[5],
-                content=row[7],
+                content=row[6],
                 posted_at=posted_at,
                 join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
 
-        sources = set()
-
         sheet = defects_doc.worksheet('5_급발진_의심신고(국토부/소비자원)')
         for row in sheet.get_all_values()[1:]:
             car_code = row[2] + row[3] + row[4]
+
+            if car_code in not_exists:
+                continue
 
             car = Car.objects.get(code=car_code)
 
@@ -168,7 +184,3 @@ class Command(BaseCommand):
                 car=car,
                 detail=row[10],
             )
-
-            sources.add(row[11])
-
-        print(sources)
