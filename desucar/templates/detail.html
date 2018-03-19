@@ -28,6 +28,10 @@
                     <div class="value">{{ value.count }}</div>
                 </li>
                 {% endfor %}
+                <li class="navbar-tab" id="comment">
+                    <div>댓글</div>
+                    <div class="value disqus-comment-count" data-disqus-identifier="check-{{ car.code }}"></div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -41,11 +45,11 @@
                         <h3>[{{ item.get_kind_display }}] {{ item.part_name }}</h3>
                         <p>{{ item.solution | linebreaksbr }}</p>
                     {% elif kind == "비공식 결함처리" %}
-                        <h3>[{{ kind }}] {{ item }}</h3>
+                        <h3>[{{ item.status }}] {{ item.part_name }} </h3>
                         <p>
                             <ul>
                                 {% for post in item.posts.all %}
-                                <li>{{ post.content }}</li>
+                                <li>{{ post.content | linebreaksbr }}</li>
                                 {% endfor %}
                             </ul>
                         </p>
@@ -57,7 +61,26 @@
                 {% endfor %}
             </ul>
             {% endfor %}
+            <ul>
+                <li class="defect comment">
+                    <div id="disqus_thread"></div>
+                </li>
+            </ul>
         </div>
     </div>
+
+    <script>
+        var disqus_config = function () {
+            // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = '//checkyourcar.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>
 </div>
 {% endblock %}
