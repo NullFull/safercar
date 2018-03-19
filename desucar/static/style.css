@@ -84,6 +84,9 @@ a {
     color: white;
 }
 .searchbar .dropdown {
+    position: absolute;
+    background-color: white;
+    width: 100%;
     margin-top: 0.3em;
     text-align: left;
     outline: none;
@@ -213,11 +216,9 @@ a {
     font-size: 1.6rem;
     z-index: 100;
 }
-
 .navbar-tab .value {
     z-index: -5;
 }
-
 .defects {
     font-size: 14px;
 }
