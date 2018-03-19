@@ -7,35 +7,6 @@ var defects = document.querySelectorAll('.defect');
 var cars = [];
 var currentTab = void 0;
 
-var toggleTab = function toggleTab(tab) {
-  if (tab.id !== currentTab.id) {
-    currentTab.classList.remove('active');
-    currentTab = tab;
-    currentTab.classList.add('active');
-    renderDefects(currentTab.id);
-  }
-};
-
-var renderDefects = function renderDefects(id) {
-  defects.forEach(function (d) {
-    d.style.display = d.className.includes(id) ? '' : 'none';
-  });
-};
-
-if (tabs) {
-  currentTab = Array.from(tabs.children).find(function (item) {
-    return !item.classList.contains('no-value');
-  });
-  currentTab.classList.add('active');
-  renderDefects(currentTab.id);
-
-  tabs.addEventListener('click', function (e) {
-    if (e.target.nodeName === 'LI') {
-      toggleTab(e.target);
-    }
-  });
-}
-
 if (searchbar) {
   var renderSuggestion = function renderSuggestion() {
     autocomplete.innerHTML = '';
@@ -82,4 +53,35 @@ if (searchbar) {
   }, 300);
 
   searchbar.addEventListener('input', getSuggestion);
+}
+
+var toggleTab = function toggleTab(tab) {
+  if (tab.id !== currentTab.id) {
+    currentTab.classList.remove('active');
+    currentTab = tab;
+    currentTab.classList.add('active');
+    renderDefects(currentTab.id);
+  }
+};
+
+var renderDefects = function renderDefects(id) {
+  defects.forEach(function (d) {
+    d.style.display = d.className.includes(id) ? '' : 'none';
+  });
+};
+
+if (tabs) {
+  currentTab = Array.from(tabs.children).find(function (item) {
+    return !item.classList.contains('no-value');
+  });
+  if (currentTab) {
+    currentTab.classList.add('active');
+    renderDefects(currentTab.id);
+  }
+
+  tabs.addEventListener('click', function (e) {
+    if (e.target.nodeName === 'LI') {
+      toggleTab(e.target);
+    }
+  });
 }

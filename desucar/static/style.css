@@ -32,7 +32,7 @@ a {
     background: #2868CF;
     color: white;
     height: 60px;
-    padding-top: 0.2rem;
+    padding-top: 6px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
 .header h1 {
@@ -40,7 +40,7 @@ a {
     line-height: 60px;
 }
 .body-wrapper {
-    padding-bottom: 120px;
+    
 }
 .footer {
     background: white;
@@ -87,6 +87,9 @@ a {
     color: white;
 }
 .searchbar .dropdown {
+    position: absolute;
+    background-color: white;
+    width: 100%;
     margin-top: 0.3em;
     text-align: left;
     outline: none;
@@ -112,12 +115,15 @@ a {
     text-decoration: underline;
 }
 .index {
-    max-width: 600px;
+    max-width: 100%;
+    height: 100vh;
     margin: 0 auto;
     padding: 0 16px;
     color: #fff;
     font-family: sans-serif;
-    background: url('./static/img/bg-driver.png');
+    background: url('/static/img/bg-driver.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .index .lead {
@@ -136,7 +142,9 @@ a {
     text-align: center;
 }
 .page-title {
-    font-size: 3rem;   
+    text-align: center;
+    font-size: 2.2em;  
+    font-weight: bold; 
 }
 .search .results ul li {
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -228,11 +236,9 @@ a {
     font-size: 1.6rem;
     z-index: 100;
 }
-
 .navbar-tab .value {
     z-index: -5;
 }
-
 .defects {
     font-size: 14px;
 }
