@@ -32,6 +32,7 @@ a {
     background: #2868CF;
     color: white;
     height: 60px;
+    padding-top: 0.2rem;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
 .header h1 {
@@ -116,7 +117,7 @@ a {
     padding: 0 16px;
     color: #fff;
     font-family: sans-serif;
-    background: url('./static/img/bg-img.png');
+    background: url('./static/img/bg-driver.png');
 }
 
 .index .lead {
