@@ -23,7 +23,11 @@
         <div class="container">
             <ul class="navbar-tabs">
                 {% for kind, value in defects.items %}
-                <li class="navbar-tab {% if value.count == 0 %}no-value{% endif %}" id="{{ value.code }}">
+                <li class="navbar-tab
+                    {% if value.count == 0 %}
+                    no-value
+                    {% endif %}"
+                    id="{{ value.code }}">
                     <div>{{ kind }}</div>
                     <div class="value">{{ value.count }}</div>
                 </li>

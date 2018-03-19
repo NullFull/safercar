@@ -7,33 +7,6 @@ const defects = document.querySelectorAll('.defect')
 let cars = []
 let currentTab
 
-const toggleTab = (tab) => {
-  if (tab.id !== currentTab.id) {
-    currentTab.classList.remove('active')
-    currentTab = tab
-    currentTab.classList.add('active')
-    renderDefects(currentTab.id)
-  }
-}
-
-const renderDefects = (id) => {
-  defects.forEach(d => {
-    d.style.display = d.className.includes(id) ? '' : 'none'
-  })
-}
-
-if (tabs) {
-  currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
-  currentTab.classList.add('active')
-  renderDefects(currentTab.id)
-
-  tabs.addEventListener('click', e => {
-    if (e.target.nodeName === 'LI') {
-      toggleTab(e.target)
-    }
-  })
-}
-
 if (searchbar) {
   const renderSuggestion = () => {
     autocomplete.innerHTML = ''
@@ -84,4 +57,33 @@ if (searchbar) {
   }, 300)
 
   searchbar.addEventListener('input', getSuggestion)
+}
+
+const toggleTab = (tab) => {
+  if (tab.id !== currentTab.id) {
+    currentTab.classList.remove('active')
+    currentTab = tab
+    currentTab.classList.add('active')
+    renderDefects(currentTab.id)
+  }
+}
+
+const renderDefects = (id) => {
+  defects.forEach(d => {
+    d.style.display = d.className.includes(id) ? '' : 'none'
+  })
+}
+
+if (tabs) {
+  currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
+  if (currentTab) {
+    currentTab.classList.add('active')
+    renderDefects(currentTab.id)
+  }
+
+  tabs.addEventListener('click', e => {
+    if (e.target.nodeName === 'LI') {
+      toggleTab(e.target)
+    }
+  })
 }
