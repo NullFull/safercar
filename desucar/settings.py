@@ -6,6 +6,10 @@ SECRET_KEY = '-y8__i2!z((_zu(z@-*u@on0vu7*(8(53x*apbbc69m6__ytn1'
 MODE = os.environ.get('MODE', 'development')
 DEBUG = MODE == 'development'
 
+INTERNAL_IPS = (
+    '127.0.0.1',
+)
+
 ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
