@@ -51,6 +51,9 @@ a {
     width: 100%;
     text-align: center;
 }
+.footer p a {
+    width: 60%;
+}
 .searchbar {
     padding: 8px 0;
     position: relative;
