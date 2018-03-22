@@ -39,8 +39,8 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
-        <div class="defects">
+    <div class="defects">
+        <div class="container">
             {% for kind, value in defects.items %}
             <ul>
                 {% for item in value.items %}
@@ -48,7 +48,7 @@
                     {% if kind == "리콜" or kind == "무상수리" %}
                         <h3>[{{ item.get_kind_display }}] {{ item.part_name }}</h3>
                         <p>{{ item.solution | linebreaksbr }}</p>
-                    {% elif kind == "비공식 결함처리" %}
+                    {% elif kind == "비공식 결함" %}
                         <h3>[{{ item.status }}] {{ item.part_name }} </h3>
                         <p>
                             <ul>
@@ -70,6 +70,11 @@
                     <div id="disqus_thread"></div>
                 </li>
             </ul>
+        </div>
+    </div>
+    <div class="share">
+        <div class="container">
+
         </div>
     </div>
 

@@ -25,7 +25,7 @@ def detail(request, maker_name, car_name, car_year, car_code):
             'code': 'freefix',
             'items': [x for x in official_defects if x.kind == 'FF'],
         },
-        '비공식 무상수리': {
+        '비공식 결함': {
             'code': 'unofficial',
             'items': list(car.community_defects.all()),
         },
