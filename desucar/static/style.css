@@ -124,7 +124,7 @@ a {
 .searchbar .examples ul li {
     display: inline-block;
     text-align: center;
-    padding: 8px 8px;
+    padding: 12px 8px;
 }
 .searchbar .examples ul li a {
     text-decoration: underline;
@@ -151,11 +151,10 @@ a {
 }
 .index {
     padding: 0 16px 100px;
-    color: #fff;
+    color: white;
     background: url('/static/img/bg-driver.png') center no-repeat;
     background-size: cover;
 }
-
 .index .lead {
     padding: 40px 0;
 }
@@ -179,6 +178,12 @@ a {
 }
 .index .cta h3 {
     text-align: center;
+}
+.index .cta .examples {
+    text-align: center;
+}
+.search {
+    padding-bottom: 100px;
 }
 .search .results ul li {
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
