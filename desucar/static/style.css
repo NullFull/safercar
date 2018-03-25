@@ -52,8 +52,11 @@ a {
     text-align: center;
 }
 .searchbar {
-    padding: 8px 0;
+    height: 80px;
     position: relative;
+    background: url('/static/img/kaitlyn-baker-246352.png');
+    background-size: cover;
+    background-position: center;
 }
 .searchbar input {
     border: 1px solid transparent;
@@ -109,7 +112,9 @@ a {
 }
 .searchbar .examples ul li {
     display: inline-block;
+    text-align: center;
     padding: 8px 8px;
+    color: white;
 }
 .searchbar .examples ul li a {
     text-decoration: underline;
