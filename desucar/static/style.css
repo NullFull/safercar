@@ -129,6 +129,26 @@ a {
 .searchbar .examples ul li a {
     text-decoration: underline;
 }
+.carticle {
+    padding-bottom: 100px;
+}
+.carticle .lead {
+    text-align: center;
+    padding: 40px 0;
+}
+.carticle.detail .title {
+    padding: 20px;
+}
+.carticle.list ul {
+    border-top: 1px solid #eeeeee;
+}
+.carticle.list ul li {
+    border-bottom: 1px solid #eeeeee;
+}
+.carticle.list ul li a {
+    display: block;
+    padding: 12px 4px;
+}
 .index {
     padding: 0 16px 100px;
     color: #fff;
