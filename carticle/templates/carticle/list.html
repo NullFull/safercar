@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+
+{% block "body" %}
+<div class="carticle list">
+    <div class="container">
+        <div class="lead">
+            <h2>차・쓸・신・잡</h2>
+            <h3><b>차</b>에 관한 <b>쓸</b>모 있고 <b>신</b>기한 <b>잡</b>학사전</h3>
+        </div>
+        <div class="list">
+            <ul>
+                {% for article in articles %}
+                <li><a href="/articles/{{ article.id }}">{{ article.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

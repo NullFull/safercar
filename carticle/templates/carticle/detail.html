@@ -1,0 +1,18 @@
+{% extends "_base.html" %}
+
+{% block "additional_header" %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block "body" %}
+<div class="carticle detail">
+    <div class="container">
+        <h1 class="title">{{ article.title }}</h1>
+        <div class="content">
+            {{ article.content | safe}}
+        </div>
+    </div>
+</div>
+{% endblock %}

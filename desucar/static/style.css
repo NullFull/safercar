@@ -34,12 +34,18 @@ a {
     height: 60px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
+.header .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 .header .home {
+    height: 30px;
     display: inline-block;
 }
 .header .home img {
-    margin-top: 15px;
-    height: 30px;
+    height: 100%;
 }
 /*.header h1 {*/
     /*font-size: 20px;*/

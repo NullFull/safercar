@@ -5,6 +5,8 @@
     <title>내차결함</title>
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    {% block "additional_header" %}
+    {% endblock %}
 </head>
 <body>
 <div>
@@ -12,6 +14,9 @@
         <div class="container">
             <div class="home">
                 <a href="/" title="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a>
+            </div>
+            <div class="articles">
+                <a href="/articles">차쓸신잡</a>
             </div>
         </div>
     </div>
