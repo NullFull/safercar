@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 detail_img.transform(resize='600x')
                 detail_img.save(filename=detail_img_path)
 
-                list_img_path = path.join(TARGET_DIR, basename + '-100x.png')
+                list_img_path = path.join(TARGET_DIR, basename + '-200x.png')
                 list_img = img.clone()
-                list_img.transform(resize='100x')
+                list_img.transform(resize='200x')
                 list_img.save(filename=list_img_path)
