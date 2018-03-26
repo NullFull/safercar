@@ -1,4 +1,4 @@
-html, body, div, ul, li, p, input, button {
+html, body, div, ul, li, p, input, button, dl, dt, dd {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -75,7 +75,7 @@ a {
 }
 .searchbar input {
     border-radius: 3px;
-    padding: 5px 10px;
+    padding: 8px 12px;
     font-size: 1rem;
     border: 1px solid #dbdbdb;
     color: #363636;
@@ -121,10 +121,13 @@ a {
     display: block;
     width: 100%;
 }
+.searchbar .examples {
+    text-align: center;
+}
 .searchbar .examples ul li {
     display: inline-block;
     text-align: center;
-    padding: 12px 8px;
+    padding: 12px 4px;
 }
 .searchbar .examples ul li a {
     text-decoration: underline;
@@ -152,7 +155,7 @@ a {
 .index {
     padding: 0 16px 100px;
     color: white;
-    background: url('/static/img/bg-driver.png') center no-repeat;
+    background: #4d4d4d center no-repeat;
     background-size: cover;
 }
 .index .lead {
@@ -179,9 +182,6 @@ a {
 .index .cta h3 {
     text-align: center;
 }
-.index .cta .examples {
-    text-align: center;
-}
 .search {
     padding-bottom: 100px;
 }
@@ -195,19 +195,22 @@ a {
     /*display: block;*/
     line-height: 1.5;
     width: 100%;
-    height: 100%;
-    min-height: 80px;
+    /*height: 100%;*/
+    /*min-height: 80px;*/
     display: flex;
 }
 .search .results ul li .thumbnail {
     vertical-align: top;
     margin-right: 10px;
     width: 120px;
-    height: 60px;
+    height: 80px;
     background-size: cover;
     background-position: center center;
 }
-/*.search .results ul li .thumbnail img {*/
+.search .results ul li .maker {
+    font-size: 13px;
+}
+    /*.search .results ul li .thumbnail img {*/
     /*width: 100%;*/
 /*}*/
 .info {
@@ -256,6 +259,7 @@ a {
     text-align: center;
     display: inline-block;
     cursor: pointer;
+    padding-bottom: 4px;
 }
 .navbar-tab * {
     pointer-events: none;
@@ -282,9 +286,89 @@ a {
 .navbar-tab .value {
     z-index: -5;
 }
+.content {
+    padding-bottom: 100px;
+}
 .defects {
     font-size: 14px;
 }
+.defects .defects-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+.defects.comments iframe {
+    min-height: 327px;
+}
 .defects ul li {
     margin-bottom: 16px;
+    border-bottom: 1px solid #edecd6;
+}
+
+.defect {
+    text-align: left;
+}
+.defect-info {
+    padding: 4px 4px;
+}
+.defect-info dl {
+    overflow: hidden;
+    opacity: 0.75;
+}
+.defect-info dl dt {
+    clear: both;
+    float: left;
+    font-weight: bold;
+    /*margin-right: 20px;*/
+}
+.defect-info dl dt::after {
+    content: ": ";
+}
+.defect-info dl dd {
+    float: left;
+    margin-left: 10px;
+    word-wrap: break-word;
+    margin-bottom: 4px;
+}
+/*.defect-info .more .more-toggle {*/
+    /*text-align: right;*/
+/*}*/
+.defect-info .more .more-content {
+    display: none;
+}
+.defect-info .more .more-toggle {
+    cursor: pointer;
+}
+.defect-info .more.visible .more-toggle {
+    display: none;
+}
+.defect-info .more.visible .more-content {
+    display: block;
+}
+
+.defect-info h4 span.url {
+    font-size: 11px;
+    font-weight: lighter;
+}
+.defect-info .ellipsis {
+    max-height: 80px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 20px;
+}
+.defect-info .ellipsis .expand {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    background: linear-gradient(rgba(0,0,0,0), white);
+}
+.defect-info .ellipsis.expanded {
+    max-height: initial;
+}
+.defect-info .ellipsis.expanded .expand {
+    display: none;
 }

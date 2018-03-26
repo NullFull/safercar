@@ -1,6 +1,7 @@
 {% extends "_base.html" %}
 
 {% load static %}
+{% load humanize %}
 
 {% block "body" %}
 <div>
@@ -33,43 +34,100 @@
                 </li>
                 {% endfor %}
                 <li class="navbar-tab" id="comment">
-                    <div>댓글</div>
-                    <div class="value disqus-comment-count" data-disqus-identifier="check-{{ car.code }}"></div>
+                    <div>결함 신고</div>
+                    <div class="value disqus-comment-count" data-disqus-identifier="check-{{ car.code }}">0</div>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="defects">
+    <div class="content">
         <div class="container">
             {% for kind, value in defects.items %}
-            <ul>
+            <div class="defects {{ value.code }}">
+                <div class="defects-desc">{{ value.desc }}</div>
+                <ul>
                 {% for item in value.items %}
-                <li class="defect {{ value.code }}">
-                    {% if kind == "리콜" or kind == "무상수리" %}
-                        <h3>[{{ item.get_kind_display }}] {{ item.part_name }}</h3>
-                        <p>{{ item.solution | linebreaksbr }}</p>
-                    {% elif kind == "비공식 결함" %}
-                        <h3>[{{ item.status }}] {{ item.part_name }} </h3>
-                        <p>
-                            <ul>
-                                {% for post in item.posts.all %}
-                                <li>{{ post.content | linebreaksbr }}</li>
-                                {% endfor %}
-                            </ul>
-                        </p>
-                    {% elif kind == "급발진 의심" %}
-                        <h3>[{{ kind }}] {{ item.part_name }}</h3>
-                        <p>{{ item.detail | linebreaksbr }}</p>
-                    {% endif %}
-                </li>
+                    <li>
+                        <div class="defect">
+                            {% if kind == "리콜" or kind == "무상수리" %}
+                                <h3>{{ item.part_name }}</h3>
+                                <div class="defect-info">
+                                    <dl>
+                                        <dt>생산시점</dt>
+                                        <dd>{{ item.make_start|date:"Y. n. j" }}</dd>
+                                        <dt>생산종점</dt>
+                                        <dd>{{ item.make_end|date:"Y. n. j" }}</dd>
+                                        <dt>대상 차량 대수</dt>
+                                        <dd>{{ item.n_targets|intcomma }} 대</dd>
+                                        <dt>조치시작</dt>
+                                        <dd>{{ item.fix_start }}</dd>
+                                        <dt>시정기간</dt>
+                                        <dd>{{ item.fix_end }}</dd>
+                                        <dt>상세정보</dt>
+                                        <dd>
+                                            <div class="more">
+                                                <div class="more-toggle">
+                                                    <a>펼쳐보기</a>
+                                                </div>
+                                                <div class="more-content">
+                                                    <div>{{ item.solution | linebreaksbr }}</div>
+                                                </div>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <!-- <div>{{ item.solution | linebreaksbr }}</div> -->
+                            {% elif kind == "비공식 결함" %}
+                                <h3>{{ item.part_name }} </h3>
+                                <div class="defect-info">
+                                    <dl>
+                                        <dt>분류</dt>
+                                        <dd>{{ item.status }}</dd>
+                                        <dt>게시글</dt>
+                                        <dd>
+                                            <ul>
+                                            {% for post in item.posts.all %}
+                                                <li>
+                                                    <h4>{{ post.defect.community.name }} <span class="url">{{ post.url }}</span></h4>
+                                                    <div class="ellipsis">
+                                                        {{ post.content | linebreaksbr }}
+                                                        <div class="expand">
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {% endfor %}
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <!--
+                                <div>
+                                    <ul>
+                                        {% for post in item.posts.all %}
+                                        <li>{{ post.content | linebreaksbr }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                -->
+                            {% elif kind == "급발진 의심" %}
+                                <h3>{{ item.car_detail }}</h3>
+                                <div class="defect-info">
+                                    <dl>
+                                        <dd>{{ item.detail | linebreaksbr }}</dd>
+                                    </dl>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </li>
                 {% endfor %}
-            </ul>
+                </ul>
+            </div>
             {% endfor %}
-            <ul>
-                <li class="defect comment">
-                    <div id="disqus_thread"></div>
-                </li>
-            </ul>
+            <div class="defects comments">
+                <div class="defects-desc">해당 차량을 운행하며 직접 발견한 결함이나, 제작사(수입사)의 결함 처리 과정에서 겪은 문제를 올려주세요. 사용자들의 문제 제기가 집중되는 차종에 대해서는 뉴스타파 제작진이 직접 취재에 나서겠습니다.</div>
+                <div id="disqus_thread"></div>
+            </div>
         </div>
     </div>
     <div class="share">
@@ -77,10 +135,11 @@
 
         </div>
     </div>
-
     <script>
+        var disqus_shortname = 'checkyourcar';
+        var disqus_identifier = 'check-{{ car.code }}';
         var disqus_config = function () {
-            // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
             this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
         };
         (function() {
@@ -91,5 +150,6 @@
         })();
     </script>
     <script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>
+    <script src="//checkyourcar.disqus.com/embed.js" async></script>
 </div>
 {% endblock %}
