@@ -1,0 +1,32 @@
+{% extends "_base.html" %}
+
+{% block "additional_header" %}
+<style>
+    .content {max-width: 568px;display: block; margin: auto;padding-top: 30px;color:#333;}
+    .content img {max-width: 100%;display: block;margin: auto;}
+    .content h1 {font-size:1.8em; line-height:1em;}
+    .content h2 {font-size: 1.5em; line-height: 5px;margin:-5px 0 -5px 0;}
+    .content p {margin: 15px 0;font-size: 1em;line-height: 28px;}
+    .content figcaption{text-align: right;font-size: 0.8em;font-style: italic;}
+    .content figure {margin: 0;}
+    .content hr {color:#333}
+    .content a {text-decoration: none;color:#e67f47;}
+    .content .subtitle{font-size:0.9em;color:#666;}
+    .content .box{border:1px solid #999;padding: 10px;font-size:0.9em;}
+</style>
+{% endblock %}
+
+{% block "body" %}
+<div class="carticle detail">
+    <div class="container">
+        <!--<h1 class="title">{{ article.title }}</h1>-->
+        <div class="content">
+            {{ article.content | safe}}
+            <div>
+                <a href="/articles">목록으로 가기</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -2,15 +2,22 @@
 {% load static %}
 <html>
 <head>
+    <title>내차결함</title>
     <meta name="viewport" content="width=device-width" />
-
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?3" />
+    {% block "additional_header" %}
+    {% endblock %}
 </head>
 <body>
 <div>
     <div class="header">
         <div class="container">
-            <h1><a href="/" alt="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a></h1>
+            <div class="home">
+                <a href="/" title="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a>
+            </div>
+            <div class="articles">
+                <a href="/articles">차쓸신잡</a>
+            </div>
         </div>
     </div>
 
@@ -20,14 +27,19 @@
     </div>
 
     <div class="footer">
-        <p>
-            <a href="https://newstapa.org/" alt="뉴스타파 사이트 바로가기">ⓒ <img src="{% static 'img/newta-logo-01.svg' %}"></a> x <a href="https://github.com/NullFull/safercar" alt="Null채움. 바로가기"><img src="{% static 'img/null-logo-01.svg' %}"></a> 
-            </br>All Rights Reserved. 
-        </p>
+        <div>
+            <a href="https://newstapa.org/" title="뉴스타파 사이트. 바로가기">
+                한국탐사저널리즘센터 뉴스타파
+            </a>
+            <span>X</span>
+            <a href="https://github.com/NullFull/safercar" title="Null채움. 바로가기">
+                Null채움
+            </a>
+        </div>
     </div>
 </div>
 </body>
-<script src="{% static 'script.js' %}"></script>
+<script src="{% static 'script.js' %}?3"></script>
 {% if not debug %}
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115908559-1"></script>
 <script>

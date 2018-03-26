@@ -38,6 +38,8 @@ class OfficialDefect(models.Model):
     part_name = models.CharField(max_length=20)
     solution = models.TextField()
     source = models.URLField(null=True, blank=True)
+    make_start = models.DateField(null=True)
+    make_end = models.DateField(null=True)
     fix_start = models.CharField(max_length=40, null=True, blank=True)
     fix_end = models.CharField(max_length=40, null=True, blank=True)
 
@@ -67,6 +69,7 @@ class CommunityDefectPost(models.Model):
 
 class SuddenAccelReport(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='sudden_accels')
+    car_detail = models.CharField(max_length=40, null=True)
     buy_at = models.DateField(null=True, blank=True)
     make_at = models.DateField(null=True, blank=True)
     accident_at = models.DateField(null=True, blank=True)

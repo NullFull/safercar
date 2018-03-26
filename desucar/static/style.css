@@ -1,4 +1,4 @@
-html, body, div, ul, li, p, input, button {
+html, body, div, ul, li, p, input, button, dl, dt, dd {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -32,57 +32,71 @@ a {
     background: #2868CF;
     color: white;
     height: 60px;
-    padding-top: 6px;
     box-shadow: 0 2px 3px rgba(0,0,0,0.5);
 }
-.header h1 {
-    font-size: 20px;
-    line-height: 60px;
+.header .container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+.header .home {
+    height: 30px;
+    display: inline-block;
+}
+.header .home img {
+    height: 100%;
+}
+/*.header h1 {*/
+    /*font-size: 20px;*/
+    /*line-height: 60px;*/
+/*}*/
 .body-wrapper {
-    
+    background: white;
 }
 .footer {
-    background: white;
+    background: #212121;
+    color: #7E7E7E;
     padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
     width: 100%;
     text-align: center;
+    font-size: 12px;
+}
+.footer img {
+    height: 22px;
 }
 .searchbar {
-    padding: 8px 0;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.searchbar form {
     position: relative;
 }
 .searchbar input {
-    border: 1px solid transparent;
     border-radius: 3px;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    padding: 8px 12px;
     font-size: 1rem;
-    width: calc(100% - 5em);
-    height: 2.25em;
-    padding: 0 16px;
-    border-color: #dbdbdb;
+    border: 1px solid #dbdbdb;
     color: #363636;
     margin-right: -5px;
+    width: 100%;
 }
 .searchbar input:focus {
     outline: none;
     border-color: #3273dc;
-    -webkit-box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
-    box-shadow: 0 0 0 0.125em rgba(50, 115, 220, 0.25);
+    box-shadow: 0 0 0 1px rgba(50, 115, 220, 0.25);
 }
 .searchbar button {
-    position: relative;
+    position: absolute;
     font-size: 1rem;
-    height: 2.25em;
-    width: 5em;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    min-width: 80px;
     border: 0;
-    border-radius: 3px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-radius: 0 3px 3px 0;
+    height: 100%;
     background: #2868CF;
     color: white;
 }
@@ -107,30 +121,57 @@ a {
     display: block;
     width: 100%;
 }
+.searchbar .examples {
+    text-align: center;
+}
 .searchbar .examples ul li {
     display: inline-block;
-    padding: 8px 8px;
+    text-align: center;
+    padding: 12px 4px;
 }
 .searchbar .examples ul li a {
     text-decoration: underline;
 }
-.index {
-    max-width: 100%;
-    height: 100vh;
-    margin: 0 auto;
-    padding: 0 16px;
-    color: #fff;
-    font-family: sans-serif;
-    background: url('/static/img/bg-driver.png');
-    background-size: cover;
-    background-position: center;
+.carticle {
+    padding-bottom: 100px;
 }
-
+.carticle .lead {
+    text-align: center;
+    padding: 40px 0;
+}
+.carticle.detail .title {
+    padding: 20px;
+}
+.carticle.list ul {
+    border-top: 1px solid #eeeeee;
+}
+.carticle.list ul li {
+    border-bottom: 1px solid #eeeeee;
+}
+.carticle.list ul li a {
+    display: block;
+    padding: 12px 4px;
+}
+.index {
+    padding: 0 16px 100px;
+    color: white;
+    background: #4d4d4d center no-repeat;
+    background-size: cover;
+}
 .index .lead {
     padding: 40px 0;
 }
+.index .lead h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    /*font-weight: bold;*/
+    font-weight: lighter;
+    line-height: 1.3;
+    margin-bottom: 1em;
+}
 .index .lead p {
     margin-bottom: 14px;
+    line-height: 1.5;
 }
 .index .lead .links {
     text-align: right;
@@ -138,13 +179,11 @@ a {
 .index .lead .links a {
     text-decoration: underline;
 }
-.index .search {
+.index .cta h3 {
     text-align: center;
 }
-.page-title {
-    text-align: center;
-    font-size: 2.2em;  
-    font-weight: bold; 
+.search {
+    padding-bottom: 100px;
 }
 .search .results ul li {
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -156,18 +195,24 @@ a {
     /*display: block;*/
     line-height: 1.5;
     width: 100%;
-    height: 100%;
-    min-height: 80px;
+    /*height: 100%;*/
+    /*min-height: 80px;*/
     display: flex;
 }
 .search .results ul li .thumbnail {
     vertical-align: top;
     margin-right: 10px;
-    width: 100px;
+    width: 120px;
+    height: 80px;
+    background-size: cover;
+    background-position: center center;
 }
-.search .results ul li .thumbnail img {
-    width: 100%;
+.search .results ul li .maker {
+    font-size: 13px;
 }
+    /*.search .results ul li .thumbnail img {*/
+    /*width: 100%;*/
+/*}*/
 .info {
     text-align: center;
 }
@@ -198,6 +243,7 @@ a {
 }
 
 .navbar {
+    font-size: 12px;
     box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
     margin: 1.5em 0;
 }
@@ -213,6 +259,7 @@ a {
     text-align: center;
     display: inline-block;
     cursor: pointer;
+    padding-bottom: 4px;
 }
 .navbar-tab * {
     pointer-events: none;
@@ -239,9 +286,89 @@ a {
 .navbar-tab .value {
     z-index: -5;
 }
+.content {
+    padding-bottom: 100px;
+}
 .defects {
     font-size: 14px;
 }
+.defects .defects-desc {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+}
+.defects.comments iframe {
+    min-height: 327px;
+}
 .defects ul li {
     margin-bottom: 16px;
+    border-bottom: 1px solid #edecd6;
+}
+
+.defect {
+    text-align: left;
+}
+.defect-info {
+    padding: 4px 4px;
+}
+.defect-info dl {
+    overflow: hidden;
+    opacity: 0.75;
+}
+.defect-info dl dt {
+    clear: both;
+    float: left;
+    font-weight: bold;
+    /*margin-right: 20px;*/
+}
+.defect-info dl dt::after {
+    content: ": ";
+}
+.defect-info dl dd {
+    float: left;
+    margin-left: 10px;
+    word-wrap: break-word;
+    margin-bottom: 4px;
+}
+/*.defect-info .more .more-toggle {*/
+    /*text-align: right;*/
+/*}*/
+.defect-info .more .more-content {
+    display: none;
+}
+.defect-info .more .more-toggle {
+    cursor: pointer;
+}
+.defect-info .more.visible .more-toggle {
+    display: none;
+}
+.defect-info .more.visible .more-content {
+    display: block;
+}
+
+.defect-info h4 span.url {
+    font-size: 11px;
+    font-weight: lighter;
+}
+.defect-info .ellipsis {
+    max-height: 80px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 20px;
+}
+.defect-info .ellipsis .expand {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    position: absolute;
+    background: linear-gradient(rgba(0,0,0,0), white);
+}
+.defect-info .ellipsis.expanded {
+    max-height: initial;
+}
+.defect-info .ellipsis.expanded .expand {
+    display: none;
 }

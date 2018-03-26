@@ -1,8 +1,8 @@
-var baseUrl = 'http://127.0.0.1:8000';
+var baseUrl = '';
 var searchbar = document.querySelector('.q');
 var autocomplete = document.querySelector('.autocomplete');
 var tabs = document.querySelector('.navbar-tabs');
-var defects = document.querySelectorAll('.defect');
+var defects = document.querySelectorAll('.defects');
 
 var cars = [];
 var currentTab = void 0;
@@ -85,3 +85,18 @@ if (tabs) {
     }
   });
 }
+
+var more = document.querySelectorAll('.more');
+more.forEach(function (el) {
+    el.querySelector('.more-toggle').addEventListener('click', function(event) {
+        el.classList.add('visible');
+    })
+});
+
+
+var ellipsis = document.querySelectorAll('.ellipsis');
+ellipsis.forEach(function (el) {
+    el.querySelector('.expand').addEventListener('click', function (event) {
+        el.classList.add('expanded')
+    })
+});

@@ -13,8 +13,11 @@
             {% for car in cars %}
                 <li>
                     <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
-                        <div class="thumbnail"><img src="{% static 'cars/' %}{{ car.code}}-100x.png"/></div>
-                        <span>{{ car.maker.name }}<br/>{{ car.name }}</span>
+                        <div class="thumbnail" style="background-image: url('{% static 'cars/' %}{{ car.code }}-200x.png')"></div>
+                        <div>
+                            <div class="maker">{{ car.maker.name }}</div>
+                            <div class="name">{{ car.name }}</div>
+                        </div>
                     </a>
                 </li>
             {% endfor %}

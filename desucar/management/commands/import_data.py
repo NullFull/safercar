@@ -10,11 +10,15 @@ from desucar.models import Car, Maker, OfficialDefect, CommunityDefect, Communit
 
 
 def format_date(s):
+    s = s.replace('-', '')
     if not s:
+        return None
+    if s == '발표내용 없음':
         return None
     s = s.replace('(게시일)', '')
     if s.endswith('.'):
         s = s[:-1]
+    print(s)
     ys, ms, ds = s.split('.')
     y, m, d = int(ys), int(ms), int(ds)
     return date(year=y, month=m, day=d)
@@ -111,17 +115,23 @@ class Command(BaseCommand):
                     n_targets=n_targets,
                     part_name=part_name,
                     solution=row[12],
+                    make_start=format_date(row[5]),
+                    make_end=format_date(row[6]),
                     fix_start=row[8],
+                    fix_end=row[9],
                 )
 
-        # community_doc = gs.open_by_key('11Ik9e_baJlToODyLI5swY3wKoPS9QIRZlzumm04LI4U')
-        # communities = {}
-        # for row in community_doc.get_worksheet(0).get_all_values()[1:]:
-        #     print(row)
-        #     community = Community.objects.create(
-        #         name=row[2],
-        #         # url=row[5],
-        #     )
+        community_doc = gs.open_by_key('11Ik9e_baJlToODyLI5swY3wKoPS9QIRZlzumm04LI4U')
+        communities = []
+        for row in community_doc.get_worksheet(0).get_all_values()[1:]:
+            print(row)
+            community = Community.objects.create(
+                name=row[2],
+                url=row[5],
+                # TODO : number of members
+                # TODO : is_active
+            )
+            communities.append(community)
 
         sheet = defects_doc.worksheet('3_비공식_결함정보(동호회/제보/인터넷등)')
         defects = {}
@@ -129,17 +139,17 @@ class Command(BaseCommand):
             car_code = row[2] + row[3] + row[4]
             if car_code in not_exists:  # TODO : fix code.
                 continue
-            community, _ = Community.objects.get_or_create(
-                name=row[6],
-                url='https://test.test',
-            )
+            # community, _ = Community.objects.get_or_create(
+            #     name=row[6],
+            #     url='https://test.test',
+            # )
 
             car = Car.objects.get(code=car_code)
             key = row[8]
             part_name = row[7]
 
             defect = CommunityDefect.objects.create(
-                community=community,
+                # community=community,
                 car=car,
                 part_name=part_name,
                 status=row[5],
@@ -156,20 +166,36 @@ class Command(BaseCommand):
             key = row[0]
             posted_at = format_date(row[3]) if row[3] else None
 
+            # TODO : remove
             if key in ['1', '59']:
                 continue
 
             print(row[6])
-            print(key)
-            print(type(key))
+
+            url = row[5].strip()
+            defect = defects[key]
 
             CommunityDefectPost.objects.create(
                 defect=defects[key],
-                url=row[5],
+                url=url,
                 content=row[6],
                 posted_at=posted_at,
                 join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
+            print(url)
+
+            # TODO : 커뮤니티 없음
+            def not_in():
+                for ne in ['http://k7love.com/', 'http://cafe.daum.net/newSM5/']:
+                    if ne in url:
+                        return True
+
+            if not_in():
+                continue
+
+            community = [c for c in communities if c.url in url][0]
+            defect.community = community
+            defect.save()
 
         sheet = defects_doc.worksheet('5_급발진_의심신고(국토부/소비자원)')
         for row in sheet.get_all_values()[1:]:
@@ -182,5 +208,7 @@ class Command(BaseCommand):
 
             SuddenAccelReport.objects.create(
                 car=car,
+                car_detail=row[5] + ' ' + row[6],
                 detail=row[10],
             )
+            print(row[10])
