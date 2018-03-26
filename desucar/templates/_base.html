@@ -3,8 +3,15 @@
 <html>
 <head>
     <title>내차결함</title>
-    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'img/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'img/safari-pinned-tab.svg' %}" color="#5bbad5">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}?3" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width" />
     {% block "additional_header" %}
     {% endblock %}
 </head>
@@ -39,7 +46,7 @@
     </div>
 </div>
 </body>
-<script src="{% static 'script.js' %}?3"></script>
+<script src="{% static 'script.js' %}"></script>
 {% if not debug %}
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115908559-1"></script>
 <script>
