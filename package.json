@@ -2,7 +2,8 @@
   "name": "safercar",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel desucar/js -w -d desucar/static"
+    "build": "babel desucar/js -d desucar/static",
+    "watch": "babel desucar/js -w -d desucar/static"
   },
   "repository": "git@github.com:NullFull/safercar.git",
   "author": "nullfull",
