@@ -1,4 +1,4 @@
-const baseUrl = 'http://127.0.0.1:8000'
+const baseUrl = ''
 const searchbar = document.querySelector('.q')
 const autocomplete = document.querySelector('.autocomplete')
 const tabs = document.querySelector('.navbar-tabs')
