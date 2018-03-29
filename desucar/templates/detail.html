@@ -18,6 +18,9 @@
                 <h1 class="name">{{ car.name }}</h1>
                 <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
             </div>
+            <div>
+                <p class="contact">{{ car.maker.contact }}</p>
+            </div>
         </div>
     </div>
     <nav class="navbar">

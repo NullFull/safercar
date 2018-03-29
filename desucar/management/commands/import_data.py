@@ -50,8 +50,15 @@ class Command(BaseCommand):
 
         gs = gspread.authorize(cred)
         cars_doc = gs.open_by_key('1EMOGtpBJ9sW2RTZMjZ7UGQ7ODQgDjruyp-YsW5g1AgU')
-        cars_sheet = cars_doc.worksheet('대상차종 구체화')
+        center_sheet = cars_doc.worksheet('문의처')
 
+        contacts = {}
+        for row in center_sheet.get_all_values()[1:]:
+            contacts[row[0]] = row[2]
+
+        print(contacts)
+
+        cars_sheet = cars_doc.worksheet('대상차종 구체화')
         for row in cars_sheet.get_all_values()[1:]:
             # print(row)
             maker_name = row[3]
@@ -69,6 +76,9 @@ class Command(BaseCommand):
             print(search_keywords)
 
             maker, _ = Maker.objects.get_or_create(name=maker_name)
+            maker.contact = contacts.get(row[5])
+            maker.save()
+
             car, _ = Car.objects.get_or_create(
                 maker=maker,
                 name=car_name,

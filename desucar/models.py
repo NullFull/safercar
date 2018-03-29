@@ -3,6 +3,7 @@ from django.db import models
 
 class Maker(models.Model):
     name = models.CharField(max_length=30)
+    contact = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
         return '{name}'.format(name=self.name)
