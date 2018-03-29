@@ -53,10 +53,8 @@
                                 <h3>{{ item.part_name }}</h3>
                                 <div class="defect-info">
                                     <dl>
-                                        <dt>생산시점</dt>
-                                        <dd>{{ item.make_start|date:"Y. n. j" }}</dd>
-                                        <dt>생산종점</dt>
-                                        <dd>{{ item.make_end|date:"Y. n. j" }}</dd>
+                                        <dt>생산시기</dt>
+                                        <dd>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</dd>
                                         <dt>대상 차량 대수</dt>
                                         <dd>{{ item.n_targets|intcomma }} 대</dd>
                                         <dt>조치시작</dt>

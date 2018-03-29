@@ -117,6 +117,7 @@ class Command(BaseCommand):
                     solution=row[12],
                     make_start=format_date(row[5]),
                     make_end=format_date(row[6]),
+                    make_date_comment=row[7],
                     fix_start=row[8],
                     fix_end=row[9],
                 )

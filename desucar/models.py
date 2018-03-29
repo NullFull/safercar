@@ -40,6 +40,7 @@ class OfficialDefect(models.Model):
     source = models.URLField(null=True, blank=True)
     make_start = models.DateField(null=True)
     make_end = models.DateField(null=True)
+    make_date_comment = models.CharField(max_length=30, null=True, blank=True)
     fix_start = models.CharField(max_length=40, null=True, blank=True)
     fix_end = models.CharField(max_length=40, null=True, blank=True)
 
