@@ -27,10 +27,7 @@
         <div class="container">
             <ul class="navbar-tabs">
                 {% for kind, value in defects.items %}
-                <li class="navbar-tab
-                    {% if value.count == 0 %}
-                    no-value
-                    {% endif %}"
+                <li class="navbar-tab"
                     id="{{ value.code }}">
                     <div>{{ kind }}</div>
                     <div class="value">{{ value.count }}</div>
@@ -48,6 +45,17 @@
             {% for kind, value in defects.items %}
             <div class="defects {{ value.code }}">
                 <div class="defects-desc">{{ value.desc }}</div>
+                {% if value.count == 0 %}
+                <div>
+                    <h3>
+                        {% if kind == "급발진 의심" %}
+                            아직까지 신고된 내역이 없습니다.
+                        {% else %}
+                            아직까지 알려진 결함이 없습니다.
+                        {% endif %}
+                    </h3>
+                </div>
+                {% endif %}
                 <ul>
                 {% for item in value.items %}
                     <li>
