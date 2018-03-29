@@ -141,10 +141,6 @@ class Command(BaseCommand):
             car_code = row[2] + row[3] + row[4]
             if car_code in not_exists:  # TODO : fix code.
                 continue
-            # community, _ = Community.objects.get_or_create(
-            #     name=row[6],
-            #     url='https://test.test',
-            # )
 
             car = Car.objects.get(code=car_code)
             key = row[8]
@@ -157,8 +153,6 @@ class Command(BaseCommand):
                 status=row[5],
             )
 
-            print(key)
-            print(type(key))
             defects[key] = defect
 
         print(len(defects.keys()))
@@ -182,6 +176,7 @@ class Command(BaseCommand):
                 url=url,
                 content=row[6],
                 posted_at=posted_at,
+                author_name=row[4],
                 join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
             print(url)

@@ -90,9 +90,11 @@
                                                     <h4>{{ post.defect.community.name }} <span class="url">{{ post.url }}</span></h4>
                                                     <div class="ellipsis">
                                                         {{ post.content | linebreaksbr }}
-                                                        <div class="expand">
-
+                                                        <div class="post-info">
+                                                            <p class="date">{{ post.posted_at|date:"Y. n. j" }}</p>
+                                                            <p>{{ post.author_name }}</p>
                                                         </div>
+                                                        <div class="expand"></div>
                                                     </div>
                                                 </li>
                                             {% endfor %}

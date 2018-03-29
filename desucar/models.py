@@ -66,6 +66,7 @@ class CommunityDefectPost(models.Model):
     url = models.URLField()
     content = models.TextField(null=True, blank=True)
     posted_at = models.DateField(null=True, blank=True)
+    author_name = models.CharField(max_length=30)
     join_required = models.BooleanField()
 
 
