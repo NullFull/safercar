@@ -126,6 +126,7 @@ class Command(BaseCommand):
                     n_targets=n_targets,
                     part_name=part_name,
                     solution=row[12],
+                    source_name=row[14],
                     make_start=format_date(row[5]),
                     make_end=format_date(row[6]),
                     make_date_comment=row[7],
@@ -217,5 +218,6 @@ class Command(BaseCommand):
                 car=car,
                 car_detail=row[5] + ' ' + row[6],
                 detail=row[10],
+                source=row[11],
             )
             print(row[10])

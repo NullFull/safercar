@@ -335,6 +335,11 @@ a {
     word-wrap: break-word;
     margin-bottom: 4px;
 }
+.defect-info dl dd .source {
+    text-align: right;
+    margin-top: 12px;
+    font-size: 12px;
+}
 /*.defect-info .more .more-toggle {*/
     /*text-align: right;*/
 /*}*/

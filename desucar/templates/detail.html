@@ -85,6 +85,8 @@
                                                 </div>
                                             </div>
                                         </dd>
+                                        <dt>출처</dt>
+                                        <dd>{{ item.source_name }}</dd>
                                     </dl>
                                 </div>
                             {% elif kind == "비공식 결함" %}
@@ -117,7 +119,10 @@
                                 <h3>{{ item.car_detail }}</h3>
                                 <div class="defect-info">
                                     <dl>
-                                        <dd>{{ item.detail | linebreaksbr }}</dd>
+                                        <dd>
+                                            {{ item.detail | linebreaksbr }}
+                                            <div class="source">- {{ item.source }}</div>
+                                        </dd>
                                     </dl>
                                 </div>
                             {% endif %}
