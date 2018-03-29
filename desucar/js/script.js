@@ -87,3 +87,19 @@ if (tabs) {
     }
   })
 }
+
+
+const more = document.querySelectorAll('.more');
+more.forEach(function (el) {
+  el.querySelector('.more-toggle').addEventListener('click', function(event) {
+    el.classList.add('visible')
+  })
+});
+
+
+const ellipsis = document.querySelectorAll('.ellipsis');
+ellipsis.forEach(function (el) {
+  el.querySelector('.expand').addEventListener('click', function (event) {
+    el.classList.add('expanded')
+  })
+});
