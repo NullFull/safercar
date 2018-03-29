@@ -113,7 +113,7 @@ class Command(BaseCommand):
                     '조치시점까지 생산된 해당 차량 전체',
                     '스티커 미부착 차량 전체',
                 ]:
-                    row[10] = '0'
+                    row[10] = None
 
                 part_name = row[11]
                 print(part_name)
@@ -134,15 +134,20 @@ class Command(BaseCommand):
                     fix_end=row[9],
                 )
 
-        community_doc = gs.open_by_key('11Ik9e_baJlToODyLI5swY3wKoPS9QIRZlzumm04LI4U')
+        community_doc = gs.open_by_key('1odQ14CCOmN9jlL-TnSj9W37iGf8bi_AmG_VjYsp8qNg')
         communities = []
         for row in community_doc.get_worksheet(0).get_all_values()[1:]:
             print(row)
+
+            if row[5] in ['정보 없음']:
+                row[5] = None
+            n_members = parse_int(row[5]) if row[5] else None
+
             community = Community.objects.create(
-                name=row[2],
-                url=row[5],
-                # TODO : number of members
-                # TODO : is_active
+                name=row[4],
+                url=row[7],
+                n_members=n_members,
+                is_active=row[6] == '활성화',
             )
             communities.append(community)
 
@@ -173,14 +178,13 @@ class Command(BaseCommand):
             key = row[0]
             posted_at = format_date(row[3]) if row[3] else None
 
-            # TODO : remove
-            if key in ['1', '59']:
-                continue
+            url = row[5].strip()
+            if key not in defects:
+                continue  # TODO : remove
+
+            defect = defects[key]
 
             print(row[6])
-
-            url = row[5].strip()
-            defect = defects[key]
 
             CommunityDefectPost.objects.create(
                 defect=defects[key],
@@ -191,15 +195,6 @@ class Command(BaseCommand):
                 join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
             print(url)
-
-            # TODO : 커뮤니티 없음
-            def not_in():
-                for ne in ['http://k7love.com/', 'http://cafe.daum.net/newSM5/']:
-                    if ne in url:
-                        return True
-
-            if not_in():
-                continue
 
             community = [c for c in communities if c.url in url][0]
             defect.community = community

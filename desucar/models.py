@@ -54,6 +54,8 @@ class OfficialDefect(models.Model):
 class Community(models.Model):
     name = models.CharField(max_length=40)
     url = models.URLField()
+    n_members = models.IntegerField(null=True)
+    is_active = models.BooleanField()
 
 
 class CommunityDefect(models.Model):
