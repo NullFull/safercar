@@ -30,6 +30,7 @@ class OfficialDefect(models.Model):
         무상수리 = 'FF'
         
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='official_defects')
+    car_detail = models.TextField()
     kind = models.CharField(max_length=2, choices=(
         (종류.리콜, '리콜'),
         (종류.무상수리, '무상수리'),

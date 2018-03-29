@@ -55,6 +55,8 @@
                                     <dl>
                                         <dt>생산시기</dt>
                                         <dd>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</dd>
+                                        <dt>세부 차명</dt>
+                                        <dd>{{ item.car_detail }}</dd>
                                         <dt>대상 차량 대수</dt>
                                         <dd>{{ item.n_targets|intcomma }} 대</dd>
                                         <dt>조치시작</dt>
@@ -74,7 +76,6 @@
                                         </dd>
                                     </dl>
                                 </div>
-                                <!-- <div>{{ item.solution | linebreaksbr }}</div> -->
                             {% elif kind == "비공식 결함" %}
                                 <h3>{{ item.part_name }} </h3>
                                 <div class="defect-info">
@@ -99,15 +100,6 @@
                                         </dd>
                                     </dl>
                                 </div>
-                                <!--
-                                <div>
-                                    <ul>
-                                        {% for post in item.posts.all %}
-                                        <li>{{ post.content | linebreaksbr }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                                -->
                             {% elif kind == "급발진 의심" %}
                                 <h3>{{ item.car_detail }}</h3>
                                 <div class="defect-info">

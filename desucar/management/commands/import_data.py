@@ -111,6 +111,7 @@ class Command(BaseCommand):
 
                 OfficialDefect.objects.create(
                     car=car,
+                    car_detail=row[1],
                     kind=defect_type,
                     n_targets=n_targets,
                     part_name=part_name,
