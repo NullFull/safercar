@@ -106,24 +106,31 @@ class Command(BaseCommand):
                     continue
 
                 car = Car.objects.get(code=car_code)
-                if row[10] in [
+                if not row[10]:
+                    n_targets = None
+                    n_targets_comment = None
+                elif row[10] in [
                     '증상 발생 차량 전체',
                     '해당차량 전체',
                     '증상 발생하는 차량 전체',
                     '조치시점까지 생산된 해당 차량 전체',
                     '스티커 미부착 차량 전체',
                 ]:
-                    row[10] = None
+                    n_targets = None
+                    n_targets_comment = row[10]
+                else:
+                    n_targets = parse_int(row[10])
+                    n_targets_comment = None
 
                 part_name = row[11]
                 print(part_name)
-                n_targets = parse_int(row[10]) if row[10] else None
 
                 OfficialDefect.objects.create(
                     car=car,
                     car_detail=row[1],
                     kind=defect_type,
                     n_targets=n_targets,
+                    n_targets_comment=n_targets_comment,
                     part_name=part_name,
                     solution=row[12],
                     source_name=row[14],

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.humanize.templatetags.humanize import intcomma
 
 
 class Maker(models.Model):
@@ -37,6 +38,7 @@ class OfficialDefect(models.Model):
         (종류.무상수리, '무상수리'),
     ))
     n_targets = models.IntegerField(null=True, blank=True)
+    n_targets_comment = models.CharField(max_length=30, null=True, blank=True)
     part_name = models.CharField(max_length=20)
     solution = models.TextField()
     source_name = models.CharField(max_length=50)
@@ -46,6 +48,14 @@ class OfficialDefect(models.Model):
     make_date_comment = models.CharField(max_length=30, null=True, blank=True)
     fix_start = models.CharField(max_length=40, null=True, blank=True)
     fix_end = models.CharField(max_length=40, null=True, blank=True)
+    
+    def n_targets_str(self):
+        if not self.n_targets and not self.n_targets_comment:
+            return ''
+        elif self.n_targets_comment:
+            return self.n_targets_comment
+        else:
+            return intcomma(self.n_targets) + ' 대'
 
     def __str__(self):
         return '{name} - {part}'.format(name=self.car.name, part=self.part_name)
