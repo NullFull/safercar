@@ -41,7 +41,7 @@
         <div class="container">
             {% for kind, value in defects.items %}
             <div class="defects {{ value.code }}">
-                <div class="defects-desc">{{ value.desc }}</div>
+                <div class="defects-desc">{{ value.desc|safe }} <span class="last-update">{{ value.last_update|date:"Y. n. j" }}</span></div>
                 {% if value.count == 0 %}
                 <div>
                     <h3>
