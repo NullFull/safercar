@@ -9,19 +9,25 @@
             {% include "components/searchbar.html" %}
         </div>
         <div class="results">
-            <ul>
-            {% for car in cars %}
-                <li>
-                    <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
-                        <div class="thumbnail" style="background-image: url('{% static 'cars/' %}{{ car.code }}-200x.png')"></div>
-                        <div>
-                            <div class="maker">{{ car.maker.name }}</div>
-                            <div class="name">{{ car.name }}</div>
-                        </div>
-                    </a>
-                </li>
-            {% endfor %}
-            </ul>
+            {% if cars %}
+                <ul>
+                {% for car in cars %}
+                    <li>
+                        <a href="{{ car.maker.name }}/{{ car.simple_name }}-{{ car.year }}-{{ car.code }}">
+                            <div class="thumbnail" style="background-image: url('{% static 'cars/' %}{{ car.code }}-200x.png')"></div>
+                            <div>
+                                <div class="maker">{{ car.maker.name }}</div>
+                                <div class="name">{{ car.name }}</div>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <h3>입력이 잘못되었거나 결함정보 제공 대상차종이 아닙니다.</h3>
+                <p>&lt;내차결함포털&gt;은 국내에 등록된 차 111종, 약 2150만대의 결함정보를 제공합니다. 이는 현재 국내 등록차 중 약 96%를 커버하며, 추후 사용자들 요구가 많은 차종은 별도 추가할 예정입니다.</p>
+                <p>(기준 : 2018년 1월 1일 현재 국내에 2만대 이상 등록된 차종, 혹은 2017년 이후 출시된 신차 중 5천대 이상 등록된 차종 등. 자료제공 국토교통부)</p>
+            {% endif %}
         </div>
     </div>
 </div>
