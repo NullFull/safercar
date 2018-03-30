@@ -18,9 +18,6 @@
                 <h1 class="name">{{ car.name }}</h1>
                 <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
             </div>
-            <div>
-                <p class="contact">{{ car.maker.contact }}</p>
-            </div>
         </div>
     </div>
     <nav class="navbar">
@@ -74,6 +71,8 @@
                                         <dd>{{ item.fix_start }}</dd>
                                         <dt>시정기간</dt>
                                         <dd>{{ item.fix_end }}</dd>
+                                        <dt>연락처</dt>
+                                        <dd>{{ item.car.maker.contact }}</dd>
                                         <dt>상세정보</dt>
                                         <dd>
                                             <div class="more">
