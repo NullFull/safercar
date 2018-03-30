@@ -99,7 +99,11 @@
                                             <ul>
                                             {% for post in item.posts.all %}
                                                 <li>
-                                                    <h4>{{ post.defect.community.name }} <span class="url">{{ post.url }}</span></h4>
+                                                    <h4>{{ post.defect.community.name }}
+                                                        <span class="url">{{ post.url }}</span>
+                                                        <span class="join-required">{% if post.join_required %}가입필요{% endif %}</span>
+                                                    </h4>
+
                                                     <div class="ellipsis">
                                                         {{ post.content | linebreaksbr }}
                                                         <div class="post-info">

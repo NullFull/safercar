@@ -359,6 +359,9 @@ a {
     font-size: 11px;
     font-weight: lighter;
 }
+.defect-info h4 .join-required {
+    font-size: 11px;
+}
 .defect-info .post-info {
     text-align: right;
 }
