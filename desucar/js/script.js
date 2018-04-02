@@ -2,7 +2,7 @@ const baseUrl = ''
 const searchbar = document.querySelector('.q')
 const autocomplete = document.querySelector('.autocomplete')
 const tabs = document.querySelector('.navbar-tabs')
-const defects = document.querySelectorAll('.defect')
+const defects = document.querySelectorAll('.defects')
 
 let cars = []
 let currentTab
