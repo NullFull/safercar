@@ -2,20 +2,27 @@ const baseUrl = ''
 const searchbar = document.querySelector('.q')
 const autocomplete = document.querySelector('.autocomplete')
 const tabs = document.querySelector('.navbar-tabs')
-const defects = document.querySelectorAll('.defects')
+const defects = document.querySelectorAll('.defect')
 
+let q = ''
 let cars = []
+let carIndex = -1
 let currentTab
 
 if (searchbar) {
-  const renderSuggestion = () => {
+  const renderSuggestion = (i = null) => {
     autocomplete.innerHTML = ''
-    cars.forEach(car => {
-      autocomplete.innerHTML += `
+    cars.forEach((car, index) => {
+      const item = i === index
+        ? `
+          <li class="dropdown-item focused">
+            <a href="/${car.fields.maker}/${car.fields.simple_name}-${car.fields.make_start.substr(0, 4)}-${car.fields.code}">${car.fields.name}</a>
+          </li>`
+        : `
           <li class="dropdown-item">
             <a href="/${car.fields.maker}/${car.fields.simple_name}-${car.fields.make_start.substr(0, 4)}-${car.fields.code}">${car.fields.name}</a>
-          </li>
-          `
+          </li>`
+      autocomplete.innerHTML += item
     })
   }
 
@@ -36,6 +43,7 @@ if (searchbar) {
   }
 
   const getSuggestion = debounce(() => {
+    q = searchbar.value
     if (!searchbar.value) {
       cars = []
       renderSuggestion()
@@ -56,7 +64,42 @@ if (searchbar) {
     }
   }, 300)
 
-  searchbar.addEventListener('input', getSuggestion)
+  const selectCar = (i) => {
+    renderSuggestion(i)
+    if (i === -1) {
+      searchbar.value = q
+    } else {
+      searchbar.value = cars[i].fields.name
+    }
+  }
+
+  const shiftFocus = (i) => {
+    if (carIndex === -1 && i < 0) {
+      carIndex = cars.length - 1
+    } else if (carIndex === cars.length - 1 && i > 0) {
+      carIndex = -1
+    } else {
+      carIndex += i
+    }
+    selectCar(carIndex)
+  }
+
+  searchbar.addEventListener('keydown', e => {
+    // up key
+    if (e.keyCode === 38 && cars.length) {
+      e.preventDefault()
+      shiftFocus(-1)
+    }
+    // down key
+    if (e.keyCode === 40 && cars.length) {
+      e.preventDefault()
+      shiftFocus(1)
+    }
+    // FIXME: 텍스트 입력에 해당하는 키만 감지하는 조건문으로 변경
+    if (e.key.length === 1 || e.keyCode === 8) {
+      getSuggestion()
+    }
+  })
 }
 
 const toggleTab = (tab) => {
@@ -88,18 +131,16 @@ if (tabs) {
   })
 }
 
-
-const more = document.querySelectorAll('.more');
+const more = document.querySelectorAll('.more')
 more.forEach(function (el) {
-  el.querySelector('.more-toggle').addEventListener('click', function(event) {
+  el.querySelector('.more-toggle').addEventListener('click', function (event) {
     el.classList.add('visible')
   })
-});
+})
 
-
-const ellipsis = document.querySelectorAll('.ellipsis');
+const ellipsis = document.querySelectorAll('.ellipsis')
 ellipsis.forEach(function (el) {
   el.querySelector('.expand').addEventListener('click', function (event) {
     el.classList.add('expanded')
   })
-});
+})

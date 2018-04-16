@@ -117,6 +117,9 @@ a {
 .dropdown-item:hover {
     background-color: #e6f7ff;
 }
+.dropdown-item.focused {
+    background-color: #e6f7ff;
+}
 .dropdown-item a {
     display: block;
     width: 100%;
