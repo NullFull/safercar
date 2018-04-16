@@ -210,7 +210,7 @@ class Command(BaseCommand):
             defect.community = community
             defect.save()
 
-        sheet = defects_doc.worksheet('5_급발진_의심신고(국토부/소비자원)')
+        sheet = defects_doc.worksheet('4_급발진_의심신고(국토부/소비자원)')
         for row in sheet.get_all_values()[1:]:
             car_code = row[2] + row[3] + row[4]
 
