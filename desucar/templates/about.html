@@ -1,0 +1,21 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block "additional_header" %}
+<style>
+    .about h1 {
+        color: red;
+    }
+</style>
+{% endblock %}
+
+
+{% block "body" %}
+<div class="about">
+    <div class="container">
+        <h1>Hello</h1>
+        <img src="{% static 'img/safecar-logo-01.svg' %}">
+    </div>
+</div>
+{% endblock %}

@@ -88,3 +88,7 @@ def suggest(request):
             query = query.filter(name__contains=token)
     data = serializers.serialize('json', query.all())
     return HttpResponse(data, content_type='application/json')
+
+
+def about(request):
+    return render(request, 'about.html')

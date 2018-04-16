@@ -7,6 +7,7 @@ from carticle import views as article_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
+    path('about', views.about),
     path('search', views.search),
     path('<maker_name>/<car_name>-<int:car_year>-<car_code>', views.detail),
     path('suggest', views.suggest),
