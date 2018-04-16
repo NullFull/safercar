@@ -203,6 +203,9 @@ class Command(BaseCommand):
             )
             print(url)
 
+            if 'bobaedream' in url:  # TODO: 목록에 보배드림 추가
+                continue
+
             community = [c for c in communities if c.url in url][0]
             defect.community = community
             defect.save()
