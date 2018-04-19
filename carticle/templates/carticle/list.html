@@ -1,19 +1,166 @@
 {% extends "_base.html" %}
 
+{% load static %}
+
+{% block "additional_header" %}
+<style>
+	
+	/* ------ COMMON ------ */
+	.carticle {
+		background: #F7F7F7;
+	}
+	
+	.carticle .cont-wrap {
+		padding: 16px;
+		background: #FFFFFF;
+		box-shadow: 0 1px 1px 0 rgba(0,0,0,0.10);
+		margin-top: 50px;
+	}
+	
+	.carticle img {
+		max-width: 100%;
+		height: auto;      
+	}
+	
+	
+	/* ------ HEADER ------ */
+	.carticle .lead {
+		background: url({% static 'img/carticle-lead.jpg' %}) no-repeat;
+		background-size: cover;
+		height: 350px;
+		background-position: center center;
+		width: 100%;
+		
+	}
+	
+	.carticle .lead .lead-img {position: relative;}
+	
+	.carticle .lead .lead-img .title {
+		position: absolute;
+		margin: auto;
+		left: 0;
+		right: 0;
+	}
+	
+	.carticle .lead .lead-img .car {
+		position: absolute;
+		margin: auto;
+		left: 350px;
+		right: 0;
+		top: 220px;
+	}
+	
+	
+	/* ------ ATTICLE ------ */
+	
+	.carticle .article-list .car-lead {
+		background: url({% static 'img/trivia-title2.png' %}) no-repeat;
+		height: 300px;
+		position: absolute;
+		left: 50%;
+		top: -180px;
+		right: 0;
+	}
+	
+	.carticle .article-list .post-thumb {
+		float: left;
+		width: 120px;
+		height: 104px;
+		background: #E5E5E5;
+		margin-right: 10px;
+	}
+	
+	.carticle .article-list .post-txt {
+		line-height: 140%;
+		color: #666666;
+		margin-bottom: 15px;
+	}
+	
+	.carticle .article-list .post-txt strong {
+		font-size: 110%;
+		margin-bottom: 5px;
+		display: inline-block;
+		color: #222;
+	}
+
+	.carticle .article-list span {
+		float: left;
+		font-size: 85%;
+		color: #959595;
+		font-weight: 300;
+	}
+	
+	.carticle .article-list .ico_dot {
+		width: 2px;
+		height: 2px;
+		margin: 4px 6px 0;
+		background-color: #aaa;
+		vertical-align: top;
+	}
+	
+	.carticle .article-list .post-list {
+		overflow: hidden;
+		padding: 20px 0;
+		border-bottom: 1px solid #E5E5E5;
+	}
+	
+	.carticle .article-list .post-list:first-child {padding-top: 0;}
+	
+	
+    /* Small phones : from 0 to 767px */
+	@media only screen and (max-width:767px) {
+		
+		.carticle .cont-wrap {margin-top: 16px;}		
+
+		.carticle .lead {height: 280px;}
+		.carticle .lead .lead-img .title {width: 85%;}
+
+		.carticle .lead .lead-img .car {
+			left: 0;
+			top: 146px;
+			width: 200px;
+
+		}
+
+		.carticle .article-list .post-txt p {display: none;}
+
+		.carticle .article-list .post-txt strong {display: inline;}
+	}
+
+</style>
+{% endblock %}
+
+
 {% block "body" %}
-<div class="carticle list">
+<div class="carticle">
+	<div class="lead">
+		<div class="lead-img">
+			<span class="title"><img src="{% static 'img/trivia-title.png' %}"></span>
+			<span class="car"><img src="{% static 'img/trivia-title2.png' %}"></span>
+		</div>
+    </div>
+	
     <div class="container">
-        <div class="lead">
-            <h2>차・쓸・신・잡</h2>
-            <h3><b>차</b>에 관한 <b>쓸</b>모 있고 <b>신</b>기한 <b>잡</b>학사전</h3>
-        </div>
-        <div class="list">
-            <ul>
-                {% for article in articles %}
-                <li><a href="/articles/{{ article.id }}">{{ article.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+		<div class="cont-wrap">
+        	<div class="article-list">
+				<ul>
+				{% for article in articles %}
+					<li class="post-list">
+						<a href="/articles/{{ article.id }}">
+							<div class="post-thumb"><img src=""></div> 
+							<div class="post-txt">
+								<strong>{{ article.title }}</strong>
+								<p>{{ article.content }} …</p>
+							</div> 
+							<span>친절한재원씨</span>
+							<span class="ico_dot"></span>
+							<span>2018.03.26</span>
+						</a>
+					</li>
+				{% endfor %}
+				</ul>
+        	</div>
+		</div>	
     </div>
 </div>
 {% endblock %}
