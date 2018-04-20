@@ -109,19 +109,15 @@
 	
     /* Small phones : from 0 to 767px */
 	@media only screen and (max-width:767px) {
-		
-		.carticle .cont-wrap {margin-top: 16px;}		
-
+		.carticle .cont-wrap {margin-top: 16px;}
 		.carticle .lead {height: 280px;}
 		.carticle .lead .lead-img .title {width: 85%;}
-
 		.carticle .lead .lead-img .car {
 			left: 0;
 			top: 146px;
 			width: 200px;
 
 		}
-
 		.carticle .article-list .post-txt p {display: none;}
 
 		.carticle .article-list .post-txt strong {display: inline;}
@@ -150,7 +146,7 @@
 							<div class="post-thumb"><img src=""></div> 
 							<div class="post-txt">
 								<strong>{{ article.title }}</strong>
-								<p>{{ article.content }} …</p>
+								<p>{{ article.cached_html | striptags | truncatechars:120 }} …</p>
 							</div> 
 							<span>친절한재원씨</span>
 							<span class="ico_dot"></span>
