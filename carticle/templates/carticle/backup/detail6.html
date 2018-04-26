@@ -320,7 +320,15 @@
 		.tb-list {font-size: 90%;}
 	}
 </style>
-{% endblock %} 
+{% endblock %}
+{% block "ogp" %}
+<meta property="og:title" content="차쓸신잡(6) 급발진 2탄 : 주차장 세차장 미스터리"/>
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/6" />
+<meta property="og:image" content="{% static 'carticle/car/image6-1.png' %}" />
+<meta property="og:description" content="2017년 한 해에만 신고된 급발진 의심사고가 73건. 제작사는 운전자의 실수가 원인이라고 주장하지만, 그렇다고 보기 어려운 경우도 적지 않습니다. 이번 '차쓸신잡'에서는 엑셀을 잘못 밟았더라도 급발진으로 이어지기는 어려운 사례들을 정리했습니다." />
+{% endblock %}
 {% block "body" %}
 <div class="carticle con-wrap">
 	<div class="container">

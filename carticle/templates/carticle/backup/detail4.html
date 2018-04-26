@@ -1,4 +1,6 @@
-{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
+{% extends "_base.html" %} 
+{% load static %} 
+{% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
 	/* ------ HEADER ------ */
@@ -314,7 +316,17 @@
 			font-size: 90%;
 		}
 	}
-</style> {% endblock %} {% block "body" %}
+</style> 
+{% endblock %} 
+{% block "ogp" %}
+<meta property="og:title" content="차쓸신잡(4) 국내에서 가장 많은 사람들이 타는 100대 차종은?" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/4" />
+<meta property="og:image" content="{% static 'carticle/car/image4-1.png' %}" />
+<meta property="og:description" content="차를 긴 시간 타고 다니면서 이런저런 경험을 해본 사람만 알게 되는 '꿀팁'이 있기 마련입니다. 이런 정보들은 보통 '자동차 동호회'에 모이기 마련이죠. '차쓸신잡'에서 우리나라 100대 차종의 동호회 리스트를 모아봤습니다." />
+{% endblock %}
+{% block "body" %}
 <div class="carticle con-wrap">
 	<div class="container">
 		<div class="con-box">
@@ -371,4 +383,5 @@
 			</section>
 		</div>
 	</div>
-</div> {% endblock %}
+</div> 
+{% endblock %}

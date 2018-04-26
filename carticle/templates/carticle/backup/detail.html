@@ -295,7 +295,15 @@
 		}
 	}
 </style> 
-{% endblock %} 
+{% endblock %}
+{% block "ogp" %}
+<meta property="og:title" content="차쓸신잡(1) 한국인이 가장 오래타는 차 베스트 10" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/1" />
+<meta property="og:image" content="{% static 'carticle/car/image1-1.jpg' %}" />
+<meta property="og:description" content="우리나라에서 운행중인 차 10대 중 1대는 출시된 지 15년이 넘은 차입니다. 한국인들은 어떤 차를 가장 아끼며 오래 타고 있을까요? '차쓸신잡'에서 가장 많이 운행되고 있는 10대 차종을 알아봤습니다." />
+{% endblock %}
 {% block "body" %}
 
 <div class="carticle con-wrap">

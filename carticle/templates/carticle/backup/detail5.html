@@ -1,5 +1,6 @@
-{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
-
+{% extends "_base.html" %} 
+{% load static %} 
+{% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
 	/* ------ HEADER ------ */
@@ -317,7 +318,17 @@
 		
 		.tb-list {font-size: 90%;}
 	}
-</style> {% endblock %} {% block "body" %}
+</style> 
+{% endblock %} 
+{% block "ogp" %}
+<meta property="og:title" content="차쓸신잡(5) 급발진 1탄 : 급발진 의심사고가 가장 많았던 차는?" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/5" />
+<meta property="og:image" content="{% static 'carticle/car/image5-1.png' %}" />
+<meta property="og:description" content="급발진 의심 사고가 가장 많은 차종은 무엇일까요? '차쓸신잡'에서 2000년부터 18년 동안 정부에 신고된 급발진 의심 사고 신고내역 1천여 건을 분석했습니다. 먼저 가장 신고건수가 많은 3대 차종과 10만대당 신고건수가 많은 제작사 3곳입니다." />
+{% endblock %}
+{% block "body" %}
 <div class="carticle con-wrap">
 	<div class="container">
 		<div class="con-box">

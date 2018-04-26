@@ -1,4 +1,6 @@
-{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
+{% extends "_base.html" %} 
+{% load static %} 
+{% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
 	/* ------ HEADER ------ */
@@ -296,7 +298,19 @@
 			display: none;
 		}
 	}
-</style> {% endblock %} {% block "body" %}
+</style> 
+{% endblock %} 
+{% block "ogp" %}
+<meta property="og:title" content="차쓸신잡(1) 늑장리콜 상습범을 수배합니다 (늑장리콜 국내차 10종)" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/2" />
+<meta property="og:image" content="{% static 'carticle/car/image2-3.jpg'%}" />
+<meta property="og:description" content="차주 여러분은 제조사의 리콜 발표를 주의깊게 보고 계신가요? 어떤 차는 출시된 직후 리콜을 실시하지만, 간혹 출시 후 한참 지나 리콜을 하는 경우도 있습니다. '차쓸신잡'에서 출시와 리콜 시점의 기간이 가장 긴 '늑장리콜' 사례를 모았습니다.
+" />
+{% endblock %}
+
+{% block "body" %}
 <div class="carticle con-wrap">
 	<div class="container">
 		<div class="con-box">
@@ -443,4 +457,5 @@
 			</section>
 		</div>
 	</div>
-</div> {% endblock %}
+</div>
+{% endblock %}
