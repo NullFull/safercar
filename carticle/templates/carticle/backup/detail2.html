@@ -1,0 +1,446 @@
+{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
+<link rel="stylesheet" href="{% static 'content.css' %}">
+<style>
+	/* ------ HEADER ------ */
+	
+	.carticle .post-header {
+		text-align: center;
+		margin-bottom: 30px;
+		margin-top: 50px;
+	}
+	
+	.carticle h1 {
+		font-size: 180%;
+		margin: 10px 0 3px 0;
+	}
+	
+	.carticle .post-header span {
+		border-bottom: 1px solid #222;
+		padding-bottom: 2px;
+	}
+	
+	.carticle .post-header .byline {
+		font-size: 80%;
+		border-bottom: 0;
+		color: #2868CF;
+		letter-spacing: 0.3px;
+	}
+	/* ------AUTHOR ------ */
+	
+	.post-author {
+		text-align: left;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.sblank {
+		padding-bottom: 40px;
+	}
+	
+	.post-author .sticker {
+		width: 190px;
+		float: right;
+		margin: 0 0 15px 15px;
+	}
+	
+	.post-author2 {
+		text-align: center;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.post-author2 p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	
+	.post-author2 .sticker-center {
+		margin: 0 0 10px 0;
+	}
+	
+	.post-author p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	/* ------ QUOTE ------ */
+	
+	.carticle blockquote {
+		text-align: center;
+		font-size: 90%;
+		font-weight: 600;
+		position: relative;
+		padding: 25px 14px 0;
+		line-height: 180%;
+		margin: 30px auto;
+	}
+	
+	.carticle blockquote:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 15px;
+		height: 14px;
+		margin-left: -7px;
+		background: url({% static 'carticle/img_quote.png' %}) no-repeat;
+		content: '';
+	}
+	
+	.carticle .blockquote_type2 {
+		border-color: #acacac;
+		border-width: 0 0 0 2px;
+		border-style: solid;
+		padding: 1px 0 0 12px;
+		color: #666;
+		line-height: 18pt;
+		text-align: left;
+		margin: 30px 0;
+		font-size: 90%;
+	}
+	
+	mark {
+		background-color: #f1c40f;
+		color: black;
+	}
+
+	/* ------ ARTICLE ------ */
+	
+	.carticle .article {
+		border: 0;
+	}
+	
+	.carticle section {
+		padding: 0 30px 50px 30px;
+		overflow: hidden;
+	}
+	
+	.carticle .article-link {
+		font-size: 100%;
+		color: #2868CF;
+		text-decoration: underline;
+	}
+	
+	.article .ranking {
+		text-align: center;
+		font-weight: 500;
+	}
+	
+	.article .ranking span {
+		display: block;
+		margin: 15px 0 5px 0;
+	}
+	
+	.article .ranking strong {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		padding: 5px 0;
+		display: inline-block;
+		font-size: 150%;
+		margin-top: 60px;
+	}
+	
+	.article .ranking .car-name {
+		font-size: 150%;
+		margin: 5px 0 30px 0;
+		font-weight: 600;
+	}
+	
+	.article .ranking .car-name-sm {
+		font-size: 120%;
+	}
+	
+	.article .recall-list {
+		font-size: 95%;
+		line-height: 180%;
+	}
+	
+	.article .notice {
+		font-size: 90%;
+	}
+	
+	.tb-list,
+	table,
+	th,
+	td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		font-size: 90%;
+	}
+	
+	th {
+		text-align: left;
+	}
+	
+	.tb-list,
+	th,
+	td {
+		padding: 10px;
+	}
+	
+	.tb-list a {
+		color: red;
+	}
+	
+	.ac-tit {
+		font-size: 130%;
+		text-align: center;
+		font-weight: 600;
+		margin-top: 60px;
+	}
+	
+	.ac-tit img {
+		margin-top: 10px;
+	}
+	
+	.ac-list {
+		line-height: 180%;
+	}
+	
+	.mystery {
+		font-size: 90%;
+		line-height: 150%;
+	}
+	
+	.mystery .my-tit {
+		font-size: 120%;
+		text-align: center;
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+	
+	.mystery .my-tit span {
+		font-size: 85%;
+	}
+	
+	.my-list {
+		border: 1px dashed #bfbfbf;
+		padding: 20px;
+		background: #f4f4f4;
+	}
+	
+	.my-list li {
+		padding: 5px 0;
+	}
+	/* ------ BUTTON ------ */
+	
+	.carticle .btn:link,
+	.carticle .btn:visited {
+		display: inline-block;
+		padding: 10px 60px;
+		font-weight: 400;
+		text-decoration: none;
+		border-radius: 200px;
+		font-size: 110%;
+		letter-spacing: 0.02em;
+	}
+	
+	.carticle .btn-tips:link,
+	.carticle .btn-tips:visited {
+		border: 1px solid #0E8BE4;
+		color: #0E8BE4;
+	}
+	
+	.carticle .action {
+		text-align: center;
+	}
+	/* ------ PATTERN ------ */
+	
+	.start {
+		background: url({% static 'carticle/line-type2.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	.line {
+		background: url({% static 'carticle/line-type3.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 30px 0 10px 0;
+	}
+	
+	.line2 {
+		background: url({% static 'carticle/line-type4.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 30px;
+		margin: 30px 0 10px 0;
+	}
+	
+	.finish {
+		background: url({% static 'carticle/line-type.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	@media only screen and (max-width:640px) {
+		.carticle section {
+			padding: 50px 0px;
+		}
+		.post-author {
+			text-align: center;
+		}
+		.post-author .sticker {
+			float: none;
+		}
+		.carticle .btn:link,
+		.carticle .btn:visited {
+			padding: 8px 30px;
+			font-size: 90%;
+		}
+		br {
+			display: none;
+		}
+	}
+</style> {% endblock %} {% block "body" %}
+<div class="carticle con-wrap">
+	<div class="container">
+		<div class="con-box">
+			<div class="post-header">
+				<span>차쓸신잡2</span>
+				<h1>늑장리콜 상습범을 수배합니다<br>(늑장리콜 국내차 10종)</h1> 
+				<span class="byline">정재원&#183;2018.03.09 20:06 </span> 
+			</div>
+			<div class="post-author sblank">
+				<img class="sticker" src="{% static 'carticle/sticon-02.png' %}">
+				<p>안녕하세요. 뉴스타파의 (친절한) 자동차 기자 정재원입니다.
+					<br> 이 코너의 타이틀이 ‘차쓸신잡’이라 혹시 쓸모없는 잡지식 아니야?라고 생각하시는 분들이 있을 텐데요.
+					<img class="emoji" src="{% static 'img/emoji/thinking-face.png' %}">
+					<br>
+					<br> 아닙니다. 저희는 앞으로도 쭉 쓸모 있(!)으면서도 재미있는 정보를 전해드리겠습니다. 오늘은 그중에서도 한 번쯤 꼭 살펴보셔야 할 리콜에 관한 이야기입니다.
+				</p>
+			</div>
+			
+			<!-- ARTICLE -->
+			<section class="article">
+				<div class="line2"></div>
+				<p class="article-txt"><mark><b>늑장리콜</b></mark>이 뭘까요? 말 그대로 차가 나온지 한~참 지나 리콜을 하는 겁니다. 리콜할 정도의 중요한 문제라면 차가 처음 팔린 시점부터 사용자들이 불만을 제기했을 테고, 제작사는 고객센터나 일선 자동차정비소를 통해 이런 결함 정보를 인지했을 가능성이 큽니다. 하지만 시간이 한참 지나 리콜 결정을 하는 거죠.</p>
+				<p class="article-txt">왜? <mark><b>리콜은 늦게 하면 할수록 이익</b></mark>이기 때문입니다. 자동차 관리법에 보면, 리콜이 시작되기 전에 사용자가 알아서 결함을 수리했을 경우 ‘리콜 시작 전 1년 안에 한 수리’에 대해서만 비용을 보상해주도록 규정하고 있습니다.</p>
+				<p class="article-txt">그러니 리콜을 늦추면 늦출수록 알아서 수리를 한 사람도 늘어날 테고, 반면 나중에 보상해줘야 하는 사람은 줄어드는 거죠. 개중에는 의도적이라고 말할 수 없는 불가피한 사정도 있겠지만, 소비자에겐 늑장리콜이 명백한 손해라는 점에서 한번 따져볼 필요는 있겠죠?</p>
+
+				<blockquote> 오늘은 가장 리콜을 늦게 한 차종 10개를 꼽아봤습니다.
+					<br> 리콜 대상 차량이 처음 생산된 시점부터 리콜이 개시된 시점까지
+					<br> 가장 오래 걸린 차종들입니다.
+				</blockquote>
+				
+				<div class="blockquote_type2">자료제공 : 국토교통부. 내수용 승용/승합차 1천 대 이상 리콜 건 대상 분석. 동일 날짜에 다수의 차종이 발표된 리콜 건의 경우 가장 리콜에 오래 걸린 차종을 기준으로 순위를 매김.</div>
+				
+				<div class="ranking"> <strong>1위</strong> <span>르노삼성 SM3</span> <span class="car-name">리콜 소요 기간 5,074일 (13.9년)</span> <img src="{% static 'carticle/car/image2-1.png'%}" alt="르노삼성SM3"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 1세대(N17) SM3</li>
+					<li>&#45; 대상 차량 : 4,418대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2002년 2월 7일 ~ 2003년 2월 7일</li>
+					<li>&#45; 리콜 시행일 : 2015년 12월 30일</li>
+					<li>&#45; 리콜 소요 기간 : 5,074일 (13.9년)</li>
+					<li>&#45; <b>결함내용</b> : <b>조수석 에어백 모듈 문제</b>(조수석 에어백 전개 시 인플레이터 내부 압력이 증가해, 매우 드문 경우지만 과도한 폭발 압력으로 내부 부품 금속 파편에 의한 상해를 입힐 가능성 있음. 신규 개발된 조수석 에어백 모듈로 부품 교체.) </li>
+				</ul>
+				<div class="ranking"> <strong>2위</strong> <span>한국GM 라세티</span> <span class="car-name">리콜 소요 기간 3,574일 (9.8년)</span> <img src="{% static 'carticle/car/image2-2.png'%}" alt="한국GM 라세티 "> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 라세티 해치백(1.5/1.6 가솔린, 2.0 디젤)</li>
+					<li>&#45; 대상 차량 : 3,711대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2002년 11월 4일 ~ 2006년 3월 27일</li>
+					<li>&#45; 리콜 시행일 : 2012년 8월 17일</li>
+					<li>&#45; 리콜 소요 기간 : 3,574일 (9.8년)</li>
+					<li>&#45; <b>결함내용</b> : <b>전조등 전기배선 문제</b>(전조등 전기배선 연결부위(스플라이스 팩) 결함으로 전기저항이 증가하여 연결부위가 녹아 주행 중 전조등이 작동되지 않을 수 있는 결함. 스플라이스 팩 제거 후 전기배선 단순화 작업 진행.) </li>
+				</ul>
+				<div class="ranking"> <strong>3위</strong> <span>쌍용자동차 액티언 스포츠</span> <span class="car-name">리콜 소요 기간 3,526일 (9.7년)</span> <img src="{% static 'carticle/car/image2-3.jpg'%}" alt="쌍용자동차 액티언 스포츠"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 액티언 스포츠(전륜)</li>
+					<li>&#45; 대상 차량 : 27,068대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2005년 5월 1일 ~ 2008년 1월 8일</li>
+					<li>&#45; 리콜 시행일 : 2014년 12월 26일</li>
+					<li>&#45; 리콜 소요 기간 :3,526일 (9.7년)</li>
+					<li>&#45; <b>결함내용</b> : <b>볼 조인트</b>(볼 조인트 이탈 및 파손 결함으로 인하여, 잦은 험로 주행 및 반복적인 외부 충격 이후 일상 점검/수리 없이 운행할 경우, 일부 차량에서 안전 운행에 지장을 초래할 가능성. 전륜 볼 조인트의 경우 볼 스터드 직경이 증대된 보완 제품으로 교환. 후륜 볼 조인트(렉스턴, 카이런 일부차량)의 경우 볼 사이즈 증대된 제품으로 교환. 렉스턴, 카이런 등 비슷한 시기 생산된 다른 차종에서도 같은 문제 발생으로 동시 리콜 처리) </li>
+				</ul>
+				<div class="ranking"> <strong>4위</strong> <span>현대자동차 그랜저</span> <span class="car-name">리콜 소요 기간 3,526일 (9.7년)</span> <img src="{% static 'carticle/car/image2-4.png'%}" alt="현대자동차 그랜저"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 4세대(TG) 그랜저</li>
+					<li>&#45; 대상 차량 : 10,912대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2007년 3월 7일 ~ 2007년 8월 14일</li>
+					<li>&#45; 리콜 시행일 : 2016년 9월 22일</li>
+					<li>&#45; 리콜 소요 기간 : 3,487일 (9.6년)</li>
+					<li>&#45; <b>결함내용</b> : <b>파워 시트 스위치</b> (외부 수분 유입으로 인한 내부 부품 부식 가능성이 있으며 이로 인해 파워 시트 작동 불량 및 간헐적 임의 작동 가능성이 있는 결함. 리콜을 통해 파워 시트 스위치 교환.) </li>
+				</ul>
+				<div class="ranking"> <strong>5위</strong> <span>기아자동차 스포티지</span> <span class="car-name">리콜 소요 기간 3,410일 (9.3년)</span>
+					<img src="{% static 'carticle/car/image2-5.png'%}" alt="기아자동차 스포티지">
+				</div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 2세대(KM) 뉴 스포티지</li>
+					<li>&#45; 대상 차량 : 2,686대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2007년 8월 9일 ~ 2009년 5월 22일</li>
+					<li>&#45; 리콜 시행일 : 2016년 12월 9일</li>
+					<li>&#45; 리콜 소요 기간 : 3,410일 (9.3년)</li>
+					<li>&#45; <b>결함내용</b> : <b>ESC 모듈</b> (ESC 모듈 커넥터 조립 불량으로 겨울철 제설제 염수 유입 시 ESC 모듈부 쇼트로 ESC 경고등 점등 및 ESC 모듈부 소손이 발생할 수 있는 결함. ESC 모듈 커넥터 핀 부식 점검 후 부식이 없을 경우 ESC 모듈 커넥터 커버 교환 작업. 핀 부식이 있을 경우 ESC 모듈 교환 및 커넥터 에어세척 후 커넥터 커버 교환.) </li>
+				</ul>
+				<div class="ranking"> <strong>6위</strong> <span>기아자동차 스포티지</span> <span class="car-name">리콜 소요 기간 3,127일 (8.6년)</span> <img src="{% static 'carticle/car/image2-6.jpg'%}" alt="기아자동차 스포티지"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 1세대(NB-7) 스포티지</li>
+					<li>&#45; 대상 차량 : 302,404대 (같은 결함을 가진 세피아 포함 대수)</li>
+					<li>&#45; 리콜 차량 생산기간 : 1994년 6월 1일 ~ 1998년 5월 30일</li>
+					<li>&#45; 리콜 시행일 : 2002년 12월 23일</li>
+					<li>&#45; 리콜 소요 기간 : 3,127일 (8.6년)</li>
+					<li>&#45; <b>결함내용</b> : <b>시트벨트 버클 체결부 </b> (앞좌석 시트벨트 버클 체결 불량. 시트벨트 버클 체결부 점검 후, 관련부품 수리 또는 교체.)</li>
+				</ul>
+				<div class="ranking"> <strong>7위</strong> <span>현대자동차 아반떼</span> <span class="car-name">리콜 소요 기간 3,023일 (8.3년)</span> <img src="{% static 'carticle/car/image2-7.png'%}" alt="현대자동차 아반떼"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 3세대(HD) 아반떼</li>
+					<li>&#45; 대상 차량 : 111,553대</li>
+					<li>&#45; 리콜 차량 생산기간 : 2008년 1월 2일 ~ 2009년 8월 22일</li>
+					<li>&#45; 리콜 시행일 : 2016년 4월 12일</li>
+					<li>&#45; 리콜 소요 기간 : 3,023일 (8.3년)</li>
+					<li>&#45; <b>결함내용</b> : <b>에어백 소프트웨어 </b>(에어백 마진 조정 불량으로 인해 에어백 제어 유닛이 위치한 차체 하단 부위에 강한 충격 발생 시 에어백 비정상 전개 가능성이 있음. 대상 차량 확인 후 에어백 소프트웨어 업그레이드 작업.) </li>
+				</ul>
+				<div class="ranking"> <strong>8위</strong> <span>한국GM 라세티 프리미어</span> <span class="car-name">리콜 소요 기간 2,892일 (7.9년)</span> <img src="{% static 'carticle/car/image2-8.png'%}" alt="한국GM 라세티 프리미어"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 2세대(J300) 라세티 프리미어 </li>
+					<li>&#45; 대상 차량 : 5,756대</li>
+					<li>&#45; 리콜 차량 생산기간 :2008년 7월 24일 ~ 2010년 8월 31일</li>
+					<li>&#45; 리콜 시행일 : 2016년 6월 24일</li>
+					<li>&#45; 리콜 소요 기간 : 2,892일 (7.9년)</li>
+					<li>&#45; <b>결함내용</b> : <b>배터리 트레이 </b>(엔진제어장치 브라켓과 배터리 트레이가 충분히 고정되지 않을 경우 엔진제어장치와 엔진배선 사이의 상대운동이 발생. 이로 인해 터미널 표면이 산화가 되어 엔진제어장치의 터미널과 엔진 배선의 터미널이 간헐적으로 단속되는 현상이 발생할 수 있음. 개선된 배터리 트레이 교체 및 터미널 부위에 통전 그리스 도포.) </li>
+				</ul>
+				<div class="ranking"> <strong>9위</strong> <span>현대자동차 쏘나타</span> <span class="car-name">리콜 소요 기간 2,882일 (7.9년)</span> <img src="{% static 'carticle/car/image2-9.png'%}" alt="현대자동차 쏘나타"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 : 6세대(YF) 쏘나타</li>
+					<li>&#45; 대상 차량 : 6,092대</li>
+					<li>&#45; 리콜 차량 생산기간 :2009년 7월 1일 ~ 2013년 8월 31일</li>
+					<li>&#45; 리콜 시행일 : 2017년 5월 22일 (국토부 강제 리콜 명령)</li>
+					<li>&#45; 리콜 소요 기간 : : 2,882일 (7.9년)</li>
+					<li>&#45; <b>결함내용</b> : <b>세타2 엔진</b>(크랭크 샤프트 오일 홀 가공 장비 관리 미흡으로 가공 후 금속 이물질이 잔존할 경우 콘로드 베어링부에 영향으로 내구 진행 시 비정상 소음 발생 가능성이 있어 리콜. 소음 무시 후 지속 운행 시 시동꺼짐이 발생 될 수 있는 결함. 대상 차량에 대해 엔진 점검 및 이상 있을 경우 엔진 교환 등 수리.) 세타2 엔진 결함으로 현대차 쏘나타, 그랜저, 기아차 스포티지, K5, K7 등 동시 리콜 진행. </li>
+				</ul>
+				<div class="ranking"> <strong>10위</strong> <span>현대자동차 베라크루즈</span> <span class="car-name">리콜 소요 기간 2,703일 (7.4년)</span> <img src="{% static 'carticle/car/image2-11.png'%}" alt="현대자동차 베라크루즈"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<ul class="recall-list">
+					<li>&#45; 세부 차종명 :1세대(EN) 베라크루즈 </li>
+					<li>&#45; 대상 차량 : 1,754대</li>
+					<li>&#45; 리콜 차량 생산기간 :2007년 5월 7일 ~ 2013년 6월 28일</li>
+					<li>&#45; 리콜 시행일 : 2014년 9월 30일</li>
+					<li>&#45; 리콜 소요 기간 : : 2,703일 (7.4년)</li>
+					<li>&#45; <b>결함내용</b> : <b>엔진 헤드커버 가스켓</b>(엔진 헤드커버 오일 누유로 장기간 진행 시 간헐적으로 알터네이터가 오염되어 작동이 불량하게 되고, 배터리 경고등 점등 및 시동불량/시동꺼짐이 발생할 수 있는 가능성. 엔진 헤드커버 가스켓 점검 및 교환.) </li>
+				</ul>
+				<div class="finish"></div>
+				<p class="article-txt">이상 늑장리콜 국내차 10종을 알아봤습니다.</p>
+				<p class="article-txt">마치기 전에 잠깐! 이번 늑장리콜 차종 순위에서는 수입차를 제외하고 국내차만을 대상으로 정리했습니다. 왜일까요? </p>
+				<p class="article-txt">이번에 &#60;내차결함포털&#62;을 제작하면서 저희는 국토부와 환경부에서 2000년 이후 리콜 정보 1000여 건 전체를 받아 분석했습니다. 그러면서 특이한 현상을 발견했는데요. 수입차가 (상대적으로 훨씬 더 많이 팔리는) 국내차에 비해 리콜 횟수가 더 많았습니다. </p>
+				<p class="article-txt">이유가 뭘까요. 값비싼 수입차가 리콜을 할 만한 중대결함이 더 많았던 걸까요?</p>
+				<p class="article-txt">그렇다고 보기는 어렵습니다. 수입차는 자동차관리법 제33조에 따라 외국에서 리콜이 있을 경우 그 내용을 반드시 우리나라 국토교통부에 보고하게 되어 있습니다. 이렇다 보니 수입차는 국내에서 처리되는 리콜에 더해 미국 등에서 엄격하게 판정된 리콜까지 대부분 처리해야 합니다. 수치상으로 볼 때 수입차의 리콜 건수가 많아진 이유는 여기에 있는 것으로 보입니다.</p>
+				<p class="article-txt">이처럼 국내차와 수입차가 리콜 시행 과정이 다르기 때문에 둘을 똑같이 놓고 비교하기는 어렵다는 결론을 냈습니다. 미국 등 외국의 리콜 제도에 관한 이야기는 길게 풀어볼 가치가 있는 중요한 얘기니까요, 다음 기회에 좀 더 자세히 들려드리겠습니다.</p>
+				
+				<div class="action"> <a class="btn btn-tips" href="#">목록보기</a></div>
+			</section>
+		</div>
+	</div>
+</div> {% endblock %}

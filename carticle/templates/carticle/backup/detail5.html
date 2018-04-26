@@ -1,8 +1,5 @@
-{% extends "_base.html" %}
+{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
 
-{% load static %}
-
-{% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
 	/* ------ HEADER ------ */
@@ -320,13 +317,7 @@
 		
 		.tb-list {font-size: 90%;}
 	}
-</style>
-{% endblock %}
-
-{% block "ogp" %}
-{% endblock %}
-
-{% block "body" %}
+</style> {% endblock %} {% block "body" %}
 <div class="carticle con-wrap">
 	<div class="container">
 		<div class="con-box">

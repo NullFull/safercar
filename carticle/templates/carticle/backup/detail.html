@@ -1,0 +1,396 @@
+{% extends "_base.html" %} 
+{% load static %} 
+{% block "additional_header" %}
+<link rel="stylesheet" href="{% static 'content.css' %}">
+
+<style>
+	
+	/* ------ HEADER ------ */
+	.carticle .post-header {
+		text-align: center;
+		margin-bottom: 30px;
+		margin-top: 50px;
+	}
+	
+	.carticle h1 {
+		font-size: 180%;
+		margin: 10px 0 3px 0;
+	}
+	
+	.carticle .post-header span {
+		border-bottom: 1px solid #222;
+		padding-bottom: 2px;
+	}
+	
+	.carticle .post-header .byline {
+		font-size: 80%;
+		border-bottom: 0;
+		color: #2868CF;
+		letter-spacing: 0.3px;
+	}
+	
+	/* ------AUTHOR ------ */
+	
+	.post-author {
+		text-align: left;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.sblank {
+		padding-bottom: 40px;
+	}
+	
+	.post-author .sticker {
+		width: 190px;
+		float: right;
+		margin: 0 0 15px 15px;
+	}
+	
+	.post-author2 {
+		text-align: center;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.post-author2 p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	
+	.post-author2 .sticker-center {
+		margin: 0 0 10px 0;
+	}
+	
+	.post-author p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	
+	
+	/* ------ QUOTE ------ */
+	.carticle blockquote {
+		text-align: center;
+		font-size: 90%;
+		font-weight: 600;
+		position: relative;
+		padding: 25px 14px 0;
+		line-height: 180%;
+		margin: 30px auto;
+	}
+	
+	.carticle blockquote:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 15px;
+		height: 14px;
+		margin-left: -7px;
+		background: url({% static 'carticle/img_quote.png' %}) no-repeat;
+		content: '';
+	}
+	
+	.carticle .blockquote_type2 {
+		border-color: #acacac;
+		border-width: 0 0 0 2px;
+		border-style: solid;
+		padding: 1px 0 0 12px;
+		color: #666;
+		line-height: 18pt;
+		text-align: left;
+		margin: 30px 0;
+	}
+	
+	mark { 
+    background-color: #f1c40f;
+    color: black;
+	}
+	
+	
+	/* ------ ARTICLE ------ */
+	
+	.carticle .article {
+		border: 0;
+	}
+	
+	.carticle section {
+		padding: 0 30px 50px 30px;
+		overflow: hidden;
+	}
+	
+	.carticle .article-link {
+		font-size: 100%;
+		color: #2868CF;
+		text-decoration: underline;
+	}
+	
+	.article .ranking {
+		text-align: center;
+		font-weight: 500;
+	}
+	
+	.article .ranking span {
+		display: block;
+		margin: 15px 0 5px 0;
+	}
+	
+	.article .ranking strong {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		padding: 5px 0;
+		display: inline-block;
+		font-size: 150%;
+		margin-top: 60px;
+	}
+	
+	.article .ranking .car-name {
+		font-size: 150%;
+		margin: 5px 0 30px 0;
+		font-weight: 600;
+	}
+	
+	.article .ranking .car-name-sm {
+		font-size: 120%;
+	}
+	
+	.article .recall-list {
+		font-size: 95%;
+		line-height: 180%;
+	}
+	
+	.article .notice {
+		font-size: 90%;
+	}
+	
+	.tb-list,
+	table,
+	th,
+	td {
+		border: 1px solid black;
+		border-collapse: collapse;
+		font-size: 90%;
+	}
+	
+	th {
+		text-align: left;
+	}
+	
+	.tb-list,
+	th,
+	td {
+		padding: 10px;
+	}
+	
+	.tb-list a {
+		color: red;
+	}
+	
+	.ac-tit {
+		font-size: 130%;
+		text-align: center;
+		font-weight: 600;
+		margin-top: 60px;
+	}
+	
+	.ac-tit img {
+		margin-top: 10px;
+	}
+	
+	.ac-list {
+		line-height: 180%;
+	}
+	
+	.mystery {
+		font-size: 90%;
+		line-height: 150%;
+	}
+	
+	.mystery .my-tit {
+		font-size: 120%;
+		text-align: center;
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+	
+	.mystery .my-tit span {
+		font-size: 85%;
+	}
+	
+	.my-list {
+		border: 1px dashed #bfbfbf;
+		padding: 20px;
+		background: #f4f4f4;
+	}
+	
+	.my-list li {
+		padding: 5px 0;
+	}
+	/* ------ BUTTON ------ */
+	
+	.carticle .btn:link,
+	.carticle .btn:visited {
+		display: inline-block;
+		padding: 10px 60px;
+		font-weight: 400;
+		text-decoration: none;
+		border-radius: 200px;
+		font-size: 110%;
+		letter-spacing: 0.02em;
+	}
+	
+	.carticle .btn-tips:link,
+	.carticle .btn-tips:visited {
+		border: 1px solid #0E8BE4;
+		color: #0E8BE4;
+	}
+	
+	.carticle .action {
+		text-align: center;
+	}
+	/* ------ PATTERN ------ */
+	
+	.start {
+		background: url({% static 'carticle/line-type2.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	.line {
+		background: url({% static 'carticle/line-type3.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 30px 0 10px 0;
+	}
+	
+	.finish {
+		background: url({% static 'carticle/line-type.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	@media only screen and (max-width:640px) {
+		.carticle section {
+			padding: 50px 0px;
+		}
+		.post-author {
+			text-align: center;
+		}
+		.post-author .sticker {
+			float: none;
+		}
+		.carticle .btn:link,
+		.carticle .btn:visited {
+			padding: 8px 30px;
+			font-size: 90%;
+		}
+		br {
+			display: none;
+		}
+	}
+</style> 
+{% endblock %} 
+{% block "body" %}
+
+<div class="carticle con-wrap">
+	<div class="container">
+		<div class="con-box">
+			<!-- POST HEADER -->
+			<div class="post-header">
+				<span>차쓸신잡1</span>
+				<h1>국내에서 가장 많은 사람이 타는 100대 차종은?</h1>
+				<span class="byline">정재원&#183;2018.03.09 20:06</span>
+			</div>
+			<!-- AUTHOR -->
+			<div class="post-author">
+				<img class="sticker" src="{% static 'carticle/sticon-01.png' %}">
+				<p>
+					안녕하세요. 뉴스타파의 (친절한) 자동차 기자 정재원입니다.
+					‘차쓸신잡’은 차에 관한 쓸모 있고(!) 신기한 정보들을 알려드리는 코너입니다.
+					<img class="emoji" src="{% static 'img/emoji/clapping-hands.png' %}"><br> 
+					차결함포털에 결함 얘기만 가득하면 지루할 수 있잖아요.<br> 
+					그래서 차에 관심 있는 분들이 편하게 볼 수 있는 이야기들을 커피 한 잔에 곁들인 치즈 케이크처럼 준비해보려고 합니다.
+					<img class="emoji" src="{% static 'img/emoji/hot-beverage.png' %}" alt="hot-beverage"><br><br> 
+					차쓸신잡에 담기는 이야기들은 대부분 차결함포털에 담긴 방대한 데이터들을 뼈대 삼아 살을 붙여 만들었습니다.<br>  
+					모아놓은 정보가 많다 보니 이렇게 저렇게 가공하는 과정에서 재미있는 이야기들이 여럿 발견되었거든요. 
+					그 첫 번째로 오늘 차쓸신잡에서는 한국인들이 가장 오래 아끼며 타는 차에 관한 이야기를 들려드릴게요.
+				</p>
+			</div>
+			<!-- QUOTE -->
+			<blockquote> 2017년 말 현재 대한민국에서 달리는 차 중 <mark>출시된 지 15년 넘은 차는
+				<br>270만대(2,717,761대)</mark>가 조금 넘습니다.
+				<br>전체 등록차량이 2,250만대 정도니까, 열 대 중 한 대꼴로 15살이 넘었다는 얘기죠.
+				<br>어떤 차들이 15년 이상을 지치지 않고 달리고 있을까요?
+				<br>먼저 1위부터 소개합니다.
+			</blockquote>
+			
+			<!-- ARTICLE -->
+			<section class="article">
+				<!-- 1위 -->
+				<div class="ranking"> <strong>1위</strong> <span>자영업자들의 든든한 친구!</span> <span class="car-name">현대차 포터 (233,102대)</span> <img src="{% static 'carticle/car/image1-1.jpg' %}" alt="현대차포터"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Two hundred percent)</figcaption>
+				<p class="article-txt">포터는 현대차의 1톤 트럭입니다. 영어로 ‘짐꾼’을 뜻하는 포터(porter)는 현대차 최초의 차들 가운데 하나인데요. ‘포터'라는 이름은 현대차가 1977년 2월에 현상 모집을 통해 정했다네요. <a href="https://ko.wikipedia.org/wiki/%ED%98%84%EB%8C%80_%ED%8F%AC%ED%84%B0" target="_blank" style="color: #2868CF; font-size: 90%; text-decoration: underline">(출처 : 위키백과)</a></p>
+				<p class="article-txt">포터 트럭은 주로 영세 자영업자들의 생계 수단으로 쓰이다 보니 경기가 안 좋아도 꾸준히 팔리고 있습니다. 최근까지도 매년 10만대 가까운 판매량을 기록하는 등, 명실상부한 한국 차 최고의 스테디셀러라고 할 수 있죠.</p>
+				<p class="article-txt"><a href="http://news.hankyung.com/article/2017120487211" class="article-link" target="_blank">한국경제신문 기사</a>에 따르면, 현대자동차가 2019년경 소형트럭 포터와 중형트럭 마이티를 기반으로 하는 전기 트럭을 양산한다고 합니다. 포터가 전기 트럭으로 본격 변신하면 낡은 디젤 트럭이 내뿜는 배출가스 문제도 해결될 수 있겠네요.</p>
+				
+				<!-- 2위 -->
+				<div class="ranking"> <strong>2위</strong> <span>아깝게 2위! 한국인의 국민차</span> <span class="car-name">현대차 쏘나타 (231,226대)</span> <img src="{% static 'carticle/car/image1-2.jpg' %}" alt="현대차쏘나타"> </div>
+				<figcaption class="txt-caption">출처ㅣ위키백과 / Two hundred percent</figcaption>
+				<p class="article-txt">15년 이상 달리는 차가 무려 23만대. 누가 보기에도 국민차라고 할 만한 쏘나타입니다. 하지만 1985년 처음 출시된 1세대는 대우자동차의 중형차인 로얄 시리즈에 밀리며 참패를 기록했다는 것 알고 계세요? 게다가 당시 이름은 지금처럼 ‘쏘나타’가 아니라 ‘소나타’였습니다. 하지만 당시 대우자동차한테 “소나 타는 차”라는 비아냥을 듣고 이름을 ‘쏘나타’로 바꿨다네요. 하지만 ‘소나타’가 망한 뒤 출시된 쏘나타 시리즈는 국내 중형차 시장의 최강자로 올라섭니다. ‘쏘나타 III’가 출시된 1996년, 쏘나타 시리즈의 누적 판매량은 100만대를 넘어섰죠.<a href="http://global-autonews.com/bbs/board.php?bo_table=bd_013&wr_id=259" target="_blank" style="color: #2868CF; font-size: 90%; text-decoration: underline"> (출처 : 글로벌 오토 뉴스)</a></p>
+				<p class="article-txt">이때 쏘나타 후면에 붙은 차명 엠블렘 중 ‘S’자를 가지고 있으면 서울대에 합격할 수 있다는 애교 넘치는(?) 미신이 퍼지면서, ‘S’자 없는 ‘ONATA’를 길거리에서 흔하게 볼 수 있었습니다. 그래서 입시철이 끝나면 현대차는 연례행사처럼 엠블렘 무상 교체 서비스를 했다네요.</p>
+				
+				<!-- 3위 -->
+				<div class="ranking"> <strong>3위</strong> <span>국민차 동생</span> <span class="car-name">현대차 아반떼(159,679 대)</span> <img src="{% static 'carticle/car/image1-3.jpg' %}" alt="현대차아반떼"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Chu)</figcaption>
+				<p class="article-txt"><a href="http://newslibrary.naver.com/viewer/index.nhn?articleId=1995060700329108001&editNo=20&printCount=1&publishDate=1995-06-07&officeId=00032&pageNo=8&printNo=15446&publishType=00010" class="article-link" target="_blank">경향신문</a>에 따르면, 1995년 3월 처음 출시된 아반떼는 판매 첫날 3천7백대가 계약돼 국내 신차판매로는 최고 기록을 세웠다고 합니다. 이후로도 맏형 격인 쏘나타와 월간 판매고 1위 자리를 주고받으며 선풍적인 인기를 끌었는데요. 당시로써는 세련된 디자인으로 20~30대 젊은 층의 큰 호응을 얻어낸 아반떼. 이 차를 디자인한 현대차의 디자이너는 언론 인터뷰에서 “청자의 곡선을 이용해 아반떼를 디자인했다”고 말했습니다. 여러분도 청자의 곡선을 닮은 매력이 느껴지시나요?</p>
+				
+				<!-- 4위 -->
+				<div class="ranking"> <strong>4위</strong> <span>호랑이 담배 피우던 시절 삼성이 차도 팔던 시절</span> <span class="car-name">르노삼성 SM5(135,308대)</span> <img src="{% static 'carticle/car/image1-4.jpg' %}" alt="르노삼성SM5"> </div>
+				<figcaption class="txt-caption">출처ㅣ위키백과 / Two hundred percent</figcaption>
+				<p class="article-txt">이제는 ‘르노삼성자동차’에서 삼성이 손을 뗐지만, 15년 이상 달리는 SM5 차들이 처음 나왔던 1998년만 해도 삼성이 차를 만들어 팔고 있었습니다. 까마득한 옛날얘기처럼 들리죠? 지금은 고유명사처럼 느껴지는 차 이름 SM도 다름 아니라 Samsung Motors의 약자에서 따왔다네요. 하지만 처음 차 사업에 손을 뻗은 삼성은 기술력이 충분치 못해서 닛산의 파워트레인과 부품을 그대로 들여와서 차를 만들었다고 합니다.<a href="https://ko.wikipedia.org/wiki/%EB%A5%B4%EB%85%B8%EC%82%BC%EC%84%B1_SM5" target="_blank" style="color: #2868CF; font-size: 90%; text-decoration: underline">(출처 : 위키백과)</a> 그래도 결국 완성도 높은 차가 만들어졌으니 지금까지 13만대가 넘는 차가 달리고 있겠죠?</p>
+				
+				<!-- 5위 -->
+				<div class="ranking"> <strong>5위</strong> <span>깍두기 그랜저를 기억하세요?</span> <span class="car-name">현대차 그랜저(127,236 대)</span> <img src="{% static 'carticle/car/image1-5.jpg' %}" alt="현대차그랜저"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Chu)</figcaption>
+				<p class="article-txt">1986년 현대차가 당시로써는 최고급 승용차인 그랜저를 출시했습니다. 최초 판매가는 1,690만 원이었다고 하네요. 당시 <a href="http://newslibrary.naver.com/viewer/index.nhn?articleId=1986091300099205014&editNo=1&printCount=1&publishDate=1986-09-13&officeId=00009&pageNo=5&printNo=6319&publishType=00020" class="article-link" target="_blank">매일경제 기사</a>에는 그랜저를 비롯한 “외제 수입 방어용으로 개발된 고급 승용차들이 큰 인기를 끌고 있다”고 적혀 있습니다. 그런데 인기를 끈 이유 중 하나로 꼽힌 것이 “내년 외산 승용차 개방을 앞두고 국산 승용차 사용 분위기가 조성”된 것이라고 합니다. 지금과는 사뭇 분위기가 다르죠?</p>
+				
+				<!-- 6위 -->
+				<div class="ranking"> <strong>6위</strong> <span>화물운반차의 ABC</span> <span class="car-name">기아차 프론티어(97,335 대)</span> <img src="{% static 'carticle/car/image1-6.png' %}" alt="기아차프론티어 "> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<p class="article-txt">프론티어는 기아차가 현대차와 합병(1998)되기 이전 경쟁 관계였을 때 출시한 차입니다. 1997년 당시 1톤 트럭 시장은 (이번 차쓸신잡에서 영예의 1위를 차지한) 현대차 포터와 기아차 세레스 등이 나눠 갖고 있었는데요. 당시 <a href="http://newslibrary.naver.com/viewer/index.nhn?articleId=1997061600289111003&editNo=5&printCount=1&publishDate=1997-06-16&officeId=00028&pageNo=11&printNo=2906&publishType=00010" class="article-link" target="_blank">한겨레신문 기사</a>에 따르면 그해 기아차는 “‘꿈의 3000cc’를 내걸고 봉고 프런티어를 새로 내놓으며 과거 ‘트럭 왕국’의 명예 회복”을 노렸다네요. 이때 나온 차가 지금까지 10만대 가까이 달리고 있으니 부도 직전 기아차의 큰 꿈은 어느 정도 이뤄졌다고 봐야 할까요?</p>
+				
+				<!-- 7위 -->
+				<div class="ranking"> <strong>7위</strong> <span>원조 한국산 SUV</span> <span class="car-name">현대차 싼타페(86,356 대)</span> <img src="{% static 'carticle/car/image1-7.png' %}" alt="현대차싼타페"> </div>
+				<figcaption class="txt-caption">(출처 : 제작사)</figcaption>
+				<p class="article-txt">싼타페는 현대차가 처음으로 독자 개발한 SUV 차량입니다. 100% 독자기술로 개발해서 일본 미쓰비시 공업에 주던 로얄티를 주지 않아도 되었다고 하네요.<a href="https://ko.wikipedia.org/wiki/%ED%98%84%EB%8C%80_%EC%8B%BC%ED%83%80%ED%8E%98" target="_blank" style="color: #2868CF; font-size: 90%; text-decoration: underline">(출처 : 위키백과)</a> 출시 직후부터 큰 인기를 끈 덕에 지금까지도 기아차 쏘렌토와 함께 SUV 시장의 큰 부분을 차지하고 있습니다.</p>
+				
+				<!-- 8위 -->
+				<div class="ranking"> <strong>8위</strong> <span>벤츠 엔진 얹은 쌍용차의 화양연화</span> <span class="car-name">쌍용차 코란도(77,130 대)</span> <img src="{% static 'carticle/car/image1-8.jpg' %}" alt="쌍용차코란도"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Chu)</figcaption>
+				<p class="article-txt">‘코란도’는 현존하는 한국의 자동차 브랜드 중 가장 오래된 이름이라고 합니다. 1세대가 무려 1969년 생산됐고, 우리에게 익숙한 2세대 코란도(사진)는 1996년 처음 생산됐습니다. 메르세데스-벤츠 사의 엔진을 얹은 2세대 코란도는 출시 이듬해 SUV 판매 전체 1위를 기록하며 대우차에 흡수합병되기 직전 쌍용차의 전성기를 이끌었죠. <a href="https://ko.wikipedia.org/wiki/%EC%8C%8D%EC%9A%A9_%EC%BD%94%EB%9E%80%EB%8F%84" class="article-link" target="_blank">위키백과</a>에 따르면 ‘코란도’라는 이름은 “'한국인의 의지와 힘으로 개발한 차(Korean do it)', '한국 땅을 뒤덮는 차(Korean land over)', '한국을 지배하는 차(Korean land dominator)' 등의 의미”를 가지고 있다고 하네요.</p>
+				
+				<!-- 9위 -->
+				<div class="ranking"> <strong>9위</strong> <span>봉고차의 세대전환</span> <span class="car-name">현대차 스타렉스(65,856 대)</span> <img src="{% static 'carticle/car/image1-9.jpg' %}" alt="현대차스타렉스"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Chu)</figcaption>
+				<p class="article-txt">1997년 처음 출시된 스타렉스는 미니버스의 넉넉한 공간과 지프의 기동성을 통합하려는 목적으로 만들었다고 합니다. 그래서 일반적인 미니버스와는 달리 앞의 보닛을 승용차처럼 길쭉하게 앞으로 빼는 디자인으로 설계했다네요. 의도한 대로 두 마리 토끼를 잘 잡았기 때문인지 꾸준한 사랑을 받고 있는데요. 다만 2000년부터 2007년 정도 사이에 생산된 스타렉스는 하체 부식 문제가 심각하다는 의견이 많습니다. 현대차가 무상수리를 통해 방청 작업을 해주고 있지만, 부식으로 바퀴를 잇는 축이 끊어지는 사례가 보고되는 등 근본적인 해결이 되지 않고 있습니다. </p>
+				
+				<!-- 10위 -->
+				<div class="ranking"> <strong>10위</strong> <span>깍두기 그랜저의 친구 깍두기 SUV</span> <span class="car-name">현대차 갤로퍼(65,819 대)</span> <img src="{% static 'carticle/car/image1-10.jpg' %}" alt="현대차갤로퍼"> </div>
+				<figcaption class="txt-caption">(출처 : 위키백과 / Chu)</figcaption>
+				<p class="article-txt">1991년 현대가 출시한 지프형 SUV 갤로퍼는 큰 인기를 끌었습니다. 출시된 그해, SUV 시장을 나눠갖고 있던 쌍용차 코란도, 아시아차 록스타보다 더 많은 판매량을 기록했죠. 비록 현대차가 독자 개발한 다른 SUV가 나오면서 단종됐지만, 보고되는 큰 문제 없이 여전히 6만5천 명이 타고 있네요.</p>
+				<div class="finish"></div>
+				<p class="article-txt">아깝게 순위에 들지 못한 차들도 많습니다. 기아차의 SUV 카니발이 64,445대로 뒤를 이었고, 그 밖에 무쏘(63,016대), 엑시언트(트라고) 트럭(60,789대), 카렌스(59,109대) 등이 여전히 15년 넘게 도로 위를 달리고 있습니다.</p>
+				<p class="article-txt">오래된 차일수록 결함에 취약할 수 있습니다. 운전자가 인식하지 못하는 사이에 부품 부식이나 마모가 일어나 안전을 위협할 수 있으니까요.&#60;내차결함포털&#62;에서 위의 순위에 든 차들을 검색해보면 정부가 해당 차량의 결함을 조사한 결과와 동호회 회원들이 보고한 결함 정보 등 여러 자료가 나옵니다. 위 차종들을 운행하시는 분들은 이 정보들을 꼼꼼히 챙겨보시고 혹시 모를 고장에 대비하시길 바랍니다. 모두 안전운전 하세요!<img class="emoji" src="{% static 'img/emoji/folded-hands.png' %}"></p>
+				
+				<div class="action"> <a class="btn btn-tips" href="#">목록보기</a></div>
+			</section>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -1,0 +1,503 @@
+{% extends "_base.html" %} 
+{% load static %} 
+{% block "additional_header" %}
+<link rel="stylesheet" href="{% static 'content.css' %}">
+<style>
+	/* ------ HEADER ------ */
+	.carticle .post-header {
+		text-align: center;
+		margin-bottom: 30px;
+		margin-top: 50px;
+	}
+	
+	.carticle h1 {
+		font-size: 180%;
+		margin: 10px 0 3px 0;
+	}
+	
+	.carticle .post-header span {
+		border-bottom: 1px solid #222;
+		padding-bottom: 2px;
+	}
+	
+	.carticle .post-header .byline {
+		font-size: 80%;
+		border-bottom: 0;
+		color: #2868CF;
+		letter-spacing: 0.3px;
+	}
+	/* ------AUTHOR ------ */
+	
+	.post-author {
+		text-align: left;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.sblank {
+		padding-bottom: 40px;
+	}
+	
+	.post-author .sticker {
+		width: 190px;
+		float: right;
+		margin: 0 0 15px 15px;
+	}
+	
+	.post-author2 {
+		text-align: center;
+		background: #FBFBFC;
+		border: 1px solid #E5E5E5;
+		padding: 21px 25px 20px;
+	}
+	
+	.post-author2 p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	
+	.post-author2 .sticker-center {
+		margin: 0 0 10px 0;
+	}
+	
+	.post-author p {
+		margin-top: 10px;
+		line-height: 150%;
+		color: #666;
+	}
+	/* ------ QUOTE ------ */
+	
+	.carticle blockquote {
+		text-align: center;
+		font-size: 90%;
+		font-weight: 600;
+		position: relative;
+		padding: 25px 14px 0;
+		line-height: 180%;
+		margin: 30px auto;
+	}
+	
+	.carticle blockquote:before {
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 15px;
+		height: 14px;
+		margin-left: -7px;
+		background: url({% static 'carticle/img_quote.png' %}) no-repeat;
+		content: '';
+	}
+	
+	.carticle .blockquote_type2 {
+		border-color: #acacac;
+		border-width: 0 0 0 2px;
+		border-style: solid;
+		padding: 1px 0 0 12px;
+		color: #666;
+		line-height: 18pt;
+		text-align: left;
+		margin: 30px 0;
+		font-size: 90%;
+	}
+	
+	mark {
+		background-color: #f1c40f;
+		color: black;
+	
+	}
+	/* ------ ARTICLE ------ */
+	
+	.carticle .article {
+		border: 0;
+	}
+	
+	.carticle section {
+		padding: 0 30px 50px 30px;
+		overflow: hidden;
+	}
+	
+	.carticle .article-link {
+		font-size: 100%;
+		color: #2868CF;
+		text-decoration: underline;
+	}
+	
+	.article .ranking {
+		text-align: center;
+		font-weight: 500;
+	}
+	
+	.article .ranking span {
+		display: block;
+		margin: 15px 0 5px 0;
+	}
+	
+	.article .ranking strong {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		padding: 5px 0;
+		display: inline-block;
+		font-size: 150%;
+		margin-top: 60px;
+	}
+	
+	.article .ranking .car-name {
+		font-size: 150%;
+		margin: 5px 0 30px 0;
+		font-weight: 600;
+	}
+	
+	.article .ranking .car-name-sm {
+		font-size: 120%;
+	}
+	
+	.article .recall-list {
+		font-size: 95%;
+		line-height: 180%;
+	}
+	
+	.article .notice {
+		font-size: 90%;
+	}
+	
+	.ac-tit {
+		font-size: 130%;
+		text-align: center;
+		font-weight: 600;
+		margin-top: 60px;
+	}
+	
+	.ac-tit img {
+		margin-top: 10px;
+	}
+	
+	.ac-list {
+		line-height: 180%;
+	}
+	
+	.mystery {
+		font-size: 90%;
+		line-height: 150%;
+	}
+	
+	.mystery .my-tit {
+		font-size: 120%;
+		text-align: center;
+		margin-bottom: 20px;
+		font-weight: 600;
+	}
+	
+	.mystery .my-tit span {
+		font-size: 85%;
+	}
+	
+	.my-list {
+		border: 1px dashed #bfbfbf;
+		padding: 20px;
+		background: #f4f4f4;
+	}
+	
+	.my-list li {
+		padding: 5px 0;
+	}
+	/* ------ BUTTON ------ */
+	
+	.carticle .btn:link,
+	.carticle .btn:visited {
+		display: inline-block;
+		padding: 10px 60px;
+		font-weight: 400;
+		text-decoration: none;
+		border-radius: 200px;
+		font-size: 110%;
+		letter-spacing: 0.02em;
+	}
+	
+	.carticle .btn-tips:link,
+	.carticle .btn-tips:visited {
+		border: 1px solid #0E8BE4;
+		color: #0E8BE4;
+	}
+	
+	.carticle .action {
+		text-align: center;
+	}
+	
+	/* ------ TABLE ------ */
+	
+	.tb-list {
+		border-spacing: 0;
+		color: #888;
+		border-bottom: 1px solid #ccc;
+	}
+	
+	.tb-list th {
+		border-top: 1px solid #ccc;
+		color: #888;
+		display: table-cell;
+		font-weight: 400;
+		text-align: left;
+		padding: 8px 13px;
+      
+}
+	.tb-list td {
+		border-top: 1px solid rgba(0,0,0,.06);
+		border-left: 0 none;
+		border-right: 0 none;
+		display: table-cell;
+		vertical-align: top;
+		padding: 8px 13px;
+}
+	
+	.tb-list td {
+    color: #266d90;
+    font-size: 95%;
+}
+	
+	.tb-list  td+td {
+    color: #bf2a5c;
+    font-size: 90%;
+}
+	
+	.tb-list td+td+td {
+    color: #666;
+}
+	
+	
+	
+	/* ------ PATTERN ------ */
+	
+	.start {
+		background: url({% static 'carticle/line-type2.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	.line {
+		background: url({% static 'carticle/line-type3.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 30px 0 10px 0;
+	}
+	
+	.line2 {
+		background: url({% static 'carticle/line-type4.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 30px;
+		margin: 30px 0 10px 0;
+	}
+	
+	.finish {
+		background: url({% static 'carticle/line-type.png' %}) no-repeat;
+		background-position: 50% 50%;
+		height: 18px;
+		margin: 50px 0 30px 0;
+	}
+	
+	@media only screen and (max-width:640px) {
+		.carticle section {
+			padding: 50px 0px;
+		}
+		.post-author {
+			text-align: center;
+		}
+		.post-author .sticker {
+			float: none;
+		}
+		.carticle .btn:link,
+		.carticle .btn:visited {
+			padding: 8px 30px;
+			font-size: 90%;
+		}
+		br {
+			display: none;
+		}
+		
+		.tb-list {font-size: 90%;}
+	}
+</style>
+{% endblock %} 
+{% block "body" %}
+<div class="carticle con-wrap">
+	<div class="container">
+		<div class="con-box">
+			<!-- POST HEADER -->
+			<div class="post-header"> <span>차쓸신잡6</span>
+				<h1>급발진 2탄 : 주차장 세차장 미스터리</h1>
+				<span class="byline">정재원&#183;2018.03.09 20:06</span>
+			</div>
+			<!-- AUTHOR -->
+			<div class="post-author2">
+				<img class="sticker" src="{% static 'carticle/sticon-05.png' %}">
+				<p> 5편에 이어 이번에도 뉴스타파에서<br> 몇 년째 차 분야 한길을 파고 있는 차파 정재원 선생입니다.
+					<img class="emoji" src="{% static 'img/emoji/sunglasses.png' %}"><br>
+					5편에서 가장 급발진 의심사고가 많았던 차종과 제작사를 알아봤는데요.<br> 
+					이번에는 각각의 사고 속으로 좀 더 깊숙이 들어가 보겠습니다.<br>
+					이름하여, 주차장 세차장 미스터리!<img class="emoji" src="{% static 'img/emoji/ghost.png' %}">
+ 				</p>
+			</div>
+			<!-- ARTICLE -->
+			<section class="article">
+				<div class="line2"></div>
+				<p class="article-txt">작년(2017년) 한 해만 해도 73건에 이르는 급발진 의심 사고가 신고됐습니다. 언론에 급발진 사고 차량의 블랙박스 영상이 보도된 것도 여러 번이었죠. 하지만 여전히 (공식적인) 급발진은 없습니다. 제작사들은 운전자가 브레이크를 밟아야 할 때 착각하고 가속페달을 밟아서 급발진이 일어난다고 주장합니다. 
+				</p>
+				<p class="article-txt">뉴스타파 &#60;내차결함포털&#62;제작진은 지난 18년간의 급발진 신고 내역을 보면서 실수로 일어났다기엔 이해할 수 없는 상황을 여럿 발견했습니다. 특히 <mark>전체 신고 건수 중 차가 서행하는 주차장에서 일어난 사고가 44.1%</mark>(전체 897건 중 396건)에 이르렀습니다. 일반 도로에서 일어난 사고(49%)와 맞먹는 수치죠.</p>
+				<p class="article-txt">주차장이라는 제한된 공간에서 슬쩍슬쩍 페달을 밟으며 움직이는 차가, 브레이크를 밟아야 할 때 액셀을 밟는 실수만으로 갑자기 폭주할 수 있을까요? 구체적인 신고내용을 보여드릴 테니 직접 판단해보시기 바랍니다.</p>
+				
+				<div class="blockquote_type2"> 
+							신고 내용들은 모두 내차결함포털에서 차종별로 검색해 볼 수 있습니다. <br>
+							신고 내용들은 사건 당시 운전자의 진술에 따라 국토부/한국소비자원에서 작성한 것입니다.
+					
+				</div>
+				
+				<div class="ac-tit">
+					①주차장 급발진 미스터리 3
+					<img src="{% static 'carticle/car/image6-1.png' %}" alt="주차장 급발진 미스터리 3">
+					<figcaption class="txt-caption">출처 : 나무위키</figcaption>
+				</div>
+				
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘브레이크가 말을 듣지 않아요'</p>
+						<span>2006년 5월 4일 / 기아자동차 뉴 스포티지</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 기아자동차가 제작한 뉴스포티지 차량을 2005년 5월경 구입하여 운행 중, 여의도 국민일보 사옥 뒤 이면도로 노상주차장에서 일렬 주차된 차량 사이에 주차하려는 순간 굉음과 함께 후진 후 앞으로 돌진하면서 반대편 노면에 주차 되어있던 아우디 차량의 옆면과 추돌함.</li>
+						<li>* 아우디 차량은 50cm 이상 옆으로 밀리며 화단 분리대에 부딪혀 파손됨. </li>
+						<li>* 당시 동료 직원이 주차를 돕기 위해 수신호를 해주고 있던 상황. 굉음과 함께 뒤로 후진 후 왼쪽 바퀴가 인도 쪽으로 올라갔다가 다시 앞으로 돌진하여 <mark>브레이크를 밟고 사이드 브레이크를 잠갔지만 차량이 통제되지 않아</mark> 키를 돌려 시동을 껐음.</li>
+						<li>* 기아차 측에서는 스캐너로 간단하게 확인한 후 엔진에 이상이 없다며 법적으로 승소한 일이 없다고만 함.</li>
+						<li>* 운전자는 급발진 현상 발생한 뉴스포티지에 대한 피해보상을 요구함. (주행거리 : 약 8,000Km)</li>
+					</ul>
+				</div>
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘CCTV에 찍힌 브레이크등’</p>
+						<span>2011년 1월 19일 / 기아자동차 쏘렌토 R</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 2010년 11월 구입한 쏘렌토R 차량 소유자로,</li>
+						<li>* 운전자의 아내가 2011. 1. 19. 18:13경 주차장 진입을 위해 가속페달에 발을 살짝 올려 놓는 순간 급가속되며 20~30미터를 전진하여 반대편 차선 가장 자리의 전봇대 및 주차된 차량과 충돌하는 사고가 발생함.</li>
+						<li>* 아파트 <mark>CCTV 확인한 결과 브레이크 후미등에 불이 들어온 상태</mark>로 15미터 이상을 급가속 한 것으로 판단되며 차량의 에어백은 작동하지 않은 상태임.</li>
+						<li>* 이 사건 차량은 현재 피신청인 측 정비사업소에 입고하여 수리는 하지 않고 있으며, 기아자동차 측은 차량에는 문제가 없다고 하나 신청인은 차량에 하자로 생각되어 차량의 하자 여부에 대한 확인을 요구함.</li>
+					</ul>
+				</div>
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘아버지와 아들이 함께 겪은 급발진’</p>
+						<span>2011년 6월 7일 / BMW 520i</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 2005. 4. 15. 한독모터스가 수입한 BMW 520i 차량을 운행하던 중</li>
+						<li>* 2011. 6. 7. 10:30경 제주시 도두동 소재 오일시장 내 주차장에서 주차를 위해 시속 5km정도로 전진하고 후진을 위해 브레이크를 밟던 중 갑자기 굉음이 발생하며 차량이 흔들리다가 앞에 있던 차량과 충돌하고 다른 앞 차와 충돌하는 사고가 발생. 같은 해 6월 9일 한독모터스 부산지점으로 차량을 입고함.</li>
+						<li>* 이 사고로 인해 앞차량의 범퍼가 파손되고 앞차량의 탑승자가 부상을 입어 2주 진단으로 치료를 받았으며, <mark>그 전에도 동일한 내용으로 사고가 발생한 것을 알게 됨.</mark> 동 차량 사고 전인 2010. 12. 28. 10:00경 신고자의 아들도 제주시 노형로터리에서 신호대기 중인 두 대의 차량을 발견하고 서서히 전진하다가 정차를 위해 브레이크를 밟자 굉음을 내면서 껑충껑충거리면서 전진하다가 정차 중인 두 대의 차량과 충돌하는 사고가 발생하여 수리비를 보상한 일이 있었음.</li>
+						<li>* 사고 당시 경찰에 신고가 되어 사고조사를 받고 피해자와 합의를 하여 상해사고는 처리가 되었으나 신청인은 동 차량이 급발진 현상으로 3회나 발생한 것을 고려할 때 (추가 사고 1회에 대한 상세한 사항은 신고 내용에 포함되지 않았음) 더 이상 차량 운행이 불가한 것으로 판단하여 한독모터스에게 이의를 제기. BMW 본사에서 운전자의 과실이라고 하며 보상을 거부하고 있는 상태임.</li>
+					</ul>
+				</div>
+				&nbsp;
+				<p class="article-txt">어떤가요? 위 사례들은 모두 주차를 위해 천천히 움직이던 차가 갑작스레 날뛴 상황입니다. 착각으로 가속페달을 밟아 일어난 사고라고 볼 수 있을까요?</p>
+				<p class="article-txt">주차장 급발진 사고뿐 아니라 세차장 급발진 사고도 특이합니다. 세차장이라는 단일 장소에서 일어난 급발진 사고가 전체 신고 건수의 4.5%(897건 중 40건)를 차지하고 있는데요. 먼저 구체적인 사례를 볼까요?</p>
+				
+				<div class="ac-tit">
+					②세차장 급발진 미스터리 3
+					<img src="{% static 'carticle/car/image6-2.png' %}" alt="세차장 급발진 미스터리 3">
+					<figcaption class="txt-caption">출처 : 나무위키</figcaption>
+				</div>
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘세차기를 망가뜨린 급발진'</p>
+						<span>2008년 11월 6일 / 기아자동차 오피러스</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 2006. 7. 10 피신청인이 제작한 오피러스(A)를 구입하여 운행 중 2008.11.6 08:42경 능동주유소(S-Oil)에서 주유 후 자동세차기를 통해 세차함.</li>
+						<li>* 기어를 중립에 놓고 진입하여 <mark>세차하던 중 중간지점에서 차량 급발진 현상</mark>이 나타나 세차요원이 세차기 작동을 멈춤. 세차 중 기어 변속을 하지 않았음에도 급발진 현상이 나타난 것으로 능동주유소에서는 세차기 파손에 대한 수리비를 청구하고 있음.</li>
+						<li>* 세차 중 급발진 현상으로 파손된 차량 및 파손된 세차기 수리비에 대한 피해보상을 요구함.</li>
+					</ul>
+				</div>
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘급발진으로 세차원을 충격'</p>
+						<span>2011년 6월 8일 / 기아자동차 카니발II</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 2002년식 카니발II 차량 소유자로 2011.6.8. 14시경 금천구 시흥1동 소재 주유소에서 세차 후 출구로 5m정도를 주행 후 세차원의 정지 신호에 따라 변속기어를 중립에 놓는 순간 갑자기 차량 소음이 발생하면서 급발진이 되어 세차원을 부딪침. 그 뒤 약 30m 전방의 주유소 철제 기둥을 들이받고 콘크리트 담장을 부딪힌 뒤 차량이 멈춤.</li>
+						<li>* 이에, 보험사와 기아자동차에 연락하였으나 기아차 측은 확인 결과 차량 변속레버는 중립(N)에 놓여있었고 기계적으로는 이상이 없다고 주장함에 따라 동 건 차량의 원인 규명과 함께 보상을 요구함.</li>
+					</ul>
+				</div>
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘10미터 전속력 질주'</p>
+						<span>2014년 10월 22일 / 현대자동차 그랜저 XG</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자가 2014년 10월 22일 그랜져XG(2006.12월식/21,000km) 차량으로 잠수교 북단 오른쪽의 남경주유에서 자동세차를 마친 뒤 파란불이 들어와 "N"에 있던 기어를 "D"에 놓는 순간 차량이 빠른 속도로 앞으로 튕겨 나갔음.</li>
+						<li>* 안전벨트를 매고 에어백이 전개되어 많이 다치지는 않았음.</li>
+						<li>* 차량이 폐차할 정도로 파손되었으나 제작사에서는 기계적 결함이 발견되지 않았다고 함.</li>
+						<li>* 운전자는 10m 내외되는 거리에서 그렇게 크게 충격을 받을 수 있는지 시험해 보고 싶다고 함.</li>
+						<li>* 100% 급발진인데 대기업에서 책임을 벗어나기 위해 운전자 과실이라고 하는 것은 있을 수 없는 일임.</li>
+						<li>*  운전자는 정부차원에서 국민의 권익보호를 위해 피해보상이 이루어져야 한다고 생각함.</li>
+					</ul>
+				</div>
+				&nbsp;
+				<p class="article-txt">이처럼 세차장에서 세차 직후 일어난 급발진 사고는 이미 여러 차례 보고된 바 있습니다. 지난 2016년 2월에는 세차를 하고 나온 차가 급발진해서 옆에 서 있던 사람을 쳤는데, 이 분이 결국 사망했던 안타까운 사고도 있었죠. 법원은 운전자에 대한 형사 재판에서 무죄를 선고했습니다. <b>“학술적으로 증명된 것은 아니지만 세차 중인 차량의 시동이 켜져 있을 경우 차량 내 공기와 연료, 수분이 뒤섞이면서 엔진 상태가 변화해 급발진 사고의 원인이 될 수 있다는 의견이 있다"</b>는 것이 무죄의 이유였습니다.</p>
+				
+				<p class="article-txt">하지만 세차 후 급발진을 겪은 운전자가 손해배상을 제기해 제작결함을 인정받은 케이스는 지금까지 단 한 번도 없었습니다. 위 사례들을 종합해보면, 운전자가 운전을 잘못한 책임을 물을 수도 없고, 제작사에 차를 잘못 만든 책임을 물을 수도 없는, 어중간한 영역에 급발진이 있음을 알게 됩니다.</p>
+				
+				<p class="article-txt">이밖에도 차량의 결함이 아니고서는 일어날 수 없는 차의 이상한 움직임을 생생하게 증언하는 신고 내용도 많습니다. </p>
+				
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘비만 오면 질주본능'</p>
+						<span>2004년 6월 29일 / 기아자동차 쏘렌토</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 기아자동차가 제작한 쏘렌토 차량을 2003.4.24일 구입함(A,디젤.주행거리: 2만km)</li>
+						<li>* <mark>비만 오면 컴퓨터 오작동, 굉음 발생,</mark> 급발진 현상이 7회 발생.</li>
+						<li>* 처음에는 주행 도중 튕겨 나가 기아차 측 이의제기 하니 과실을 인정하고, 최고기술진이 고쳤다고 한번 더 타라고 하여 탔으며, 또 다시 문제가 발생되면 교환을 해준다고 하였으나 결국 6월 24일 7회째 수리 의뢰함. 구두상으로 약속한 차량교환을 요구 하니 다시 완벽하게 수리를 해준다고 함.</li>
+						<li>* 사실조사 후 당초 약속대로 차량교환을 요구함.</li>
+					</ul>
+				</div>
+				
+				<div class="mystery">
+					<div class="line"></div>
+					<div class="my-tit">
+						<p>‘귀신들린 시동버튼'</p>
+						<span>2009년 10월 21일 / 현대자동차 NF 쏘나타</span>
+					</div>
+					<ul class="my-list">
+						<li>* 운전자는 2009. 5. 14. 현대차가 제작한 NF 소나타 차량을 인수하여 운행하던 중</li>
+						<li>* 2009. 10. 21 신청인이 서울에서 평택 통복동 보성아파트 사거리 신호대기 중 갑자기 급발진으로 브레이크를 밟고있는 상태에서 갑자기 RPM 상승하여 급히 시동버튼을 껐지만 시동버튼이 스스로 동작하여 같은 현상이 발생함.</li>
+						<li>*<mark>시동버튼을 껐는데도 자동적으로 세 번이나 시동이 켜지는 현상이 발생</mark>하였고, 당시 동승자가 옆에 있어 상당히 놀란 상태이며, 차량의 운행상태를 촬영하는 차량 블랙박스에도 저장되어 있음.</li>
+						<li>* 신호대기 중 급발진과 시동 꺼짐, 켜짐 현상이 반복되는 NF소나타 차량의 원인규명 및 보상을 요구함.</li>
+					</ul>
+				</div>
+				&nbsp;
+				<p class="article-txt">물론 이 사건들 모두가 급발진이라고 볼 수는 없을 겁니다. 국과수에서 교통사고분석과장으로 재직했던 대전보건대 과학수사과 박성지 교수는 “급발진 사고 10번 중 9번은 운전자의 착각으로 발생한 것"이라고 단언합니다.</p>
+				
+				<img src="{% static 'carticle/car/image6-3.png' %}" alt="대전보건대 박성지 교수">
+				<figcaption class="txt-caption">대전보건대 박성지 교수</figcaption>
+				&nbsp;
+				<p class="article-txt">하지만 박성지 교수를 비롯해 많은 전문가가 차량 결함이 아니라면 설명할 수 없다고 보는 사건도 많습니다. 앞선 사례처럼 차가 급발진하는 시점에 블랙박스에 분명히 브레이크등이 켜진 경우가 대표적이죠. 사고기록장치(EDR)에 운전자가 가속페달을 밟지 않았다고 나오는데 차량이 폭주한 케이스도 있습니다.</p>
+				
+				<div class="finish"></div>
+				<p class="article-txt">급발진 의심 사고는 파괴적입니다. 저는 작년 1월 보도한 <a href="https://www.youtube.com/watch?v=7N9qlQs_oHw&feature=youtu.be" target="_blank" class="article-link">&#60;'급발진 사고' 의혹... 현대기아차·국과수가 덮었나&#62;</a> 급발진 의심 사고 2건을 다뤘습니다. 두 사고에서 희생된 사람만 다섯 명입니다. 멈춰 있던 차가 폭주하면 충격시 속도가 높지 않으니 사람이 죽거나 다치는 경우가 많지 않겠지만, 이 방송에 나오는 사례처럼 달리는 차에서 급발진이 일어날 경우 매우 위험합니다. </p>
+				<p class="article-txt">하지만 안타깝게도 이런 결함은 대부분 재연되지 않습니다. 어느 순간, 복잡한 구조의 차량 일부가 문제를 일으켜서 출력이 폭증한 뒤 차는 다시 제자리로 돌아오죠. 정부는 급발진을 본격적으로 조사하기도 했지만 결국 재연불가 라는 이유로 <b>급발진은 없다</b>는 결론을 냈습니다. 피해를 본 사람들은 그 누구도 배상받지 못했습니다.</p>
+				<p class="article-txt">급발진에 대해 꾸준히 관심이 필요한 이유입니다.</p>
+				
+			
+				<div class="action"> <a class="btn btn-tips" href="#">목록보기</a></div>
+			</section>
+		</div>
+	</div>
+</div> 
+{% endblock %}

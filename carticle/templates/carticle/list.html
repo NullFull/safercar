@@ -157,7 +157,7 @@
 							<div class="post-thumb"><img src=""></div> 
 							<div class="post-txt">
 								<strong>{{ article.title }}</strong>
-								<p>{{ article.content }} …</p>
+								<p>{{ article.content | striptags | truncatechars:"120" }}</p>
 							</div> 
 							<span>친절한재원씨</span>
 							<span class="ico_dot"></span>

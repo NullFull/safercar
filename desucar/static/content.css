@@ -1,0 +1,49 @@
+	.con-wrap {
+		background: #F7F7F7;
+	}
+	
+	.con-box {
+		padding: 16px;
+		background: #FFFFFF;
+		-webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.10);
+		box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.10);
+	}
+	
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.con-wrap img.emoji { 
+		height: 25px;
+		vertical-align: bottom;
+	}
+	
+	.con-wrap img.emoji-small {
+		height: 20px;
+		vertical-align: middle;
+		padding-right: 5px;
+	}
+
+	.con-wrap section {
+			padding: 50px 30px;
+			overflow: hidden;
+	}
+
+	.con-wrap .txt-caption {
+		 text-align: center;
+		 margin: 5px 0 20px 0;
+		 font-size: 13px;
+		 line-height: 18px;
+		 color: #919191;
+	}
+
+	
+	.con-wrap .article-txt {
+		margin-bottom: 18px;
+		word-break: break-all;
+		line-height: 1.6;
+	}
+	
+
+	

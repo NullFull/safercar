@@ -1,24 +1,7 @@
-{% extends "_base.html" %}
-
-{% load static %}
-
-{% block "additional_header" %}
+{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
+<link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
-	
-	/* ------ COMMON ------ */
-	.about {background: #F7F7F7;}
-	
-	.about .cont-wrap {
-		padding: 16px;
-		background: #FFFFFF;
-		box-shadow: 0 1px 1px 0 rgba(0,0,0,0.10);
-	}
-	
-	.about img {
-		max-width: 100%;
-		height: auto;      
-	}
-	
+
 	/* ------ BASIC ------ */
     .about h1 {
         text-align: center;
@@ -37,22 +20,7 @@
 		margin-bottom: 15px;
 		line-height: 140%
 	}
-	
-	.about section {
-		padding: 50px 30px; 
-		overflow: hidden;
-	}
-	
-	.about img.emoji { 
-		height: 25px;
-		vertical-align: bottom;
-	}
-	
-	.about img.emoji-small {
-		height: 20px;
-		vertical-align: middle;
-		padding-right: 5px;
-	}
+
 	
 	/* ------ BUTTONS ------ */
 	.about .btn:link,
@@ -69,7 +37,7 @@
 	}
 	
 	.about .btn-tips:before{
-		content: url({% static 'img/icon/icon-tips.svg' %});
+		content: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-tips.svg);
 		display: inline-block;
 		vertical-align: middle;
     	margin-right: 17px;
@@ -90,7 +58,7 @@
     }
 	
 	.about .btn-donate:before {
-		content: url({% static 'img/icon/icon-donate.svg' %});
+		content: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-donate.svg);
 		display: inline-block;
 		vertical-align: middle;
     	margin-right: 17px;
@@ -146,17 +114,17 @@
 	}
 	
 	/* ------ SECTION1 ------ */
-	.about .section-type .type-list li .list-icon.bg01 {background: url({% static 'img/icon/icon-recall.svg' %}) no-repeat 5px 10px;}
+	.about .type .type-list li .list-icon.bg01 {background: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-recall.svg) no-repeat 5px 10px;}
 	
-	.about .section-type .type-list li .list-icon.bg02 {background: url({% static 'img/icon/icon-freerepair.svg' %}) no-repeat 5px 10px;}
+	.about .type .type-list li .list-icon.bg02 {background: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-freerepair.svg) no-repeat 5px 10px;}
 	
-	.about .section-type .type-list li .list-icon.bg03 {background: url({% static 'img/icon/icon-unofficial.svg' %}) no-repeat 5px 10px;}
+	.about .type .type-list li .list-icon.bg03 {background: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-unofficial.svg) no-repeat 5px 10px;}
 	
-	.about .section-type .type-list li .list-icon.bg04 {background: url({% static 'img/icon/icon-doubt.svg' %}) no-repeat 5px 10px;}
+	.about .type .type-list li .list-icon.bg04 {background: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-doubt.svg) no-repeat 5px 10px;}
 	
-	.about .section-type .type-list li .list-icon.bg05 {background: url({% static 'img/icon/icon-usa.svg' %}) no-repeat 5px 10px;}
+	.about .type .type-list li .list-icon.bg05 {background: url(//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/icon/icon-usa.svg) no-repeat 5px 10px;}
 	
-	.about .section-type .type-list li .list-icon {
+	.about .type .type-list li .list-icon {
 		float: left;
 		text-align: left;
 		padding-left: 81px;
@@ -165,35 +133,35 @@
 		margin-top: 15px;
 	}
 	
-	.about .section-type .type-list li .list-icon .txt-box strong {
+	.about .type .type-list li .list-icon .txt-box strong {
 		display: block;
 		margin-bottom: 5px;
 		color: #0088E7;
 	}
 	
-	.about .section-type .type-list li .list-icon .txt-box p {
+	.about .type .type-list li .list-icon .txt-box p {
 		      font-size: 90%;
 			  color: #666;
 			  line-height: 155%;
 	}
 	
 	/* ------ SECTION2 ------ */	
-	.about .section-detail .detail-list {
+	.about .detail .detail-list {
 		border-top: 1px solid #E5E5E5;
 		padding: 15px 0;
 	}
 	
-	.about .section-detail .detail-list .title {
+	.about .detail .detail-list .title {
 		font-weight: 600;
 		margin-bottom: 10px;
 	}
 	
-	.about .section-detail .detail-list .list-txt {
+	.about .detail .detail-list .list-txt {
 		line-height: 25px;
 		margin-bottom: 10px;
 	}
 	
-	.about .section-detail .detail-list li {
+	.about .detail .detail-list li {
 		list-style: disc;
 		font-size: 14px;
 		margin-left: 20px;
@@ -241,7 +209,7 @@
 	.about .txt-point li {
 		font-size: 90%; 
 		line-height: 150%;
-		background: url("{% static 'img/middot.png' %}") no-repeat left center;
+		background: url("//storage.googleapis.com/newstapa-apps.appspot.com/desucar/static/img/middot.png") no-repeat left center;
 		padding-left: 10px;
 		display: inline-block;
 	}
@@ -283,26 +251,21 @@
 	} 
 	
 </style>
-{% endblock %}
 
-{% block "body" %}
-<div class="about">
-    <div class="container">
-        <div class="cont-wrap">
+
+
+{% endblock %} {% block "body" %}
+<div class="con-wrap about">
+	<div class="container">
+		<div class="con-box">
 			<h1>내차결함포털 사용설명서</h1>
-			
 			<!-- AUTHOR -->
-			<div class="author">
-				<img class="sticker" src="{% static 'img/reporter-01.png' %}">
-				<p>안녕하세요. 내차결함포털을 기획한 뉴스타파 정재원 기자입니다.<br> 
-					누가 어떻게 &#60;내차결함포털&#62;을 만들었는지,<br>  
-					데이터는 어디서 왔고 어디까지 담겨있는지 궁금하셨죠?<img class="emoji" src="{% static 'img/emoji/eyes.png' %}"> 
-					<br> 
-					내차결함포털 사용설명서에서 차근차근 하나씩 궁금증을 
-					풀어드리겠습니다. <img class="emoji" src="{% static 'img/emoji/sneezing-face.png' %}"> 
-				</p>
+			<div class="author"><img class="sticker" src="{% static 'img/reporter-01.png' %}">
+				<p>안녕하세요. 내차결함포털을 기획한 뉴스타파 정재원 기자입니다.
+					<br> 누가 어떻게 &#60;내차결함포털&#62;을 만들었는지,
+					<br> 데이터는 어디서 왔고 어디까지 담겨있는지 궁금하셨죠?<img class="emoji" src="{% static 'img/emoji/eyes.png' %}">
+					<br> 내차결함포털 사용설명서에서 차근차근 하나씩 궁금증을 풀어드리겠습니다. <img class="emoji" src="{% static 'img/emoji/sneezing-face.png' %}"> </p>
 			</div>
-			
 			<div class="manual-list">
 				<p><img class="emoji-small" src="{% static 'img/emoji/note-pad.png' %}">설명서 목차</p>
 				<ul>
@@ -311,65 +274,54 @@
 					<li><a href="#">3. 왜 만들었나요?</a></li>
 					<li><a href="#">4. 누가 만들었나요?</a></li>
 					<li><a href="#">5. 어떻게 유지하나요?</a></li>
-
 				</ul>
 			</div>
-		
-			
 			<!-- SECTION1 -->
-			<section class="section-type">
+			<section class="type">
 				<h2>1. 결함 데이터의 종류 </h2>
 				<p class="copy">뉴스타파&#60;내차결함포털&#62;은 총 5가지 결함정보를 제공합니다.</p>
-				
 				<ul class="type-list">
 					<li>
 						<div class="list-icon bg01">
-							<div class="txt-box">
-								<strong>리콜</strong>
+							<div class="txt-box"> <strong>리콜</strong>
 								<p>리콜은 소비자의 ‘안전을 위협하는 중대한 결함’을 바로잡기 위해 시행합니다. 이곳에서는 국토교통부 자동차리콜센터와 환경부가 제공한 2000년 이후 공식 리콜 자료 전체를 보여드립니다.</p>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="list-icon bg02">
-							<div class="txt-box">
-								<strong>무상수리</strong>
+							<div class="txt-box"> <strong>무상수리</strong>
 								<p>무상수리는 리콜 대상(안전을 위협하는 중대한 결함)이 아닌 다양한 제작 결함을 바로잡기 위해 시행합니다. 이곳에서는 국토교통부 자동차리콜센터와 한국소비자원 소비자위해감시시스템에 등록된 2000년 이후 공식 무상수리 자료 전체를 보여드립니다.</p>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="list-icon bg03">
-							<div class="txt-box">
-								<strong>비공식 결함</strong>
+							<div class="txt-box"> <strong>비공식 결함</strong>
 								<p>공식적으로 알려진 리콜이나 무상수리 외에도 비공식적으로 처리되는 중요한 결함 정보들이 많습니다. 이곳에서는 자동차 관련 커뮤니티와 온라인 자동차 동호회에서 수집된 다양한 비공식 결함 정보를 알려드립니다.</p>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="list-icon bg04">
-							<div class="txt-box">
-								<strong>급발진 의심</strong>
+							<div class="txt-box"> <strong>급발진 의심</strong>
 								<p>2000년 이후 국토교통부와 한국소비자원에 신고된 급발진 의심 사고는 800여 건이 넘지만, 지금까지 제작사나 정부가 인정한 급발진 사고는 0건입니다. 이곳에서는 차종별로 신고된 급발진 의심 사고의 구체적인 내용을 알려드립니다.</p>
 							</div>
 						</div>
 					</li>
 					<li>
 						<div class="list-icon bg05">
-							<div class="txt-box">
-								<strong>미국 리콜</strong>
+							<div class="txt-box"> <strong>미국 리콜</strong>
 								<p>2000년 이후 미국 내 자동차 리콜 1만3천여건을 분석해 국내에서 판매 중인 차종의 결함 정보를 알려드립니다. 단, 일부 차종의 경우 국내외 판매 사양에 차이가 있어 미국 리콜 데이터가 국내에 적용되지 않을 수 있습니다.</p>
 							</div>
 						</div>
 					</li>
 				</ul>
 			</section>
-			
 			<!-- SECTION2 -->
-			<section class="section-detail">
+			<section class="detail">
 				<h2>2. 결함 데이터의 범위와 한계</h2>
 				<p class="copy">뉴스타파 &#60;내차결함포털&#62;에서 전해드리는 결함 데이터들을 조금 구체적으로 살펴볼까요?</p>
-				
 				<div class="detail-list">
 					<p class="title"><img class="emoji" src="{% static 'img/emoji/pointing.png' %}">결함정보를 제공하는 대상차종은 아래와 같습니다.</p>
 					<ul>
@@ -381,7 +333,7 @@
 				<div class="detail-list">
 					<p class="title">[최근 업데이트]</p>
 					<ul>
-						<li>리콜, 무상수리, 비공식 결함, 미국 리콜 데이터는 2000년 1월  1일 ~ 2018년 3월 31일 범위의 정보를 제공합니다. 정보는 주기적으로 업데이트 할 예정입니다. </li>
+						<li>리콜, 무상수리, 비공식 결함, 미국 리콜 데이터는 2000년 1월 1일 ~ 2018년 3월 31일 범위의 정보를 제공합니다. 정보는 주기적으로 업데이트 할 예정입니다. </li>
 						<li>급발진 신고 정보는 2000년 1월 1일 ~ 2017년 12월 31일 범위의 정보를 제공합니다. 정보는 주기적으로 업데이트 할 예정입니다.</li>
 					</ul>
 				</div>
@@ -394,44 +346,37 @@
 			</section>
 			
 			<!-- SECTION3 -->
-			<section class="section-makestory">
+			<section>
 				<h2>3. 왜 만들었나요?</h2>
-				<p class="copy">누가 어떻게 &#60;내차결함포털&#62;을 만들었을까? 한번쯤 궁금하셨죠?<br>긴 시간 제작에 공을 들인 만큼 &#60;내차결함포털&#62;에는 여러 사람의 열정과 시간과 이야기가 담겨 있습니다. 스크롤 압박이 좀 있겠지만 한번 들어주실래요?<img class="emoji" src="{% static 'img/emoji/hot-beverage.png' %}">
-				</p>
-				
+				<p class="copy">누가 어떻게 &#60;내차결함포털&#62;을 만들었을까? 한번쯤 궁금하셨죠?
+					<br>긴 시간 제작에 공을 들인 만큼 &#60;내차결함포털&#62;에는 여러 사람의 열정과 시간과 이야기가 담겨 있습니다. 스크롤 압박이 좀 있겠지만 한번 들어주실래요?<img class="emoji" src="{% static 'img/emoji/hot-beverage.png' %}"> </p>
 				<div class="article">
-			        <p class="article-txt"><strong>막을 수 있었던 ‘급발진 참사’</strong></p>
+					<p class="article-txt"><strong>막을 수 있었던 ‘급발진 참사’</strong></p>
 					<p class="article-txt">2016년 8월 부산에서 일어난 일입니다. 무더운 여름날 아이 둘과 엄마, 할머니, 할아버지가 차를 타고 바닷가로 출발했습니다. 하지만 불과 15분 후, 동네를 채 벗어나기도 전에 알 수 없는 이유로 차가 폭주했죠. 결국 운전자(할아버지)를 제외한 일가족 4명이 사망했습니다. 유례 없는 ‘급발진 참사’였습니다.</p>
-					<p class="article-txt">뉴스타파는 이 사건 유족들을 직접 취재한 첫 번째 언론사였습니다. 사고 기사는 많았지만 사고 당사자를 취재한 언론은 뉴스타파 말고는 없었습니다. 당시 경찰은 운전자 한무상 씨를 기소의견(과실치사)으로 검찰에 송치해놓은 상태였습니다. 가족들이 세상을 떠난 것도 힘든 상황에서 “운전 실수로 가족들을 죽게 했다"는 혐의까지 받게 된 최악의 상황이었죠.</p>
-					<img src="{% static 'img/about/makestory-01.jpg' %}" alt="부산 싼타페 사고 운전자 한무상 씨">
+					<p class="article-txt">뉴스타파는 이 사건 유족들을 직접 취재한 첫 번째 언론사였습니다. 사고 기사는 많았지만 사고 당사자를 취재한 언론은 뉴스타파 말고는 없었습니다. 당시 경찰은 운전자 한무상 씨를 기소의견(과실치사)으로 검찰에 송치해놓은 상태였습니다. 가족들이 세상을 떠난 것도 힘든 상황에서 “운전 실수로 가족들을 죽게 했다"는 혐의까지 받게 된 최악의 상황이었죠.</p> <img src="{% static 'img/about/makestory-01.jpg' %}" alt="부산 싼타페 사고 운전자 한무상 씨">
 					<figcaption class="txt-caption">부산 싼타페 사고 운전자 한무상 씨</figcaption>
-					<p class="article-txt">누가 보더라도 사고 당시 차량의 움직임은 이상했습니다. 저는 사고차를 입수해 여러 전문가들과 장기간 검증했고 차량 결함이 사고의 원인이 되었을 가능성을 발견했습니다. 사고 원인으로 지목된 부품(고압펌프) 결함이 “안전상 심각한 품질문제"라고 현대기아차 기술진들이 직접 적어놓은 문건도 찾아냈습니다.
-					<a href="#">(관련기사 : ‘급발진 사고’ 의혹... 현대기아차·국과수가 덮었나)</a></p>
+					<p class="article-txt">누가 보더라도 사고 당시 차량의 움직임은 이상했습니다. 저는 사고차를 입수해 여러 전문가들과 장기간 검증했고 차량 결함이 사고의 원인이 되었을 가능성을 발견했습니다. 사고 원인으로 지목된 부품(고압펌프) 결함이 “안전상 심각한 품질문제"라고 현대기아차 기술진들이 직접 적어놓은 문건도 찾아냈습니다. <a href="#">(관련기사 : ‘급발진 사고’ 의혹... 현대기아차·국과수가 덮었나)</a></p>
 					<p class="article-txt">방송 이후 검찰은 한 씨를 무혐의 처리했지만, 떠난 가족들은 돌아올 수 없었습니다. 그렇게 취재 기간 반 년을 함께한 유족들의 아픔은 저에게도 깊게 남았습니다. 제가 이번 &#60;내차결함포털&#62;프로젝트를 기획한 가장 큰 이유입니다.</p>
 					<p class="article-txt"><strong>중대 결함을 안고 달리는 차, 110만 대!</strong></p>
-					<p class="article-txt">사고차 운전자 한무상 씨는 정비를 꼼꼼히 받으며 차를 관리했지만, 고압펌프 결함에 관해서는 조치를 받지 못했습니다. 취재 과정에서 이렇게 ‘몰라서 차량 결함을 방치하다 사고가 나거나 갑작스러운 고장을 겪은’ 분들을 여럿 만났습니다. 왜 이런 일이 벌어질까요? <strong>제작사나 정부가 차주들에게 결함정보를 적극적으로 전달하지 않기 때문입니다.</strong></p>
-					<img src="{% static 'img/about/makestory-02.jpg' %}" alt="부산 싼타페 사고 구조 현장">
+					<p class="article-txt">사고차 운전자 한무상 씨는 정비를 꼼꼼히 받으며 차를 관리했지만, 고압펌프 결함에 관해서는 조치를 받지 못했습니다. 취재 과정에서 이렇게 ‘몰라서 차량 결함을 방치하다 사고가 나거나 갑작스러운 고장을 겪은’ 분들을 여럿 만났습니다. 왜 이런 일이 벌어질까요? <strong>제작사나 정부가 차주들에게 결함정보를 적극적으로 전달하지 않기 때문입니다.</strong></p> <img src="{% static 'img/about/makestory-02.jpg' %}" alt="부산 싼타페 사고 구조 현장">
 					<figcaption class="txt-caption">부산 싼타페 사고 운전자 한무상 씨</figcaption>
 					<p class="article-txt"><strong>2018년 1월 1일 현재, 중대 결함에 대해 실시하는 리콜을 받지 않은 차는 무려 110만 대</strong>에 이릅니다. (최근 7년간, 국토교통부 집계) 리콜대상 차량 다섯 대 중 한 대(19%)가 안전상 심각한 문제를 안고 그대로 달리는 셈입니다. 리콜보다 한 단계 낮은 결함 시정조치인 ‘무상수리'의 시정률은 이보다 훨씬 낮습니다.</p>
 					<p class="article-txt">우리가 다음이나 네이버에 드나들며 정보를 얻듯이, 차를 타고 다니는 모든 국민들이 자신이 타는 차의 결함을 빠짐없이 찾아볼 수 있는 결함정보 포털 사이트가 있다면 어떨까요? 제작사가 ‘아는 사람’만 와서 수리 받으라고 조용히 처리하는 무상수리 정보들도 싹싹 긁어모아 한 곳에서 전부 다 검색해볼 수 있게 한다면? 그렇게 하면 누구도 자기 차의 결함을 몰라서 사고를 당하는 일은 없을 거라고 생각했습니다. </p>
 					<p class="article-txt">이런 구상으로 작업을 시작한지 반 년이 흘러, &#60;내차결함포털&#62;이 세상에 모습을 드러냈습니다.</p>
 				</div>
 			</section>
-			
 			<!-- SECTION4 -->
 			<section class="section-people">
 				<h2>4. 누가 만들었나요?</h2>
-				<p class="copy">&#60;내차결함포털&#62;은 탐사보도 전문 독립언론 뉴스타파와<br>공익개발자그룹 널(Null)채움의 협업으로 만들어졌습니다.</p>
+				<p class="copy">&#60;내차결함포털&#62;은 탐사보도 전문 독립언론 뉴스타파와
+					<br>공익개발자그룹 널(Null)채움의 협업으로 만들어졌습니다.</p>
 				<p class="cooperation"><img src="{% static 'img/cooperation-logo.jpg' %}"></p>
 				<div class="article">
-			        <p class="article-txt">뉴스타파는 100% 시민 후원으로 운영하는 탐사보도 전문 언론사입니다. 어떤 권력도 뉴스타파에 영향력을 행사할 수 없고, 광고를 끊겠다는 대기업의 협박도 뉴스타파에는 통하지 않습니다. 4만여 명 시민들의 후원만으로 운영하기에, 항상 시민의 편에서 보도하고 권력을 감시할 수 있습니다.</p>
+					<p class="article-txt">뉴스타파는 100% 시민 후원으로 운영하는 탐사보도 전문 언론사입니다. 어떤 권력도 뉴스타파에 영향력을 행사할 수 없고, 광고를 끊겠다는 대기업의 협박도 뉴스타파에는 통하지 않습니다. 4만여 명 시민들의 후원만으로 운영하기에, 항상 시민의 편에서 보도하고 권력을 감시할 수 있습니다.</p>
 					<p class="article-txt">이번 &#60;내차결함포털&#62; 프로젝트는 반 년 가량의 긴 시간이 들어가고 결과물이 어떻게 나올지 모르는 불확실한 작업이었습니다. 만약 뉴스타파가 일반적인 상업 언론이었다면 시작조차 불가능했을 겁니다. 시간이 오래 걸리는 데다 거대 자동차 제작사들의 광고가 끊길지 모를 프로젝트에 아무도 긴 시간을 투자하려고 하지 않을 테니까요. 하지만 <strong>뉴스타파는 시민들의 든든한 지지기반이 있기 때문에 누구의 눈치도 보지 않고 여기까지 올 수 있었습니다.</strong></p>
-					<p class="article-txt"><img class="emoji" src="{% static 'img/emoji/crying-face.png' %}"> 물론 그 과정이 쉽지는 않았습니다. 넉넉지 않은 형편상 최소 인력으로 진행하느라 몇 달 간 집에 갈 틈이 없기도 했고요. 저뿐 아니라 데이터 정제를 맡은 변우리 리서처와 허현호 리서처, 디자인을 맡은 하난희 디자이너, 글 자료들을 깔끔하게 다듬어준 임종헌 웹PD, 홍보클립을 제작한 박종화 PD, 그리고 공익개발자그룹 ‘널(Null)채움'을 소개해주고 개발 실무를 책임진 김슬 개발팀장까지 많은 분들이 고생했습니다.</p>
-					<img src="{% static 'img/about/makestory-03.jpg' %}" alt="데이터팀 회의">
-					<figcaption class="txt-caption">데이터팀 회의</figcaption>
-					<img src="{% static 'img/about/makestory-04.jpg' %}" alt="영상제작팀 촬영">
-					<figcaption class="txt-caption">영상제작팀 촬영</figcaption>
-					<img src="{% static 'img/about/makestory-05.jpg' %}" alt="개발자모임 널채움 작업 모습">
+					<p class="article-txt"><img class="emoji" src="{% static 'img/emoji/crying-face.png' %}"> 물론 그 과정이 쉽지는 않았습니다. 넉넉지 않은 형편상 최소 인력으로 진행하느라 몇 달 간 집에 갈 틈이 없기도 했고요. 저뿐 아니라 데이터 정제를 맡은 변우리 리서처와 허현호 리서처, 디자인을 맡은 하난희 디자이너, 글 자료들을 깔끔하게 다듬어준 임종헌 웹PD, 홍보클립을 제작한 박종화 PD, 그리고 공익개발자그룹 ‘널(Null)채움'을 소개해주고 개발 실무를 책임진 김슬 개발팀장까지 많은 분들이 고생했습니다.</p> <img src="{% static 'img/about/makestory-03.jpg' %}" alt="데이터팀 회의">
+					<figcaption class="txt-caption">데이터팀 회의</figcaption> <img src="{% static 'img/about/makestory-04.jpg' %}" alt="영상제작팀 촬영">
+					<figcaption class="txt-caption">영상제작팀 촬영</figcaption> <img src="{% static 'img/about/makestory-05.jpg' %}" alt="개발자모임 널채움 작업 모습">
 					<figcaption class="txt-caption">개발자모임 널채움 작업 모습</figcaption>
 					<p class="article-txt">&#60;내차결함포털&#62;의 웹사이트 개발은 ‘널채움(Null채움)’이라는 이름의 공익개발자그룹이 맡았습니다. 널채움은 제각기 생업을 가지고 있는 평범한 시민들로 이뤄져 있는데요. 이분들이 &#60;내차결함포털&#62;의 취지에 공감해 퇴근 후 저녁과 주말 시간을 이용해 개발 작업에 참여했습니다. 그렇게 약 100일에 걸친 널채움 개발자들의 노고로 편리하고 깔끔한 웹페이지가 완성되었습니다.</p>
 					<p class="tit"><strong>[제작진]</strong></p>
@@ -446,7 +391,6 @@
 							<li><strong>영상 :</strong>박종화</li>
 						</ul>
 					</div>
-					
 					<p class="tit"><strong>[자문 및 도움주신 분들]</strong></p>
 					<div class="txt-point">
 						<ul>
@@ -457,31 +401,24 @@
 							<li>박진혁 서정대학교 자동차학과 교수</li>
 							<li>최영석 법안전융합연구소 결함조사 전문위원, (주)차지인 대표</li>
 							<li>(주)다나와 자동차</li>
-							
 						</ul>
 					</div>
 				</div>
 			</section>
-			
 			<!-- SECTION5 -->
 			<section class="section-donation">
 				<h2>5. 어떻게 유지하나요?</h2>
 				<p class="copy">&#60;내차결함포털&#62;은 <strong>시민의 참여</strong>로 완성됩니다.<img class="emoji" src="{% static 'img/emoji/clapping-hands.png' %}"></p>
 				<div class="article">
-			        <p class="article-txt">&#60;내차결함포털&#62;의 유지보수에서 가장 중요한 부분은 정보와 경험을 가진 시민들의 지속적인 참여입니다. 필수 데이터들은 뉴스타파 제작진들이 충실하게 모았지만, 저희가 놓친 부품 결함, 제작사가 개인들에게 몰래 해준 수리 정보 등은 더 많은 시민들의 참여로 채워질수록 더 큰 힘을 갖게될 것이기 때문입니다.</p>
+					<p class="article-txt">&#60;내차결함포털&#62;의 유지보수에서 가장 중요한 부분은 정보와 경험을 가진 시민들의 지속적인 참여입니다. 필수 데이터들은 뉴스타파 제작진들이 충실하게 모았지만, 저희가 놓친 부품 결함, 제작사가 개인들에게 몰래 해준 수리 정보 등은 더 많은 시민들의 참여로 채워질수록 더 큰 힘을 갖게될 것이기 때문입니다.</p>
 					<p class="article-txt">예컨대 저희가 제공하는 데이터 중에 자동차 동호회의 주소록 정보가 있습니다. 이런 동호회들 중 일부는 시간이 지남에 따라 문을 닫거나 다루는 차종을 바꾸는데, 수백 개에 이르는 동호회의 변동 사항을 제작진이 일일이 체크하기는 현실적으로 어렵습니다. 따라서 저희는&#60;내차결함포털&#62;에 참여해주시는 시민들이 발견하고 지적해주시는 오류들을 고쳐가며 좀 더 완결성 있는 데이터 모음을 만들어가고자 합니다</p>
-					<p class="article-txt">그리고 저희는 오픈과 함께 모든 소스코드를 공개할 예정입니다. 더 많은 시민 개발자들의 도움으로 &#60;내차결함포털&#62;이 더 멋지게 진화해가기를 바라기 때문입니다. 누구든 약간의 개발 지식만 있으면 &#60;내차결함포털&#62;을 사용하며 느낀 크고 작은 문제점들을 직접 수정할 수 있습니다.</p>
-					<img src="{% static 'img/about/makestory-06.jpg' %}" alt="뉴스타파 제작진">
+					<p class="article-txt">그리고 저희는 오픈과 함께 모든 소스코드를 공개할 예정입니다. 더 많은 시민 개발자들의 도움으로 &#60;내차결함포털&#62;이 더 멋지게 진화해가기를 바라기 때문입니다. 누구든 약간의 개발 지식만 있으면 &#60;내차결함포털&#62;을 사용하며 느낀 크고 작은 문제점들을 직접 수정할 수 있습니다.</p> <img src="{% static 'img/about/makestory-06.jpg' %}" alt="뉴스타파 제작진">
 					<figcaption class="txt-caption"></figcaption>
 					<p class="article-txt">또한 &#60;내차결함포털&#62;을 제작한 인력의 인건비와 제작에 쓰인 설비 등은 뉴스타파를 후원하는 시민들의 꾸준한 지원을 통해 마련됐습니다. 뉴스타파가 앞으로도 권력을 견제하는 다양한 프로젝트를 흔들림없이 진행하기 위해서는 시민 여러분의 후원과 관심이 필요합니다.</p>
 					<p class="article-txt">앞으로도 &#60;내차결함포털&#62;은 2,200만 자동차 운전자들의 안전을 지키는 시민들의 정보 플랫폼이 되겠습니다. 시민들이 모은 정보로 제작사들의 정보독점을 극복하겠다는 꿈이 이뤄질 수 있도록 많은 참여 부탁드립니다.</p>
-					<div class="action">
-						<a class="btn btn-tips" href="#">제보하기</a>
-						<a class="btn btn-donate" href="#">후원하기</a>
-					</div>
+					<div class="action"> <a class="btn btn-tips" href="#">제보하기</a> <a class="btn btn-donate" href="#">후원하기</a> </div>
 				</div>
 			</section>
 		</div>
-    </div>
-</div>
-{% endblock %}
+	</div>
+</div> {% endblock %}
