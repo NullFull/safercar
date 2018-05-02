@@ -24,9 +24,12 @@
             <div class="home">
                 <a href="/" title="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a>
             </div>
-            <div class="articles">
+           <!-- 
+			<div class="articles">
                 <a href="/articles">차쓸신잡</a>
             </div>
+			-->
+		
         </div>
     </div>
 
@@ -36,15 +39,14 @@
     </div>
 
     <div class="footer">
-        <div>
-            <a href="https://newstapa.org/" title="뉴스타파 사이트. 바로가기">
-                한국탐사저널리즘센터 뉴스타파
-            </a>
-            <span>X</span>
-            <a href="https://github.com/NullFull/safercar" title="Null채움. 바로가기">
-                Null채움
-            </a>
-        </div>
+			<ul>
+				<li><a href="https://newstapa.org/" title="뉴스타파 사이트. 바로가기" target=_blank><img src="{% static 'img/footer-1.jpg' %}"></a>
+				</li>
+				<li><a href="https://github.com/NullFull/safercar" title="Null채움. 바로가기"  target=_blank><img src="{% static 'img/footer-2.jpg' %}"></a>
+				</li>
+			</ul>
+       	<p>내차결함 프로젝트는 뉴스타파 후원회원의 회비로 제작되었습니다.</p>
+		<a class="mbtn mbtn-donate" href="https://newstapa.org/donate" title="뉴스타파 후원페이지. 바로가기" target=_blank>후원하기</a>
     </div>
 </div>
 </body>
