@@ -49,6 +49,7 @@ class OfficialDefect(models.Model):
     fix_start = models.CharField(max_length=40, null=True, blank=True)
     fix_end = models.CharField(max_length=40, null=True, blank=True)
     
+    @property
     def n_targets_str(self):
         if not self.n_targets and not self.n_targets_comment:
             return ''
