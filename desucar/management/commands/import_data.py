@@ -141,7 +141,7 @@ class Command(BaseCommand):
         for row in community_doc.get_worksheet(0).get_all_values()[1:]:
             print(row)
 
-            if row[5] in ['정보 없음']:
+            if row[5] in ['정보 없음', '정보없음']:
                 row[5] = None
             n_members = parse_int(row[5]) if row[5] else None
 
@@ -197,9 +197,6 @@ class Command(BaseCommand):
                 join_required=row[2] == '(가입해야 읽을 수 있음)',
             )
             print(url)
-
-            if 'bobaedream' in url:  # TODO: 목록에 보배드림 추가
-                continue
 
             community = [c for c in communities if c.url in url][0]
             defect.community = community
