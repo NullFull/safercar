@@ -4,45 +4,49 @@
 {% load humanize %}
 
 {% block "body" %}
-<div>
-    <div class="container">
-        {% include "components/searchbar.html" %}
-    </div>
-    <div class="info">
-        <div class="container">
-            <div class="image">
-                <img src="{% static 'cars/' %}{{ car.code }}-600x.png">
-            </div>
-            <div>
+<div class="car-detail">
+    <!--<div class="container">-->
+        <!--{% include "components/searchbar.html" %}-->
+    <!--</div>-->
+    <div class="lead">
+        <div class="container pane">
+            <div class="info">
                 <h2 class="maker">{{ car.maker.name }}</h2>
                 <h1 class="name">{{ car.name }}</h1>
-                <p class="date">{{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</p>
+                <div class="stat">
+                    <ul>
+                        <li>생산시기: {{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</li>
+                        <li>차량대수: </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="photo">
+                <img src="{% static 'cars/' %}{{ car.code }}-600x.png">
             </div>
         </div>
     </div>
-    <nav class="navbar">
-        <div class="container">
+
+    <div class="navbar">
+        <div class="container pane">
             <ul class="navbar-tabs">
                 {% for kind, value in defects.items %}
-                <li class="navbar-tab"
-                    id="{{ value.code }}">
-                    <div>{{ kind }}</div>
+                <li class="navbar-tab" data-tab-id="{{ value.code }}">
+                    <div class="kind">{{ kind }}</div>
                     <div class="value">{{ value.count }}</div>
                 </li>
                 {% endfor %}
-                <li class="navbar-tab" id="comment">
-                    <div>결함 신고</div>
-                    <div class="value disqus-comment-count" data-disqus-identifier="check-{{ car.code }}">0</div>
-                </li>
             </ul>
         </div>
-    </nav>
+    </div>
+
     <div class="content">
-        <div class="container">
-            {% for kind, value in defects.items %}
-            <div class="defects {{ value.code }}">
-                <div class="defects-desc">{{ value.desc|safe }} <span class="last-update">{{ value.last_update|date:"Y. n. j" }}</span></div>
-                {% if value.count == 0 %}
+        {% for kind, value in defects.items %}
+        <div class="container pane navbar-content" data-tab-id="{{ value.code }}">
+            <div class="desc">{{ value.desc|safe }}</div>
+        </div>
+
+        <div class="container defects pane navbar-content" data-tab-id="{{ value.code }}">
+            {% if value.count == 0 %}
                 <div>
                     <h3>
                         {% if kind == "급발진 의심" %}
@@ -52,120 +56,164 @@
                         {% endif %}
                     </h3>
                 </div>
-                {% endif %}
-                <ul>
-                {% for item in value.items %}
-                    <li>
-                        <div class="defect">
-                            {% if kind == "리콜" or kind == "무상수리" %}
-                                <h3>{{ item.part_name }}</h3>
-                                <div class="defect-info">
-                                    <dl>
-                                        <dt>생산시기</dt>
-                                        <dd>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</dd>
-                                        <dt>세부 차명</dt>
-                                        <dd>{{ item.car_detail }}</dd>
-                                        <dt>대상 차량 대수</dt>
-                                        <dd>{{ item.n_targets_str }}</dd>
-                                        <dt>조치시작</dt>
-                                        <dd>{{ item.fix_start }}</dd>
-                                        <dt>시정기간</dt>
-                                        <dd>{{ item.fix_end }}</dd>
-                                        <dt>연락처</dt>
-                                        <dd>{{ item.car.maker.contact }}</dd>
-                                        <dt>상세정보</dt>
-                                        <dd>
-                                            <div class="more">
-                                                <div class="more-toggle">
-                                                    <a>펼쳐보기</a>
-                                                </div>
-                                                <div class="more-content">
-                                                    <div>{{ item.solution | linebreaksbr }}</div>
-                                                </div>
-                                            </div>
-                                        </dd>
-                                        <dt>출처</dt>
-                                        <dd>{{ item.source_name }}</dd>
-                                    </dl>
-                                </div>
-                            {% elif kind == "비공식 결함" %}
-                                <h3>{{ item.part_name }} </h3>
-                                <div class="defect-info">
-                                    <dl>
-                                        <dt>분류</dt>
-                                        <dd>{{ item.status }}</dd>
-                                        <dt>게시글</dt>
-                                        <dd>
-                                            <ul>
-                                            {% for post in item.posts.all %}
-                                                <li>
-                                                    <h4>{{ post.defect.community.name }}
-                                                        <span class="url">{{ post.url }}</span>
-                                                        <span class="join-required">{% if post.join_required %}가입필요{% endif %}</span>
-                                                    </h4>
+            {% endif %}
 
-                                                    <div class="ellipsis">
-                                                        {{ post.content | linebreaksbr }}
-                                                        <div class="post-info">
-                                                            <p class="date">{{ post.posted_at|date:"Y. n. j" }}</p>
-                                                            <p>{{ post.author_name }}</p>
-                                                        </div>
-                                                        <div class="expand"></div>
-                                                    </div>
-                                                </li>
-                                            {% endfor %}
-                                            </ul>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            {% elif kind == "급발진 의심" %}
-                                <h3>{{ item.car_detail }}</h3>
-                                <div class="defect-info">
-                                    <dl>
-                                        <dd>
-                                            {{ item.detail | linebreaksbr }}
-                                            <div class="source">- {{ item.source }}</div>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            {% elif kind == "미국 리콜" %}
-                                <h3>{{ item.part_name }}</h3>
-                                <div class="defect-info">
-
-                                </div>
-                            {% endif %}
+            <ul>
+            {% for item in value.items %}
+                <li>
+                    {% if kind == "리콜" or kind == "무상수리" %}
+                    <div class="defect foldable closed">
+                        <div class="title">{{ item.part_name }}</div>
+                        <div class="close">
+                            {{ item.solution | truncatechars:"80" }}
                         </div>
-                    </li>
-                {% endfor %}
-                </ul>
-            </div>
+                        <div class="open">
+                            <table>
+                                <tr>
+                                    <th>생산시기</th>
+                                    <td>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</td>
+                                </tr>
+                                <tr>
+                                    <th>세부차명</th>
+                                    <td>{{ item.car_detail }}</td>
+                                </tr>
+                                <tr>
+                                    <th>차량대수</th>
+                                    <td>{{ item.n_targets_str }}</td>
+                                </tr>
+                                <tr>
+                                    <th>조치시작</th>
+                                    <td>{{ item.fix_start }}</td>
+                                </tr>
+                                <tr>
+                                    <th>시정기간</th>
+                                    <td>{{ item.fix_end }}</td>
+                                </tr>
+                                <tr>
+                                    <th>상세정보</th>
+                                    <td>{{ item.solution | linebreaksbr }}</td>
+                                </tr>
+                                <tr>
+                                    <th>출처</th>
+                                    <td>{{ item.source_name }}</td> <!-- TODO : link -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    {% elif kind == "비공식 결함" %}
+                    <div class="defect foldable closed">
+                        <div class="title">{{ item.part_name }}</div>
+                        <div class="close">
+
+                        </div>
+                        <div class="open">
+                            <div class="overview">
+                                <table>
+                                    <tr>
+                                        <th>결함 처리 유형</th>
+                                        <td>{{ item.status }}</td>
+                                    </tr>
+                                    {% if item.editor_comment %}
+                                    <tr>
+                                        <th>메모</th>
+                                        <td>{{ item.editor_comment }}</td>
+                                    </tr>
+                                    {% endif %}
+                                </table>
+                            </div>
+                            <div class="posts">
+                                <ul>
+                                {% for post in item.posts.all %}
+                                    <li class="post">
+                                        <div class="meta">{{ post.defect.community.name }} | {{ post.author_name }} | {{ post.posted_at|date:"Y. n. j" }}</div>
+                                        <div class="post-content">{{ post.content | linebreaksbr }}</div>
+                                    </li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% elif kind == "급발진 의심" %}
+                    <div class="defect">
+                        <div class="date">{{ item.accident_at }}</div>
+                        <div class="car">{{ item.car_detail }}</div>
+                        <div>{{ item.detail | linebreaksbr }}</div>
+                    </div>
+                    {% elif kind == "미국 리콜" %}
+                    <div class="defect foldable closed">
+                        <div class="title">{{ item.part_name }}</div>
+                        <div class="open">
+                            <table>
+                                <tr>
+                                    <th>부품명</th>
+                                    <td>{{ item.original_part_name }}</td>
+                                </tr>
+                                <tr>
+                                    <th>생산시기</th>
+                                    <td>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</td>
+                                </tr>
+                                <tr>
+                                    <th>세부차명</th>
+                                    <td>{{ item.car_detail }}</td>
+                                </tr>
+                                <tr>
+                                    <th>차량대수</th>
+                                    <td>{{ item.n_targets }} 대</td>
+                                </tr>
+                                <tr>
+                                    <th>조치시작</th>
+                                    <td>{{ item.fix_start }}</td>
+                                </tr>
+                                <tr>
+                                    <th>시정기간</th>
+                                    <td>{{ item.fix_end }}</td>
+                                </tr>
+                                <tr>
+                                    <th>결함상세</th>
+                                    <td>{{ item.original_defect | linebreaksbr }}</td>
+                                </tr>
+                                <tr>
+                                    <th>안전위험성</th>
+                                    <td>{{ item.original_summary | linebreaksbr }}</td>
+                                </tr>
+                                <tr>
+                                    <th>조치내용</th>
+                                    <td>{{ item.original_solution | linebreaksbr }}</td>
+                                </tr>
+                                <tr>
+                                    <th>출처</th>
+                                    <td>NHTSA</td> <!-- TODO : link -->
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                </li>
             {% endfor %}
-            <div class="defects comments">
-                <div class="defects-desc">해당 차량을 운행하며 직접 발견한 결함이나, 제작사(수입사)의 결함 처리 과정에서 겪은 문제를 올려주세요. 사용자들의 문제 제기가 집중되는 차종에 대해서는 뉴스타파 제작진이 직접 취재에 나서겠습니다.</div>
-                <div id="disqus_thread"></div>
-            </div>
+            </ul>
         </div>
-    </div>
+        {% endfor %}
+
     <div class="share">
         <div class="container">
 
         </div>
     </div>
-    <script>
-        var disqus_shortname = 'checkyourcar';
-        var disqus_identifier = 'check-{{ car.code }}';
-        var disqus_config = function () {
-            this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
-            this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        (function() {
-            var d = document, s = d.createElement('script');
-            s.src = '//checkyourcar.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', + new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>
-    <script src="//checkyourcar.disqus.com/embed.js" async></script>
+    <!--<script>-->
+        <!--var disqus_shortname = 'checkyourcar';-->
+        <!--var disqus_identifier = 'check-{{ car.code }}';-->
+        <!--var disqus_config = function () {-->
+            <!--this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable-->
+            <!--this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable-->
+        <!--};-->
+        <!--(function() {-->
+            <!--var d = document, s = d.createElement('script');-->
+            <!--s.src = '//checkyourcar.disqus.com/embed.js';-->
+            <!--s.setAttribute('data-timestamp', + new Date());-->
+            <!--(d.head || d.body).appendChild(s);-->
+        <!--})();-->
+    <!--</script>-->
+    <!--<script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>-->
+    <!--<script src="//checkyourcar.disqus.com/embed.js" async></script>-->
 </div>
 {% endblock %}

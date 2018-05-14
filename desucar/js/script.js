@@ -1,8 +1,6 @@
 const baseUrl = ''
 const searchbar = document.querySelector('.q')
 const autocomplete = document.querySelector('.autocomplete')
-const tabs = document.querySelector('.navbar-tabs')
-const defects = document.querySelectorAll('.defect')
 
 let q = ''
 let cars = []
@@ -102,45 +100,89 @@ if (searchbar) {
   })
 }
 
-const toggleTab = (tab) => {
-  if (tab.id !== currentTab.id) {
-    currentTab.classList.remove('active')
-    currentTab = tab
-    currentTab.classList.add('active')
-    renderDefects(currentTab.id)
-  }
-}
+// const toggleTab = (tab) => {
+//   if (tab.id !== currentTab.id) {
+//     currentTab.classList.remove('active')
+//     currentTab = tab
+//     currentTab.classList.add('active')
+//     renderDefects(currentTab.id)
+//   }
+// }
+//
+// const renderDefects = (id) => {
+//   defects.forEach(d => {
+//     d.style.display = d.className.includes(id) ? '' : 'none'
+//   })
+// }
+//
+// if (tabs) {
+//   currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
+//   if (currentTab) {
+//     currentTab.classList.add('active')
+//     renderDefects(currentTab.id)
+//   }
+//
+//   tabs.addEventListener('click', e => {
+//     if (e.target.nodeName === 'LI') {
+//       toggleTab(e.target)
+//     }
+//   })
+// }
 
-const renderDefects = (id) => {
-  defects.forEach(d => {
-    d.style.display = d.className.includes(id) ? '' : 'none'
-  })
-}
+// const more = document.querySelectorAll('.more')
+// more.forEach(function (el) {
+//   el.querySelector('.more-toggle').addEventListener('click', function (event) {
+//     el.classList.add('visible')
+//   })
+// })
+//
+//
+// const ellipsis = document.querySelectorAll('.ellipsis')
+// ellipsis.forEach(function (el) {
+//   el.querySelector('.expand').addEventListener('click', function (event) {
+//     el.classList.add('expanded')
+//   })
+// })
 
-if (tabs) {
-  currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
-  if (currentTab) {
-    currentTab.classList.add('active')
-    renderDefects(currentTab.id)
-  }
 
-  tabs.addEventListener('click', e => {
-    if (e.target.nodeName === 'LI') {
-      toggleTab(e.target)
-    }
-  })
-}
-
-const more = document.querySelectorAll('.more')
-more.forEach(function (el) {
-  el.querySelector('.more-toggle').addEventListener('click', function (event) {
-    el.classList.add('visible')
+const tabs = document.querySelectorAll('.navbar-tab');
+tabs.forEach(function (tab) {
+  tab.addEventListener('click', function() {
+    tabs.forEach(function (t) {
+      t.dataset.tabId === tab.dataset.tabId ?
+        t.classList.add('active') :
+        t.classList.remove('active')
+    });
+    document.querySelectorAll('.navbar-content').forEach(function (content) {
+      content.dataset.tabId === tab.dataset.tabId ?
+        content.classList.add('active') :
+        content.classList.remove('active')
+    })
   })
 })
 
-const ellipsis = document.querySelectorAll('.ellipsis')
-ellipsis.forEach(function (el) {
-  el.querySelector('.expand').addEventListener('click', function (event) {
-    el.classList.add('expanded')
-  })
+
+for (const tab of tabs) {
+  const nText = tab.querySelector('.value').textContent
+  const n = parseInt(nText)
+  if (n > 0) {
+    tabs.forEach(function (t) {
+        t.dataset.tabId === tab.dataset.tabId ?
+            t.classList.add('active') :
+            t.classList.remove('active')
+    });
+    document.querySelectorAll('.navbar-content').forEach(function (el) {
+      if (el.dataset.tabId === tab.dataset.tabId) {
+        el.classList.add('active')
+      }
+    })
+    break
+  }
+}
+
+
+document.querySelectorAll('.foldable').forEach(function (foldable) {
+    foldable.addEventListener('click', function() {
+        foldable.classList.toggle('closed')
+    })
 })

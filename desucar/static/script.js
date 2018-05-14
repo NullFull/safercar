@@ -1,8 +1,6 @@
 var baseUrl = '';
 var searchbar = document.querySelector('.q');
 var autocomplete = document.querySelector('.autocomplete');
-var tabs = document.querySelector('.navbar-tabs');
-var defects = document.querySelectorAll('.defect');
 
 var q = '';
 var cars = [];
@@ -96,47 +94,108 @@ if (searchbar) {
   });
 }
 
-var toggleTab = function toggleTab(tab) {
-  if (tab.id !== currentTab.id) {
-    currentTab.classList.remove('active');
-    currentTab = tab;
-    currentTab.classList.add('active');
-    renderDefects(currentTab.id);
-  }
-};
+// const toggleTab = (tab) => {
+//   if (tab.id !== currentTab.id) {
+//     currentTab.classList.remove('active')
+//     currentTab = tab
+//     currentTab.classList.add('active')
+//     renderDefects(currentTab.id)
+//   }
+// }
+//
+// const renderDefects = (id) => {
+//   defects.forEach(d => {
+//     d.style.display = d.className.includes(id) ? '' : 'none'
+//   })
+// }
+//
+// if (tabs) {
+//   currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
+//   if (currentTab) {
+//     currentTab.classList.add('active')
+//     renderDefects(currentTab.id)
+//   }
+//
+//   tabs.addEventListener('click', e => {
+//     if (e.target.nodeName === 'LI') {
+//       toggleTab(e.target)
+//     }
+//   })
+// }
 
-var renderDefects = function renderDefects(id) {
-  defects.forEach(function (d) {
-    d.style.display = d.className.includes(id) ? '' : 'none';
-  });
-};
+// const more = document.querySelectorAll('.more')
+// more.forEach(function (el) {
+//   el.querySelector('.more-toggle').addEventListener('click', function (event) {
+//     el.classList.add('visible')
+//   })
+// })
+//
+//
+// const ellipsis = document.querySelectorAll('.ellipsis')
+// ellipsis.forEach(function (el) {
+//   el.querySelector('.expand').addEventListener('click', function (event) {
+//     el.classList.add('expanded')
+//   })
+// })
 
-if (tabs) {
-  currentTab = Array.from(tabs.children).find(function (item) {
-    return !item.classList.contains('no-value');
-  });
-  if (currentTab) {
-    currentTab.classList.add('active');
-    renderDefects(currentTab.id);
-  }
 
-  tabs.addEventListener('click', function (e) {
-    if (e.target.nodeName === 'LI') {
-      toggleTab(e.target);
-    }
-  });
-}
-
-var more = document.querySelectorAll('.more');
-more.forEach(function (el) {
-  el.querySelector('.more-toggle').addEventListener('click', function (event) {
-    el.classList.add('visible');
+var tabs = document.querySelectorAll('.navbar-tab');
+tabs.forEach(function (tab) {
+  tab.addEventListener('click', function () {
+    tabs.forEach(function (t) {
+      t.dataset.tabId === tab.dataset.tabId ? t.classList.add('active') : t.classList.remove('active');
+    });
+    document.querySelectorAll('.navbar-content').forEach(function (content) {
+      content.dataset.tabId === tab.dataset.tabId ? content.classList.add('active') : content.classList.remove('active');
+    });
   });
 });
 
-var ellipsis = document.querySelectorAll('.ellipsis');
-ellipsis.forEach(function (el) {
-  el.querySelector('.expand').addEventListener('click', function (event) {
-    el.classList.add('expanded');
+var _loop = function _loop(tab) {
+  var nText = tab.querySelector('.value').textContent;
+  var n = parseInt(nText);
+  if (n > 0) {
+    tabs.forEach(function (t) {
+      t.dataset.tabId === tab.dataset.tabId ? t.classList.add('active') : t.classList.remove('active');
+    });
+    document.querySelectorAll('.navbar-content').forEach(function (el) {
+      if (el.dataset.tabId === tab.dataset.tabId) {
+        el.classList.add('active');
+      }
+    });
+    return 'break';
+  }
+};
+
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+  for (var _iterator = tabs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    var tab = _step.value;
+
+    var _ret = _loop(tab);
+
+    if (_ret === 'break') break;
+  }
+} catch (err) {
+  _didIteratorError = true;
+  _iteratorError = err;
+} finally {
+  try {
+    if (!_iteratorNormalCompletion && _iterator.return) {
+      _iterator.return();
+    }
+  } finally {
+    if (_didIteratorError) {
+      throw _iteratorError;
+    }
+  }
+}
+
+document.querySelectorAll('.foldable').forEach(function (foldable) {
+  foldable.addEventListener('click', function () {
+    foldable.classList.toggle('closed');
   });
 });
