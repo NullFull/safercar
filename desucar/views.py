@@ -42,6 +42,12 @@ def detail(request, maker_name, car_name, car_year, car_code):
             'desc': '2000년 이후 국토교통부와 한국소비자원에 신고된 급발진 의심 사고는 800여건이 넘지만, 지금까지 제작사나 정부가 인정한 급발진 사고는 0건입니다. 이곳에서는 차종별로 신고된 급발진 의심 사고의 구체적인 내용을 알려드립니다.',
             'last_update': date(2018, 3, 31),
             'items': list(car.sudden_accels.all()),
+        },
+        '미국 리콜': {
+            'code': 'nhtsa',
+            'desc': '2000년 이후 미국 내 자동차 리콜 1만3천여건을 분석해 국내에서 판매 중인 차종의 결함 정보를 알려드립니다. 단, 일부 차종의 경우 국내외 판매 사양에 차이가 있어 미국 리콜 데이터가 국내에 적용되지 않을 수 있습니다.',
+            'last_update': date(2018, 5, 25),
+            'items': list(car.nhtsa_defects.all()),
         }
     }
 

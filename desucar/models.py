@@ -86,6 +86,22 @@ class CommunityDefectPost(models.Model):
     join_required = models.BooleanField()
 
 
+class NHTSADefect(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='nhtsa_defects')
+    car_detail = models.TextField()
+    n_targets = models.IntegerField(null=True, blank=True)
+    make_start = models.DateField(null=True)
+    make_end = models.DateField(null=True)
+    make_date_comment = models.CharField(max_length=30, null=True, blank=True)
+    recall_code = models.CharField(max_length=20)
+    fix_start = models.CharField(max_length=40, null=True, blank=True)
+    part_name = models.CharField(max_length=20)
+    original_part_name = models.CharField(max_length=20)
+    original_defect = models.TextField()
+    original_summary = models.TextField()
+    original_solution = models.TextField()
+
+
 class SuddenAccelReport(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='sudden_accels')
     car_detail = models.CharField(max_length=40, null=True)
