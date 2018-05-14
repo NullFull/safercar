@@ -11,9 +11,10 @@ class Maker(models.Model):
 
 
 class Car(models.Model):
-    maker = models.ForeignKey(Maker, on_delete=models.CASCADE)
+    maker = models.ForeignKey(Maker, on_delete=models.CASCADE, related_name='cars')
     name = models.CharField(max_length=30)  # 5세대(HG) 그랜저, 3세대(JA) 올 뉴 모닝
     simple_name = models.CharField(max_length=20)  # 그랜저, 모닝
+    search_keywords = models.TextField(null=True, blank=True)
     code = models.CharField(max_length=10)
     make_start = models.DateField()
     make_end = models.DateField(null=True, blank=True)

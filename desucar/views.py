@@ -1,9 +1,11 @@
+import json
 from datetime import date
+from django.conf import settings
 from django.shortcuts import render
-from desucar.models import Car, Maker
 from django.http import HttpResponse
 from django.core import serializers
-from desucar.utils.normalize import normalize_name, is_year
+from desucar.models import Car, Maker
+from desucar.utils.search import Searcher
 
 
 def index(request):
@@ -55,39 +57,27 @@ def detail(request, maker_name, car_name, car_year, car_code):
 
 def search(request):
     q = request.GET.get('q').strip()
-    tokens = q.split()
 
-    query = Car.objects
-    for token in tokens:
-        if is_year(token):
-            year = int(token)
-            query = query.filter(make_start__lte=date(year + 1, 1, 1))
-            query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
-        else:
-            token = normalize_name(token)
-            query = query.filter(name__contains=token)
+    data = json.load(open(settings.SEARCH_MAP_PATH))
+    searcher = Searcher(data['makers'], data['cars'])
+
+    makers, cars, year = searcher.search(q)
 
     return render(request, 'search.html', dict(
         q=q,
-        cars=query.order_by('-id').all(),
+        cars=cars,
     ))
-    
+
 
 def suggest(request):
     q = request.GET.get('q').strip()
-    tokens = q.split()
 
-    query = Car.objects
-    for token in tokens:
-        if is_year(token):
-            year = int(token)
-            query = query.filter(make_start__lte=date(year + 1, 1, 1))
-            query = query.filter(make_end__gte=date(year - 1, 1, 1)) | query.filter(make_end__isnull=True)
-        else:
-            token = normalize_name(token)
-            query = query.filter(name__contains=token)
-    data = serializers.serialize('json', query.all())
-    return HttpResponse(data, content_type='application/json')
+    data = json.load(open(settings.SEARCH_MAP_PATH))
+    searcher = Searcher(data['makers'], data['cars'])
+
+    makers, cars, year = searcher.search(q)
+
+    return HttpResponse(serializers.serialize('json', cars), content_type='application/json')
 
 
 def about(request):

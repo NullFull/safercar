@@ -6,8 +6,10 @@ import hgtk
 import os
 from django.conf import settings
 
+
 similar_초성s = [
     {'ㅆ', 'ㅅ'},
+    {'ㅉ', 'ㅊ'},
 ]
 similar_중성s = [
     {'ㅔ', 'ㅐ'},
@@ -27,7 +29,6 @@ def get_contained_set(sets, item):
 
 def similar_names(name):
     # TODO : simplify
-    print(name)
 
     if not hgtk.checker.is_hangul(name):
         yield name
@@ -82,3 +83,5 @@ normalize_map = load_normalize_map()
 def normalize_name(s):
     return normalize_map.get(s, s)
 
+
+__all__ = [similar_names, normalize_name]

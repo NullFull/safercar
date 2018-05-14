@@ -69,12 +69,6 @@ class Command(BaseCommand):
             make_start = format_date(row[10])
             make_end = None if row[11] == 'on' else format_date(row[11])
 
-            if search_keywords:
-                search_keywords = search_keywords.split(',')
-
-            print(car_name)
-            print(search_keywords)
-
             maker, _ = Maker.objects.get_or_create(name=maker_name)
             maker.contact = contacts.get(row[5])
             maker.save()
@@ -83,6 +77,7 @@ class Command(BaseCommand):
                 maker=maker,
                 name=car_name,
                 simple_name=car_simple_name,
+                search_keywords=search_keywords,
                 code=car_code,
                 make_start=make_start,
                 make_end=make_end,
