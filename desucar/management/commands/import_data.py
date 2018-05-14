@@ -5,8 +5,11 @@ from django.conf import settings
 from django.core.management import BaseCommand
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from desucar.models import Car, Maker, OfficialDefect, CommunityDefect, Community, SuddenAccelReport, \
-    CommunityDefectPost
+from desucar.models import Car, Maker,\
+    OfficialDefect,\
+    Community, CommunityDefect, CommunityDefectPost,\
+    SuddenAccelReport, \
+    NHTSADefect
 
 
 def format_date(s):
@@ -47,6 +50,7 @@ class Command(BaseCommand):
         OfficialDefect.objects.all().delete()
         CommunityDefect.objects.all().delete()
         Community.objects.all().delete()
+        NHTSADefect.objects.all().delete()
 
         gs = gspread.authorize(cred)
         cars_doc = gs.open_by_key('1EMOGtpBJ9sW2RTZMjZ7UGQ7ODQgDjruyp-YsW5g1AgU')
@@ -218,3 +222,26 @@ class Command(BaseCommand):
                 source=row[11],
             )
             print(row[10])
+
+        sheet = defects_doc.worksheet('5_미국_리콜')
+        for row in sheet.get_all_values()[1:]:
+            car_code = row[2] + row[3] + row[4]
+            car = Car.objects.get(code=car_code)
+
+            NHTSADefect.objects.create(
+                car=car,
+                car_detail=row[1],
+                recall_code=row[9],
+                n_targets=parse_int(row[10]),
+                make_start=format_date(row[5]),
+                make_end=format_date(row[6]),
+                make_date_comment=row[7],
+                fix_start=format_date(row[8]),
+                part_name=row[12],
+                original_part_name=row[11],
+                original_defect=row[14],
+                original_summary=row[13],
+                original_solution=row[15]
+            )
+            print(row)
+            print(car)
