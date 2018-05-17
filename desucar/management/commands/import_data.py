@@ -32,6 +32,14 @@ def parse_int(s):
     return int(s)
 
 
+def parse_report_date(s):
+    if '.' in s:
+        ys, ms, ds = s.split('.')
+        return int(ys), int(ms), int(ds)
+    else:
+        return int(s), None, None
+
+
 not_exists = [
     'a400', 'w300', 'w500', 'ea00', 'vd00', 'be00', 'ev00',
     'fe00', 'yi01', 'ym01', 'zp00', 'vr00', 'yr00', 'bs00',
@@ -218,11 +226,16 @@ class Command(BaseCommand):
 
             car = Car.objects.get(code=car_code)
 
+            report_year, report_month, report_day = parse_report_date(row[9])
             SuddenAccelReport.objects.create(
                 car=car,
                 car_detail=row[5] + ' ' + row[6],
+                accident_at=format_date(row[7]),
                 detail=row[10],
                 source=row[11],
+                report_at_year=report_year,
+                report_at_month=report_month,
+                report_at_day=report_day,
             )
             print(row[10])
 

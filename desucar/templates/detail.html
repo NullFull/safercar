@@ -135,7 +135,7 @@
                     </div>
                     {% elif kind == "급발진 의심" %}
                     <div class="defect">
-                        <div class="date">{{ item.accident_at|date:"Y. n. j" }}</div>
+                        <div class="date">{{ item.report_at }} 신고됨</div>
                         <div class="car">{{ item.car_detail }}</div>
                         <div>{{ item.detail | linebreaksbr }}</div>
                         <div class="source">{{ item.source }}</div> <!-- TODO : link -->

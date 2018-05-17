@@ -110,6 +110,18 @@ class SuddenAccelReport(models.Model):
     buy_at = models.DateField(null=True, blank=True)
     make_at = models.DateField(null=True, blank=True)
     accident_at = models.DateField(null=True, blank=True)
+    report_at_year = models.IntegerField()
+    report_at_month = models.IntegerField(null=True, blank=True)
+    report_at_day = models.IntegerField(null=True, blank=True)
 
     detail = models.TextField()
     source = models.CharField(max_length=200)
+
+    @property
+    def report_at(self):
+        s = '{}년'.format(self.report_at_year)
+        if self.report_at_month:
+            s += ' {}월'.format(self.report_at_month)
+        if self.report_at_day:
+            s += ' {}일'.format(self.report_at_day)
+        return s
