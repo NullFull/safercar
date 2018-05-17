@@ -5,3 +5,4 @@ gspread==0.6.2
 gunicorn==19.7.1
 wand
 hgtk==0.1.1
+pygtrie==2.2
