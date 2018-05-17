@@ -5,8 +5,11 @@
 {% block "body" %}
 <div class="search">
     <div class="container">
-        <div>
-            {% include "components/searchbar.html" %}
+        <!--<div>-->
+            <!--{% include "components/searchbar.html" %}-->
+        <!--</div>-->
+        <div class="lead">
+            <h3><span class="q">'{{ q }}'</span>에 대한 검색결과 입니다.</h3>
         </div>
         <div class="results">
             {% if cars %}

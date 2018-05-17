@@ -2,6 +2,20 @@
 
 {% load static %}
 
+{% block "additional_header" %}
+<style>
+	.header .searchbar {
+		display: none;
+	}
+	.header .articles {
+		display: none;
+	}
+	.header .home {
+		margin: 0 auto;
+	}
+</style>
+{% endblock %}
+
 {% block "body" %}
 <div class="index" style="background-image: url({% static 'img/bg-driver.jpg' %})">
     <div class="lead">
@@ -15,6 +29,13 @@
     <div class="cta">
         <div class="container">
             {% include "components/searchbar.html" %}
+			<div class="search-examples">
+				<ul>
+					<li><a href="/search?q=스포티지+2012">2012 스포티지</a></li>
+					<li><a href="/search?q=코나+2018">2018 코나</a></li>
+					<li class="list"><a href="/search?q=S+클래스">벤츠 S 클래스</a></li>
+				</ul>
+			</div>
         </div>
     </div>
 	<div class="main-btn">

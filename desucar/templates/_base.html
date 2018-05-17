@@ -21,15 +21,17 @@
 <div>
     <div class="header">
         <div class="container">
-            <div class="home">
-                <a href="/" title="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a>
+            <div class="menu">
+                <div class="home">
+                    <a href="/" title="내차결함"><img src="{% static 'img/safecar-logo-01.svg' %}"></a>
+                </div>
+                {% include "components/searchbar.html" %}
             </div>
-           <!-- 
-			<div class="articles">
-                <a href="/articles">차쓸신잡</a>
+            <div>
+                <div class="articles">
+                    <a href="/articles">차쓸신잡</a>
+                </div>
             </div>
-			-->
-		
         </div>
     </div>
 

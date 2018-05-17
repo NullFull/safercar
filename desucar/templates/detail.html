@@ -135,9 +135,10 @@
                     </div>
                     {% elif kind == "급발진 의심" %}
                     <div class="defect">
-                        <div class="date">{{ item.accident_at }}</div>
+                        <div class="date">{{ item.accident_at|date:"Y. n. j" }}</div>
                         <div class="car">{{ item.car_detail }}</div>
                         <div>{{ item.detail | linebreaksbr }}</div>
+                        <div class="source">{{ item.source }}</div> <!-- TODO : link -->
                     </div>
                     {% elif kind == "미국 리콜" %}
                     <div class="defect foldable closed">
@@ -149,16 +150,16 @@
                                     <td>{{ item.original_part_name }}</td>
                                 </tr>
                                 <tr>
-                                    <th>생산시기</th>
-                                    <td>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</td>
-                                </tr>
-                                <tr>
                                     <th>세부차명</th>
                                     <td>{{ item.car_detail }}</td>
                                 </tr>
                                 <tr>
+                                    <th>생산시기</th>
+                                    <td>{{ item.make_start|date:"Y. n. j" }} - {{ item.make_end|date:"Y. n. j" }} {{ item.make_date_comment }}</td>
+                                </tr>
+                                <tr>
                                     <th>차량대수</th>
-                                    <td>{{ item.n_targets }} 대</td>
+                                    <td>{{ item.n_targets|intcomma }} 대</td>
                                 </tr>
                                 <tr>
                                     <th>조치시작</th>
@@ -193,10 +194,14 @@
             </ul>
         </div>
         {% endfor %}
-
-    <div class="share">
-        <div class="container">
-
+        <div class="floating">
+            <div class="container">
+                <ul>
+                    <li class="share">공유하기</li>
+                    <li class="report">결함신고</li>
+                    <li class="donate"><a href="https://newstapa.org/donate">후원하기</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <!--<script>-->
