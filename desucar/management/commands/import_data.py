@@ -202,6 +202,8 @@ class Command(BaseCommand):
             )
             print(url)
 
+            if row[1]:
+                defect.editor_comment = row[1]
             community = [c for c in communities if c.url in url][0]
             defect.community = community
             defect.save()

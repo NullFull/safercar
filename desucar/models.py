@@ -75,6 +75,7 @@ class CommunityDefect(models.Model):
     community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=20)
     part_name = models.CharField(max_length=30, null=True, blank=True)
+    editor_comment = models.TextField(null=True, blank=True)
 
 
 class CommunityDefectPost(models.Model):
