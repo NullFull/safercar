@@ -16,7 +16,7 @@
                 <div class="stat">
                     <ul>
                         <li>생산시기: {{ car.make_start|date:'Y.m' }} - {{ car.make_end|date:'Y.m' }}</li>
-                        <li>차량대수: </li>
+                        <li>차량대수: {{ car.n_registered|intcomma }} 대 <span class="comment">({{ car.simple_name }} 전체)</span></li>
                     </ul>
                 </div>
             </div>
