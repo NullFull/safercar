@@ -1,0 +1,298 @@
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block "additional_header" %}
+<link rel="stylesheet" href="{% static 'content.css' %}">
+<style>
+    /* ------ HEADER ------ */
+    .carticle .post-header {
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 50px;
+    }
+
+    .carticle h1 {
+        font-size: 180%;
+        margin: 10px 0 3px 0;
+    }
+
+    .carticle .post-header span {
+        border-bottom: 1px solid #222;
+        padding-bottom: 2px;
+    }
+
+    .carticle .post-header .byline {
+        font-size: 80%;
+        border-bottom: 0;
+        color: #2868CF;
+        letter-spacing: 0.3px;
+    }
+
+    /* ------AUTHOR ------ */
+
+    .post-author {
+        text-align: left;
+        background: #FBFBFC;
+        border: 1px solid #E5E5E5;
+        padding: 21px 25px 20px;
+        overflow: hidden;
+    }
+
+    .sblank {
+        /*padding-bottom: 40px;*/
+    }
+
+    .post-author .sticker {
+        width: 190px;
+        float: right;
+        margin: 0 0 15px 15px;
+    }
+
+    .post-author2 {
+        text-align: center;
+        background: #FBFBFC;
+        border: 1px solid #E5E5E5;
+        padding: 21px 25px 20px;
+    }
+
+    .post-author2 p {
+        margin-top: 10px;
+        line-height: 150%;
+        color: #666;
+    }
+
+    .post-author2 .sticker-center {
+        margin: 0 0 10px 0;
+    }
+
+    .post-author p {
+        margin-top: 10px;
+        line-height: 150%;
+        color: #666;
+    }
+
+
+    /* ------ QUOTE ------ */
+    .carticle blockquote {
+        text-align: center;
+        font-size: 90%;
+        font-weight: 600;
+        position: relative;
+        padding: 25px 14px 0;
+        line-height: 180%;
+        margin: 30px auto;
+    }
+
+    .carticle blockquote:before {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 15px;
+        height: 14px;
+        margin-left: -7px;
+        background: url({% static 'carticle/img_quote.png' %}) no-repeat;
+        content: '';
+    }
+
+    .carticle .blockquote_type2 {
+        border: 0 solid #acacac;
+        border-left-width: 2px;
+        padding: 1px 0 0 12px;
+        color: #666;
+        line-height: 18pt;
+        text-align: left;
+        margin: 30px 0;
+    }
+
+    mark {
+        background-color: #f1c40f;
+        color: black;
+    }
+
+
+    /* ------ ARTICLE ------ */
+
+    .carticle .article {
+        border: 0;
+    }
+
+    .carticle section {
+        padding: 0 30px 50px 30px;
+        overflow: hidden;
+    }
+
+    .carticle .article-link {
+        font-size: 100%;
+        color: #2868CF;
+        text-decoration: underline;
+    }
+
+    .article .ranking {
+        text-align: center;
+        font-weight: 500;
+    }
+
+    .article .ranking span {
+        display: block;
+        margin: 15px 0 5px 0;
+    }
+
+    .article .ranking strong {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        padding: 5px 0;
+        display: inline-block;
+        font-size: 150%;
+        margin-top: 60px;
+    }
+
+    .article .ranking .car-name {
+        font-size: 150%;
+        margin: 5px 0 30px 0;
+        font-weight: 600;
+    }
+
+    .article .ranking .car-name-sm {
+        font-size: 120%;
+    }
+
+    .article .recall-list {
+        font-size: 95%;
+        line-height: 180%;
+    }
+
+    .article .notice {
+        font-size: 90%;
+    }
+
+    .tb-list,
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        font-size: 90%;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .tb-list,
+    th,
+    td {
+        padding: 10px;
+    }
+
+    .tb-list a {
+        color: red;
+    }
+
+    .ac-tit {
+        font-size: 130%;
+        text-align: center;
+        font-weight: 600;
+        margin-top: 60px;
+    }
+
+    .ac-tit img {
+        margin-top: 10px;
+    }
+
+    .ac-list {
+        line-height: 180%;
+    }
+
+    .mystery {
+        font-size: 90%;
+        line-height: 150%;
+    }
+
+    .mystery .my-tit {
+        font-size: 120%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-weight: 600;
+    }
+
+    .mystery .my-tit span {
+        font-size: 85%;
+    }
+
+    .my-list {
+        border: 1px dashed #bfbfbf;
+        padding: 20px;
+        background: #f4f4f4;
+    }
+
+    .my-list li {
+        padding: 5px 0;
+    }
+    /* ------ BUTTON ------ */
+
+    .carticle .btn:link,
+    .carticle .btn:visited {
+        display: inline-block;
+        padding: 10px 60px;
+        font-weight: 400;
+        text-decoration: none;
+        border-radius: 200px;
+        font-size: 110%;
+        letter-spacing: 0.02em;
+    }
+
+    .carticle .btn-tips:link,
+    .carticle .btn-tips:visited {
+        border: 1px solid #0E8BE4;
+        color: #0E8BE4;
+    }
+
+    .carticle .action {
+        text-align: center;
+    }
+    /* ------ PATTERN ------ */
+
+    .start {
+        background: url({% static 'carticle/line-type2.png' %}) no-repeat;
+        background-position: 50% 50%;
+        height: 18px;
+        margin: 50px 0 30px 0;
+    }
+
+    .line {
+        background: url({% static 'carticle/line-type3.png' %}) no-repeat;
+        background-position: 50% 50%;
+        height: 18px;
+        margin: 30px 0 10px 0;
+    }
+
+    .finish {
+        background: url({% static 'carticle/line-type.png' %}) no-repeat;
+        background-position: 50% 50%;
+        height: 18px;
+        margin: 50px 0 30px 0;
+    }
+
+    @media only screen and (max-width:640px) {
+        .carticle section {
+            padding: 50px 0px;
+        }
+        .post-author {
+            text-align: center;
+        }
+        .post-author .sticker {
+            float: none;
+        }
+        .carticle .btn:link,
+        .carticle .btn:visited {
+            padding: 8px 30px;
+            font-size: 90%;
+        }
+        br {
+            display: none;
+        }
+    }
+</style>
+{% endblock %}

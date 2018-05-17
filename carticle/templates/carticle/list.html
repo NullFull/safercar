@@ -149,17 +149,14 @@
 		<div class="cont-wrap">
         	<div class="article-list">
 				<ul>
-				{% for article in articles %}
+				{% for article_id, article in articles %}
 					<li class="post-list">
 						<a href="/articles/{{ article.id }}">
-							<div class="post-thumb"><img src=""></div> 
+							<div class="post-thumb" style="background: url('{{ article.thumbnail }}'); background-size: cover"></div>
 							<div class="post-txt">
 								<strong>{{ article.title }}</strong>
-								<p>{{ article.content | striptags | truncatechars:"120" }}</p>
+								<p>{{ article.summary | striptags | truncatechars:"120" }}</p>
 							</div> 
-							<span>친절한재원씨</span>
-							<span class="ico_dot"></span>
-							<span>2018.03.26</span>
 						</a>
 					</li>
 				{% endfor %}
