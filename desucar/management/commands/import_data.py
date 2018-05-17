@@ -85,6 +85,7 @@ class Command(BaseCommand):
                 code=car_code,
                 make_start=make_start,
                 make_end=make_end,
+                n_registered=parse_int(row[2]),
             )
 
         defects_doc = gs.open_by_key('1NC7CVJUPZzSw7_hEANafQiCvvP331p8oNWLtCi3z53Y')

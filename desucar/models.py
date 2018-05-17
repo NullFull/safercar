@@ -18,6 +18,7 @@ class Car(models.Model):
     code = models.CharField(max_length=10)
     make_start = models.DateField()
     make_end = models.DateField(null=True, blank=True)
+    n_registered = models.IntegerField()
 
     @property
     def year(self):
