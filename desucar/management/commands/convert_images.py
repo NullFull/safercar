@@ -27,6 +27,11 @@ class Command(BaseCommand):
                 detail_img.transform(resize='600x')
                 detail_img.save(filename=detail_img_path)
 
+                ogp_img_path = path.join(TARGET_DIR, basename + '-750x.png')
+                ogp_img = img.clone()
+                ogp_img.transform(resize='750x')
+                ogp_img.save(filename=ogp_img_path)
+
                 list_img_path = path.join(TARGET_DIR, basename + '-200x.png')
                 list_img = img.clone()
                 list_img.transform(resize='200x')
