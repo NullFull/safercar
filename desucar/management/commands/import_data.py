@@ -167,7 +167,7 @@ class Command(BaseCommand):
             communities.append(community)
 
         sheet = defects_doc.worksheet('3_비공식_결함정보(동호회/제보/인터넷등)')
-        defects = {}
+        defects = defaultdict(list)
         for row in sheet.get_all_values()[1:]:
             car_code = row[2] + row[3] + row[4]
             if car_code in not_exists:  # TODO : fix code.
@@ -178,13 +178,12 @@ class Command(BaseCommand):
             part_name = row[7]
 
             defect = CommunityDefect.objects.create(
-                # community=community,
                 car=car,
                 part_name=part_name,
                 status=row[5],
             )
 
-            defects[key] = defect
+            defects[key].append(defect)
 
         print(len(defects.keys()))
 
@@ -193,17 +192,17 @@ class Command(BaseCommand):
             key = row[0]
             posted_at = format_date(row[3]) if row[3] else None
 
-            url = row[5].strip()
             if key not in defects:
                 continue  # TODO : remove
 
-            defect = defects[key]
+            url = row[5].strip()
+            community = [c for c in communities if c.url in url][0]
 
             print(row[6])
 
-            CommunityDefectPost.objects.create(
-                defect=defects[key],
+            post = CommunityDefectPost.objects.create(
                 url=url,
+                community=community,
                 content=row[6],
                 posted_at=posted_at,
                 author_name=row[4],
@@ -211,11 +210,12 @@ class Command(BaseCommand):
             )
             print(url)
 
-            if row[1]:
-                defect.editor_comment = row[1]
-            community = [c for c in communities if c.url in url][0]
-            defect.community = community
-            defect.save()
+            for defect in defects[key]:
+                if row[1]:
+                    defect.editor_comment = row[1]
+                    defect.save()
+
+                defect.posts.add(post)
 
         sheet = defects_doc.worksheet('4_급발진_의심신고(국토부/소비자원)')
         for row in sheet.get_all_values()[1:]:

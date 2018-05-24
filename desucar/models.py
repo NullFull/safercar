@@ -71,21 +71,31 @@ class Community(models.Model):
     is_active = models.BooleanField()
 
 
-class CommunityDefect(models.Model):
-    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='community_defects')
-    community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
-    status = models.CharField(max_length=20)
-    part_name = models.CharField(max_length=30, null=True, blank=True)
-    editor_comment = models.TextField(null=True, blank=True)
-
-
 class CommunityDefectPost(models.Model):
-    defect = models.ForeignKey(CommunityDefect, on_delete=models.CASCADE, related_name='posts')
+    # defect = models.ForeignKey(CommunityDefect, on_delete=models.CASCADE, related_name='posts')
     url = models.URLField()
+    community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)
     content = models.TextField(null=True, blank=True)
     posted_at = models.DateField(null=True, blank=True)
     author_name = models.CharField(max_length=30)
     join_required = models.BooleanField()
+
+
+class CommunityDefect(models.Model):
+    car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='community_defects')
+    # community = models.ForeignKey(Community, on_delete=models.CASCADE, null=True)  # TODO : move to post.
+    status = models.CharField(max_length=20)
+    part_name = models.CharField(max_length=30, null=True, blank=True)
+    editor_comment = models.TextField(null=True, blank=True)
+    posts = models.ManyToManyField(CommunityDefectPost)
+
+    @property
+    def status_desc(self):
+        return {
+            '사용자 문제제기': '제작사는 아직 제작 결함이라고 인정하지 않았지만, 많은 소비자들이 문제를 겪고 있어요!',
+            '제작사 무상수리': '제작사가 정부에 보고하지 않고 자체적으로 무상수리를 해줬어요. 모르면 수리를 받지 못할 수 있으니 제작사 혹은 가까운 정비소에 문의하세요.',
+            '개인 무상수리': '제작사는 제작 결함을 인정하지 않았지만, 일부 소비자들은 정비소에서 무상으로 수리를 받았어요.',
+        }.get(self.status, '')
 
 
 class NHTSADefect(models.Model):
