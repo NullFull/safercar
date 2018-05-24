@@ -2,6 +2,15 @@
 
 {% load static %}
 
+{% block "ogp" %}
+<meta property="og:title" content="{{ article.title }}" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org/articles/{{ article.id }}" />
+<meta property="og:image" content="{{ article.thumbnail }}" />
+<meta property="og:description" content="{{ article.summary }}" />
+{% endblock %}
+
 {% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
