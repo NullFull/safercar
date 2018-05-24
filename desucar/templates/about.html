@@ -1,4 +1,8 @@
-{% extends "_base.html" %} {% load static %} {% block "additional_header" %}
+{% extends "_base.html" %}
+
+{% load static %}
+
+{% block "additional_header" %}
 <link rel="stylesheet" href="{% static 'content.css' %}">
 <style>
 
@@ -251,17 +255,16 @@
 	} 
 	
 </style>
+{% endblock %}
 
-
-
-{% endblock %} {% block "body" %}
+{% block "body" %}
 <div class="con-wrap about">
 	<div class="container">
 		<div class="con-box">
 			<h1>내차결함포털 사용설명서</h1>
 			<!-- AUTHOR -->
-			<div class="author"><img class="sticker" src="{% static 'img/reporter-01.png' %}">
-				<p>안녕하세요. 내차결함포털을 기획한 뉴스타파 정재원 기자입니다.
+			<div class="author"><img class="sticker" src="{% static 'carticle/sticon-01.png' %}">
+				<p>안녕하세요. 내차결함포털 주인장 차파입니다.
 					<br> 누가 어떻게 &#60;내차결함포털&#62;을 만들었는지,
 					<br> 데이터는 어디서 왔고 어디까지 담겨있는지 궁금하셨죠?<img class="emoji" src="{% static 'img/emoji/eyes.png' %}">
 					<br> 내차결함포털 사용설명서에서 차근차근 하나씩 궁금증을 풀어드리겠습니다. <img class="emoji" src="{% static 'img/emoji/sneezing-face.png' %}"> </p>
@@ -269,15 +272,14 @@
 			<div class="manual-list">
 				<p><img class="emoji-small" src="{% static 'img/emoji/note-pad.png' %}">설명서 목차</p>
 				<ul>
-					<li><a href="#">1.결함 데이터의 종류</a></li>
-					<li><a href="#">2. 결함 데이터의 범위와 한계</a></li>
-					<li><a href="#">3. 왜 만들었나요?</a></li>
-					<li><a href="#">4. 누가 만들었나요?</a></li>
-					<li><a href="#">5. 어떻게 유지하나요?</a></li>
+					<li><a href="#section-1">1. 결함 데이터의 종류</a></li>
+					<li><a href="#section-2">2. 결함 데이터의 범위와 한계</a></li>
+					<li><a href="#section-3">3. 왜 만들었나요?</a></li>
+					<li><a href="#section-4">4. 누가 만들었나요?</a></li>
 				</ul>
 			</div>
 			<!-- SECTION1 -->
-			<section class="type">
+			<section id="section-1" class="type">
 				<h2>1. 결함 데이터의 종류 </h2>
 				<p class="copy">뉴스타파&#60;내차결함포털&#62;은 총 5가지 결함정보를 제공합니다.</p>
 				<ul class="type-list">
@@ -319,7 +321,7 @@
 				</ul>
 			</section>
 			<!-- SECTION2 -->
-			<section class="detail">
+			<section id="section-2" class="detail">
 				<h2>2. 결함 데이터의 범위와 한계</h2>
 				<p class="copy">뉴스타파 &#60;내차결함포털&#62;에서 전해드리는 결함 데이터들을 조금 구체적으로 살펴볼까요?</p>
 				<div class="detail-list">
@@ -346,15 +348,15 @@
 			</section>
 			
 			<!-- SECTION3 -->
-			<section>
+			<section id="section-3">
 				<h2>3. 왜 만들었나요?</h2>
 				<p class="copy">누가 어떻게 &#60;내차결함포털&#62;을 만들었을까? 한번쯤 궁금하셨죠?
 					<br>긴 시간 제작에 공을 들인 만큼 &#60;내차결함포털&#62;에는 여러 사람의 열정과 시간과 이야기가 담겨 있습니다. 스크롤 압박이 좀 있겠지만 한번 들어주실래요?<img class="emoji" src="{% static 'img/emoji/hot-beverage.png' %}"> </p>
 				<div class="article">
 					<p class="article-txt"><strong>막을 수 있었던 ‘급발진 참사’</strong></p>
 					<p class="article-txt">2016년 8월 부산에서 일어난 일입니다. 무더운 여름날 아이 둘과 엄마, 할머니, 할아버지가 차를 타고 바닷가로 출발했습니다. 하지만 불과 15분 후, 동네를 채 벗어나기도 전에 알 수 없는 이유로 차가 폭주했죠. 결국 운전자(할아버지)를 제외한 일가족 4명이 사망했습니다. 유례 없는 ‘급발진 참사’였습니다.</p>
-					<p class="article-txt">뉴스타파는 이 사건 유족들을 직접 취재한 첫 번째 언론사였습니다. 사고 기사는 많았지만 사고 당사자를 취재한 언론은 뉴스타파 말고는 없었습니다. 당시 경찰은 운전자 한무상 씨를 기소의견(과실치사)으로 검찰에 송치해놓은 상태였습니다. 가족들이 세상을 떠난 것도 힘든 상황에서 “운전 실수로 가족들을 죽게 했다"는 혐의까지 받게 된 최악의 상황이었죠.</p> <img src="{% static 'img/about/makestory-01.jpg' %}" alt="부산 싼타페 사고 운전자 한무상 씨">
-					<figcaption class="txt-caption">부산 싼타페 사고 운전자 한무상 씨</figcaption>
+					<p class="article-txt">뉴스타파는 이 사건 유족들을 직접 취재한 첫 번째 언론사였습니다. 사고 기사는 많았지만 사고 당사자를 취재한 언론은 뉴스타파 말고는 없었습니다. 당시 경찰은 운전자 한무상 씨를 기소의견(과실치사)으로 검찰에 송치해놓은 상태였습니다. 가족들이 세상을 떠난 것도 힘든 상황에서 “운전 실수로 가족들을 죽게 했다"는 혐의까지 받게 된 최악의 상황이었죠.</p> <img src="{% static 'img/about/makestory-01.jpg' %}" alt="부산 싼타페 사고 구조 현장">
+					<figcaption class="txt-caption">부산 싼타페 사고 구조 현장</figcaption>
 					<p class="article-txt">누가 보더라도 사고 당시 차량의 움직임은 이상했습니다. 저는 사고차를 입수해 여러 전문가들과 장기간 검증했고 차량 결함이 사고의 원인이 되었을 가능성을 발견했습니다. 사고 원인으로 지목된 부품(고압펌프) 결함이 “안전상 심각한 품질문제"라고 현대기아차 기술진들이 직접 적어놓은 문건도 찾아냈습니다. <a href="#">(관련기사 : ‘급발진 사고’ 의혹... 현대기아차·국과수가 덮었나)</a></p>
 					<p class="article-txt">방송 이후 검찰은 한 씨를 무혐의 처리했지만, 떠난 가족들은 돌아올 수 없었습니다. 그렇게 취재 기간 반 년을 함께한 유족들의 아픔은 저에게도 깊게 남았습니다. 제가 이번 &#60;내차결함포털&#62;프로젝트를 기획한 가장 큰 이유입니다.</p>
 					<p class="article-txt"><strong>중대 결함을 안고 달리는 차, 110만 대!</strong></p>
@@ -366,7 +368,7 @@
 				</div>
 			</section>
 			<!-- SECTION4 -->
-			<section class="section-people">
+			<section id="section-4" class="section-people">
 				<h2>4. 누가 만들었나요?</h2>
 				<p class="copy">&#60;내차결함포털&#62;은 탐사보도 전문 독립언론 뉴스타파와
 					<br>공익개발자그룹 널(Null)채움의 협업으로 만들어졌습니다.</p>
@@ -403,20 +405,6 @@
 							<li>(주)다나와 자동차</li>
 						</ul>
 					</div>
-				</div>
-			</section>
-			<!-- SECTION5 -->
-			<section class="section-donation">
-				<h2>5. 어떻게 유지하나요?</h2>
-				<p class="copy">&#60;내차결함포털&#62;은 <strong>시민의 참여</strong>로 완성됩니다.<img class="emoji" src="{% static 'img/emoji/clapping-hands.png' %}"></p>
-				<div class="article">
-					<p class="article-txt">&#60;내차결함포털&#62;의 유지보수에서 가장 중요한 부분은 정보와 경험을 가진 시민들의 지속적인 참여입니다. 필수 데이터들은 뉴스타파 제작진들이 충실하게 모았지만, 저희가 놓친 부품 결함, 제작사가 개인들에게 몰래 해준 수리 정보 등은 더 많은 시민들의 참여로 채워질수록 더 큰 힘을 갖게될 것이기 때문입니다.</p>
-					<p class="article-txt">예컨대 저희가 제공하는 데이터 중에 자동차 동호회의 주소록 정보가 있습니다. 이런 동호회들 중 일부는 시간이 지남에 따라 문을 닫거나 다루는 차종을 바꾸는데, 수백 개에 이르는 동호회의 변동 사항을 제작진이 일일이 체크하기는 현실적으로 어렵습니다. 따라서 저희는&#60;내차결함포털&#62;에 참여해주시는 시민들이 발견하고 지적해주시는 오류들을 고쳐가며 좀 더 완결성 있는 데이터 모음을 만들어가고자 합니다</p>
-					<p class="article-txt">그리고 저희는 오픈과 함께 모든 소스코드를 공개할 예정입니다. 더 많은 시민 개발자들의 도움으로 &#60;내차결함포털&#62;이 더 멋지게 진화해가기를 바라기 때문입니다. 누구든 약간의 개발 지식만 있으면 &#60;내차결함포털&#62;을 사용하며 느낀 크고 작은 문제점들을 직접 수정할 수 있습니다.</p> <img src="{% static 'img/about/makestory-06.jpg' %}" alt="뉴스타파 제작진">
-					<figcaption class="txt-caption"></figcaption>
-					<p class="article-txt">또한 &#60;내차결함포털&#62;을 제작한 인력의 인건비와 제작에 쓰인 설비 등은 뉴스타파를 후원하는 시민들의 꾸준한 지원을 통해 마련됐습니다. 뉴스타파가 앞으로도 권력을 견제하는 다양한 프로젝트를 흔들림없이 진행하기 위해서는 시민 여러분의 후원과 관심이 필요합니다.</p>
-					<p class="article-txt">앞으로도 &#60;내차결함포털&#62;은 2,200만 자동차 운전자들의 안전을 지키는 시민들의 정보 플랫폼이 되겠습니다. 시민들이 모은 정보로 제작사들의 정보독점을 극복하겠다는 꿈이 이뤄질 수 있도록 많은 참여 부탁드립니다.</p>
-					<div class="action"> <a class="btn btn-tips" href="https://jebo.newstapa.org/">제보하기</a> <a class="btn btn-donate" href="https://newstapa.org/donate">후원하기</a> </div>
 				</div>
 			</section>
 		</div>
