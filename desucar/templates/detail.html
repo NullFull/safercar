@@ -3,11 +3,17 @@
 {% load static %}
 {% load humanize %}
 
+{% block "ogp" %}
+<meta property="og:title" content="{{ car.name }} 결함정보" />
+<meta property="og:site_name" content="내 차 결함정보 포털" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://checkyourcar.newstapa.org{{ request.get_full_path }}" />
+<meta property="og:image" content="{% static 'ogp/' %}{{ car.code }}.png" />
+<meta property="og:description" content="{{ article.summary }}" />
+{% endblock %}
+
 {% block "body" %}
 <div class="car-detail">
-    <!--<div class="container">-->
-        <!--{% include "components/searchbar.html" %}-->
-    <!--</div>-->
     <div class="lead">
         <div class="container pane">
             <div class="info">
@@ -42,12 +48,17 @@
     <div class="content">
         {% for kind, value in defects.items %}
         <div class="container pane navbar-content" data-tab-id="{{ value.code }}">
-            <div class="desc">{{ value.desc|safe }}</div>
+            <div class="desc" style="background-image: url('{% static 'img/icon/icon-desc-' %}{{ value.code }}.svg')">
+                {{ value.desc|safe }}
+            </div>
         </div>
 
         <div class="container defects pane navbar-content" data-tab-id="{{ value.code }}">
             {% if value.count == 0 %}
-                <div>
+                <div class="empty">
+                    <div>
+                        <img src="{% static 'img/icon/icon-warn.svg' %}">
+                    </div>
                     <h3>
                         {% if kind == "급발진 의심" %}
                             아직까지 신고된 내역이 없습니다.
@@ -111,7 +122,11 @@
                                 <table>
                                     <tr>
                                         <th>결함 처리 유형</th>
-                                        <td>{{ item.status }}</td>
+                                        <td>
+                                            {{ item.status }}
+                                            <img class="btn-show-desc" src="{% static 'img/icon/icon-status-desc.svg' %}">
+                                            <div class="status-desc">{{ item.status_desc }}</div>
+                                        </td>
                                     </tr>
                                     {% if item.editor_comment %}
                                     <tr>
@@ -125,7 +140,10 @@
                                 <ul>
                                 {% for post in item.posts.all %}
                                     <li class="post">
-                                        <div class="meta">{{ post.defect.community.name }} | {{ post.author_name }} | {{ post.posted_at|date:"Y. n. j" }}</div>
+                                        <div class="meta">
+                                            {{ post.defect.community.name }} | {{ post.author_name }} | {{ post.posted_at|date:"Y. n. j" }}
+                                            | <a href="{{ post.url }}" class="link-original">원본글보기[{% if post.join_required %}가입필요{% endif %}]</a>
+                                        </div>
                                         <div class="post-content">{{ post.content | linebreaksbr }}</div>
                                     </li>
                                 {% endfor %}
@@ -134,11 +152,15 @@
                         </div>
                     </div>
                     {% elif kind == "급발진 의심" %}
-                    <div class="defect">
-                        <div class="date">{{ item.report_at }} 신고됨</div>
-                        <div class="car">{{ item.car_detail }}</div>
-                        <div>{{ item.detail | linebreaksbr }}</div>
-                        <div class="source">{{ item.source }}</div> <!-- TODO : link -->
+                    <div class="defect sudden-accel">
+                        <div class="reported"><img src="{% static 'img/icon/icon-reported.svg' %}" /><span class="date">{{ item.report_at }} 신고</span></div>
+                        <div class="body">
+                            <div class="car">{{ item.car_detail }}</div>
+                            <div class="detail">
+                                <div class="content">{{ item.detail | linebreaksbr }}</div>
+                                <div class="source">출처 : {{ item.source }}</div> <!-- TODO : link -->
+                            </div>
+                        </div>
                     </div>
                     {% elif kind == "미국 리콜" %}
                     <div class="defect foldable closed">
@@ -196,29 +218,53 @@
         {% endfor %}
         <div class="floating">
             <div class="container">
-                <ul>
-                    <li class="share">공유하기</li>
-                    <li class="report">결함신고</li>
-                    <li class="donate"><a href="https://newstapa.org/donate">후원하기</a></li>
-                </ul>
+                <div class="utils">
+                    <div class="util share">
+                        <img class="btn-close" src="{% static 'img/icon/icon-close.svg' %}" />
+                        <p>친구에게 공유해 주세요!</p>
+                        <ul class="sns_lst">
+                            <li>
+                                <a href="https://www.facebook.com/sharer/sharer.php?u=https://checkyourcar.newstapa.org/{{ request.get_full_path }}" target="_blank">
+                                    <img src="{% static 'img/icon/icon-fb.svg' %}" alt="페이스북 공유하기">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/home?status=https://checkyourcar.newstapa.org{{ request.get_full_path }}" target="_blank">
+                                    <img src="{% static 'img/icon/icon-tw.svg' %}" alt="트위터 공유하기">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="util report">
+                        <img class="btn-close" src="{% static 'img/icon/icon-close.svg' %}" />
+                        <div id="disqus_thread"></div>
+                    </div>
+                </div>
+                <div>
+                    <ul class="btns">
+                        <li class="btn share"><img src="{% static 'img/icon/icon-share.svg' %}">공유하기</li>
+                        <li class="btn report"><img src="{% static 'img/icon/icon-report.svg' %}">결함신고</li>
+                        <li class="btn donate"><img src="{% static 'img/icon/icon-donate.svg' %}"><a href="https://newstapa.org/donate">후원하기</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
-    <!--<script>-->
-        <!--var disqus_shortname = 'checkyourcar';-->
-        <!--var disqus_identifier = 'check-{{ car.code }}';-->
-        <!--var disqus_config = function () {-->
-            <!--this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable-->
-            <!--this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable-->
-        <!--};-->
-        <!--(function() {-->
-            <!--var d = document, s = d.createElement('script');-->
-            <!--s.src = '//checkyourcar.disqus.com/embed.js';-->
-            <!--s.setAttribute('data-timestamp', + new Date());-->
-            <!--(d.head || d.body).appendChild(s);-->
-        <!--})();-->
-    <!--</script>-->
-    <!--<script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>-->
-    <!--<script src="//checkyourcar.disqus.com/embed.js" async></script>-->
+    <script>
+        var disqus_shortname = 'checkyourcar';
+        var disqus_identifier = 'check-{{ car.code }}';
+        var disqus_config = function () {
+            this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = 'check-{{ car.code }}'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+            s.src = '//checkyourcar.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <script id="dsq-count-scr" src="//checkyourcar.disqus.com/count.js" async></script>
+    <script src="//checkyourcar.disqus.com/embed.js" async></script>
 </div>
 {% endblock %}

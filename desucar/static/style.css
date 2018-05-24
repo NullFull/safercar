@@ -67,7 +67,7 @@ a {
 }
 
 .header .home {
-	height: 30px;
+	height: 40px;
 }
 
 .header .home img {
@@ -148,7 +148,7 @@ a {
     width: 28px;
     height: 28px;
     margin: 0 auto;
-	background: url('/static/img/icon/icon-search.svg') no-repeat center center;
+	background: url('./img/icon/icon-search.svg') no-repeat center center;
 	background-size: 21px 21px;
 }
 
@@ -209,7 +209,7 @@ a {
 
 .ir {
 	display: block;
-	background: url('/static/img/bg-driver.jpg') no-repeat;
+	background: url('./img/bg-driver.jpg') no-repeat;
 	overflow: hidden;
 	font-size: 0;
 	line-height: 0;
@@ -254,8 +254,9 @@ a {
 
 .index .lead p {
 	text-align: center;
-	margin-bottom: 14px;
 	line-height: 1.5;
+	max-width: 570px;
+	margin: 0 auto 14px;
 }
 
 .index .lead .links {
@@ -413,7 +414,7 @@ a {
 
 @media only screen and (max-width:640px) {
 	.index {
-		height: 700px;
+		height: 750px;
 	}
 	.index .lead {
 		padding: 80px 0 0 0;
@@ -421,9 +422,6 @@ a {
 	.index .lead h2 {
 		font-size: 23px;
 		letter-spacing: 0.5px;
-	}
-	.index .lead p br {
-		display: none;
 	}
 	.index .searchbar input {
 		padding: 15px 12px;
@@ -457,6 +455,7 @@ a {
 
 .search {
 	padding-bottom: 100px;
+	background: #F7F7F7;
 }
 
 .search .lead {
@@ -474,6 +473,7 @@ a {
 }
 
 .search .results ul li {
+	background: white;
 	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 	margin-bottom: 16px;
 	vertical-align: top;
@@ -502,6 +502,47 @@ a {
 	font-size: 13px;
 }
 
+.search .results .empty {
+	padding: 50px 37px;
+	background: white;
+	text-align: center;
+	max-width: 700px;
+	margin: 0 auto;
+}
+
+.search .results .empty h3 {
+	margin-top: 22px;
+	color: #333333;
+	font-size: 20px;
+	font-weight: normal;
+}
+
+.search .results .empty .detail {
+	margin-top: 38px;
+	color: #888888;
+	font-size: 15px;
+	line-height: 22px;
+}
+
+.search .results .empty .box {
+	margin-top: 46px;
+	text-align: left;
+	background: #F7F7F7;
+	padding: 20px 28px;
+	font-size: 12px;
+	color: #999999;
+}
+
+.search .results .empty .box p {
+	margin-bottom: 3px;
+}
+
+/* mobile */
+@media only screen and (max-width:640px) {
+	.search .results .empty img {
+		width: 65px;
+	}
+}
 
 .car-detail {
 	background: #F7F7F7;
@@ -533,6 +574,7 @@ a {
 .car-detail .lead .info .name {
 	margin-top: 4px;
 	font-size: 25px;
+	line-height: 27px;
 	font-weight: normal;
 }
 
@@ -594,6 +636,10 @@ a {
 	color: #3E3E3E;
 	font-size: 14px;
 	line-height: 18px;
+	background-repeat: no-repeat;
+	padding-top: 3px;
+	padding-left: 55px;
+	min-height: 50px;
 }
 
 .car-detail .content .desc a {
@@ -605,24 +651,66 @@ a {
 	padding-top: 0;
 }
 
-.car-detail .defects .defect {
+.car-detail .defects .empty {
+	text-align: center;
+}
+
+.car-detail .defects .empty h3 {
+	margin-top: 10px;
+}
+
+/* mobile */
+@media only screen and (max-width:640px) {
+	.car-detail .defects .empty {
+		padding: 40px 0 20px;
+	}
+
+	.car-detail .defects .empty img {
+		width: 65px;
+	}
+
+	.car-detail .defects .empty h3 {
+		font-size: 16px;
+	}
+}
+
+/* desktop */
+@media only screen and (min-width:641px) {
+	.car-detail .defects .empty {
+		padding: 120px 0 120px;
+	}
+
+	.car-detail .defects .empty h3 {
+		font-size: 20px;
+	}
+}
+
+.car-detail .defects .defect.foldable {
 	padding-top: 24px;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #E5E5E5;
 }
 
-.car-detail .defects .defect.foldable {
-	cursor: pointer;
-}
-
-.car-detail .defects .defect .title {
+.car-detail .defects .defect.foldable .title {
 	font-size: 18px;
+	line-height: 22px;
 	color: #333333;
+	cursor: pointer;
+	padding: 8px 20px 8px 0;
 }
 
-.car-detail .defects .defect .close {
-	margin-top: 5px;
+.car-detail .defects .defect.foldable .close {
 	color: #666666;
+}
+
+.foldable .title {
+	background-repeat: no-repeat;
+	background-position: right 1px top 14px;
+	background-image: url('./img/icon/icon-foldable-opened.svg');
+}
+
+.foldable.closed .title {
+	background-image: url('./img/icon/icon-foldable-closed.svg');
 }
 
 .foldable .open {
@@ -641,7 +729,7 @@ a {
 	display: block;
 }
 
-.car-detail .defects .defect .open {
+.car-detail .defects .defect.foldable .open {
 	border-top: 1px solid #9A9A9A;
 	border-bottom: 1px solid #9A9A9A;
 }
@@ -675,6 +763,10 @@ a {
 	padding-bottom: 12px;
 }
 
+.car-detail .defects .defect .overview table img {
+	vertical-align: text-bottom;
+}
+
 .car-detail .defects .defect .overview table {
 	border: 1px solid #E5E5E5;
 	background: #FBFBFC;
@@ -689,6 +781,22 @@ a {
 .car-detail .defects .defect .overview table td {
 	color: #9A9A9A;
 	border: 0;
+	position: relative;
+}
+
+.car-detail .defects .defect .overview .status-desc {
+	display: none;
+	position: absolute;
+	left: 100px;
+	top: 0;
+	border: 1px solid #E5E5E5;
+	background: white;
+	padding: 8px;
+	max-width: 290px;
+}
+
+.car-detail .defects .defect .overview .status-desc.visible {
+	display: block;
 }
 
 .car-detail .defects .defect .posts .post .meta {
@@ -699,6 +807,7 @@ a {
 }
 
 .car-detail .defects .defect .posts .post .post-content {
+	background: url('./img/icon/icon-profile.svg') no-repeat top left;
 	margin-top: 12px;
 	margin-bottom: 12px;
 	color: #222222;
@@ -706,6 +815,105 @@ a {
 	line-height: 23px;
 	padding-left: 44px;
 }
+
+.car-detail .defects .defect.sudden-accel {
+	padding: 20px 0 20px 40px;
+	overflow: hidden;
+}
+
+.car-detail .defects .defect.sudden-accel .reported {
+	position: relative;
+	color: #333333;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.car-detail .defects .defect.sudden-accel .reported img {
+	margin-right: 6px;
+	position: absolute;
+	top: 0;
+	left: -40px;
+}
+
+.car-detail .defects .defect.sudden-accel .car {
+	color: #222222;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.car-detail .defects .defect.sudden-accel .detail {
+	margin-top: 5px;
+	color: #999999;
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.car-detail .defects .defect.sudden-accel .detail .source {
+	margin-top: 5px;
+}
+
+/* mobile */
+@media only screen and (max-width:640px) {
+	.car-detail .defects .defect.sudden-accel .car {
+		margin-top: 5px;
+	}
+}
+
+/* desktop */
+@media only screen and (min-width:641px) {
+	.car-detail .defects .defect.sudden-accel .reported {
+		float: left;
+	}
+	.car-detail .defects .defect.sudden-accel .body {
+		float: left;
+		margin-left: 16px;
+	}
+}
+
+.car-detail .utils.container {
+	margin-top: 20px;
+}
+
+.car-detail .utils .util {
+	position: relative;
+	background: white;
+	border: 1px solid #333333;
+	padding: 20px;
+}
+
+.car-detail .utils .util .btn-close {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+}
+
+.car-detail .utils .util.share {
+	text-align: center;
+}
+
+.car-detail .utils .util.share p {
+	font-weight: bold;
+	margin: 10px;
+}
+
+.car-detail .utils .util.share ul {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.car-detail .utils .util.share ul li {
+	margin: 10px;
+}
+
+.car-detail .utils .util.report {
+	padding-top: 60px;
+}
+
+
+
 
 /* mobile */
 @media only screen and (max-width:640px) {
@@ -742,14 +950,6 @@ a {
 	}
 }
 
-.floating {
-	overflow: hidden;
-}
-
-.floating .container {
-	padding: 0;
-}
-
 /* mobile */
 @media only screen and (max-width:640px) {
 	.floating {
@@ -772,11 +972,38 @@ a {
 	}
 }
 
-.floating ul {
+.floating .container {
+	position: relative;
+	padding: 0;
+}
+
+.floating .utils {
+	position: absolute;
+	z-index: 1000;
+	width: 100%;
+	bottom: 50px;
+}
+
+.floating .utils .util {
+	display: none;
+	/*height: 0;*/
+	transition: height 0.2s ease-out;
+}
+
+.floating .utils .util.active {
+	/*height: auto;*/
+	display: block;
+}
+
+.floating .utils .util.report {
+	height: 400px;
+}
+
+.floating ul.btns {
 	display: flex;
 }
 
-.floating ul li {
+.floating ul li.btn {
 	flex: 1 1;
 	height: 55px;
 	line-height: 55px;
@@ -784,17 +1011,22 @@ a {
 	cursor: pointer;
 }
 
-.floating .share {
+.floating ul li.btn img {
+	vertical-align: text-bottom;
+	margin-right: 5px;
+}
+
+.floating .btn.share {
 	color: white;
 	background: #333333;
 }
 
-.floating .report {
+.floating .btn.report {
 	color: white;
 	background: #636E89;
 }
 
-.floating .donate {
+.floating .btn.donate {
 	color: white;
 	background: #008CE9;
 }

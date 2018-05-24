@@ -5,7 +5,7 @@ const autocomplete = document.querySelector('.autocomplete')
 let q = ''
 let cars = []
 let carIndex = -1
-let currentTab
+
 
 if (searchbar) {
   const renderSuggestion = (i = null) => {
@@ -49,7 +49,6 @@ if (searchbar) {
       return new Promise((resolve, reject) => {
         const req = new XMLHttpRequest()
         req.open('GET', `${baseUrl}/suggest?q=${searchbar.value}`)
-        req.send()
         req.onreadystatechange = function () {
           if (req.readyState === XMLHttpRequest.DONE) {
             if (req.status === 200) {
@@ -58,6 +57,7 @@ if (searchbar) {
             }
           }
         }
+        req.send()
       })
     }
   }, 300)
@@ -100,49 +100,58 @@ if (searchbar) {
   })
 }
 
-// const toggleTab = (tab) => {
-//   if (tab.id !== currentTab.id) {
-//     currentTab.classList.remove('active')
-//     currentTab = tab
-//     currentTab.classList.add('active')
-//     renderDefects(currentTab.id)
-//   }
-// }
-//
-// const renderDefects = (id) => {
-//   defects.forEach(d => {
-//     d.style.display = d.className.includes(id) ? '' : 'none'
-//   })
-// }
-//
-// if (tabs) {
-//   currentTab = Array.from(tabs.children).find(item => !item.classList.contains('no-value'))
-//   if (currentTab) {
-//     currentTab.classList.add('active')
-//     renderDefects(currentTab.id)
-//   }
-//
-//   tabs.addEventListener('click', e => {
-//     if (e.target.nodeName === 'LI') {
-//       toggleTab(e.target)
-//     }
-//   })
-// }
 
-// const more = document.querySelectorAll('.more')
-// more.forEach(function (el) {
-//   el.querySelector('.more-toggle').addEventListener('click', function (event) {
-//     el.classList.add('visible')
-//   })
-// })
-//
-//
-// const ellipsis = document.querySelectorAll('.ellipsis')
-// ellipsis.forEach(function (el) {
-//   el.querySelector('.expand').addEventListener('click', function (event) {
-//     el.classList.add('expanded')
-//   })
-// })
+class Floating {
+  constructor(el) {
+    this.el = el
+    this.tabShare = this.el.querySelector('.utils .util.share')
+    this.tabReport = this.el.querySelector('.utils .util.report')
+    this.tabShare.querySelector('.btn-close').addEventListener('click', this.closeAll)
+    this.tabReport.querySelector('.btn-close').addEventListener('click', this.closeAll)
+    this.btnShare = this.el.querySelector('.btns .btn.share')
+    this.btnReport = this.el.querySelector('.btns .btn.report')
+    this.btnShare.addEventListener('click', this.showShare)
+    this.btnReport.addEventListener('click', this.showReport)
+  }
+
+  closeAll = () => {
+    this.tabShare.classList.remove('active')
+    this.tabReport.classList.remove('active')
+  }
+
+  showShare = () => {
+    if (this.tabShare.classList.contains('active')) {
+      this.tabShare.classList.remove('active')
+    } else {
+      this.tabReport.classList.remove('active')
+      this.tabShare.classList.add('active')
+    }
+  }
+
+  showReport = () => {
+    if (this.tabReport.classList.contains('active')) {
+      this.tabReport.classList.remove('active')
+    } else {
+      this.tabShare.classList.remove('active')
+      this.tabReport.classList.add('active')
+      window.dispatchEvent(new Event('resize'))
+    }
+  }
+}
+
+
+if (document.querySelector('.floating')) {
+  new Floating(document.querySelector('.floating'))
+}
+
+
+document.querySelectorAll('.overview').forEach(overview => {
+  const desc = overview.querySelector('.status-desc')
+  const btn = overview.querySelector('.btn-show-desc')
+  btn.addEventListener('click', () => {
+      desc.classList.toggle('visible')
+  })
+})
 
 
 const tabs = document.querySelectorAll('.navbar-tab');
@@ -182,7 +191,10 @@ for (const tab of tabs) {
 
 
 document.querySelectorAll('.foldable').forEach(function (foldable) {
-    foldable.addEventListener('click', function() {
-        foldable.classList.toggle('closed')
-    })
+  foldable.querySelector('.title').addEventListener('click', function() {
+    foldable.classList.toggle('closed')
+  })
 })
+
+
+
