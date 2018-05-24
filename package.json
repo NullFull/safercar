@@ -2,15 +2,19 @@
   "name": "safercar",
   "version": "1.0.0",
   "scripts": {
-    "build": "babel desucar/js -d desucar/static",
-    "watch": "babel desucar/js -w -d desucar/static"
+    "build": "webpack -p",
+    "watch": "webpack -w"
   },
   "repository": "git@github.com:NullFull/safercar.git",
   "author": "nullfull",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "eslint": "^4.18.2",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
