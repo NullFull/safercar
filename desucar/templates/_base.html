@@ -15,7 +15,13 @@
     {% block "additional_header" %}
     {% endblock %}
 	{% block "ogp" %}
-	{% endblock %}
+    <meta property="og:title" content="내차결함포털" />
+    <meta property="og:site_name" content="곳곳에 숨겨진 결함정보를 한 곳에 모아 보여드립니다." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://checkyourcar.newstapa.org{{ request.get_full_path }}" />
+    <meta property="og:image" content="{% static 'ogp.png' %}" />
+    <meta property="og:description" content="{{ article.summary }}" />
+    {% endblock %}
 </head>
 <body>
 <div>
