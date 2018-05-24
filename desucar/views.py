@@ -21,13 +21,13 @@ def detail(request, maker_name, car_name, car_year, car_code):
     defects = {
         '리콜': {
             'code': 'recall',
-            'desc': '리콜은 소비자의 안전을 위협하는 중대한 결함을 바로잡기 위해 시행합니다. 이곳에서는 <a href="www.car.go.kr">국토교통부 자동차리콜센터</a>와 환경부가 제공한 2000년 이후 리콜 자료 전체를 보여드립니다.',
+            'desc': '리콜은 소비자의 안전을 위협하는 중대한 결함을 바로잡기 위해 시행합니다. 이곳에서는 <a href="http://www.car.go.kr">국토교통부 자동차리콜센터</a>와 환경부가 제공한 2000년 이후 리콜 자료 전체를 보여드립니다.',
             'last_update': date(2018, 3, 31),
             'items': [x for x in official_defects if x.kind == 'RC'],
         },
         '무상수리': {
             'code': 'freefix',
-            'desc': '무상수리는 리콜 대상이 아닌 다양한 제작 결함을 바로잡기 위해 시행합니다. 이곳에서는 <a href="www.car.go.kr">국토교통부 자동차리콜센터</a>와 <a href="www.ciss.go.kr">한국소비자원 소비자위해감시시스템</a>에 등록된 2000년 이후 무상수리 자료 전체를 보여드립니다.',
+            'desc': '무상수리는 리콜 대상이 아닌 다양한 제작 결함을 바로잡기 위해 시행합니다. 이곳에서는 <a href="http://www.car.go.kr">국토교통부 자동차리콜센터</a>와 <a href="http://www.ciss.go.kr">한국소비자원 소비자위해감시시스템</a>에 등록된 2000년 이후 무상수리 자료 전체를 보여드립니다.',
             'last_update': date(2018, 3, 31),
             'items': [x for x in official_defects if x.kind == 'FF'],
         },
