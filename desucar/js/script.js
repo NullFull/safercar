@@ -1,3 +1,6 @@
+import 'babel-polyfill';
+
+
 const baseUrl = ''
 const searchbar = document.querySelector('.q')
 const autocomplete = document.querySelector('.autocomplete')
