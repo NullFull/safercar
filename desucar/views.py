@@ -4,10 +4,13 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
+from django.views.decorators.cache import cache_page
+
 from desucar.models import Car, Maker
 from desucar.utils.search import Searcher
 
 
+@cache_page(30)
 def index(request):
     return render(request, 'index.html', dict(
         makers=Maker.objects.all(),
@@ -15,6 +18,7 @@ def index(request):
     ))
 
 
+@cache_page(30)
 def detail(request, maker_name, car_name, car_year, car_code):
     car = Car.objects.get(code=car_code)
     official_defects = car.official_defects.all()
@@ -61,6 +65,7 @@ def detail(request, maker_name, car_name, car_year, car_code):
     ))
 
 
+@cache_page(30)
 def search(request):
     q = request.GET.get('q').strip()
 
@@ -75,6 +80,7 @@ def search(request):
     ))
 
 
+@cache_page(30)
 def suggest(request):
     q = request.GET.get('q').strip()
 
@@ -86,5 +92,6 @@ def suggest(request):
     return HttpResponse(serializers.serialize('json', cars), content_type='application/json')
 
 
+@cache_page(30)
 def about(request):
     return render(request, 'about.html')
