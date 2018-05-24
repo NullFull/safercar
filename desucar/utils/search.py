@@ -78,13 +78,12 @@ class Searcher(object):
 
             try:
                 for key in self._cars_trie.keys(token):
-                    print(key)
                     new_ids = self._cars_trie.get(key)
-                    if len(car_ids) < 1:
-                        car_ids = car_ids.union(new_ids)
+                    commons = car_ids.intersection(new_ids)
+                    if len(commons) > 0:
+                        car_ids = commons
                     else:
-                        car_ids = car_ids.intersection(new_ids)
-                    print(new_ids)
+                        car_ids = car_ids.union(new_ids)
             except KeyError as e:
                 pass
 
