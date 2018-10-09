@@ -1,6 +1,7 @@
 google-api-python-client==1.6.5
 requests==2.18.4
-Django==2.0
+Django==2.1.2
+django-bmemcached==0.2.3
 gspread==0.6.2
 gunicorn==19.7.1
 wand
