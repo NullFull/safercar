@@ -3,8 +3,7 @@
 ## 논의
 
 슬랙 https://nullfull.slack.com 안 #kh-power 채널에서 개발 논의가 진행중입니다.
-
-https://nullfull-slack-invite.herokuapp.com/ 에서 셀프 초대가 가능합니다.
+https://nullfull.kr/ 에서 셀프 초대가 가능합니다.
 
 ## log
 
