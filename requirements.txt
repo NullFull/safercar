@@ -1,5 +1,5 @@
 google-api-python-client==1.6.5
-requests==2.22.0
+requests==2.31.0
 Django==2.2.27
 django-bmemcached==0.2.3
 gspread==0.6.2
